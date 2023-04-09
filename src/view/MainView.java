@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
 
 public class MainView extends JFrame {
 	
@@ -32,6 +33,7 @@ public class MainView extends JFrame {
 	private JButton lastClicked;
 	private JPanel panelTheThanhVien;
 	private JTable tableMuonSach;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -130,49 +132,49 @@ public class MainView extends JFrame {
 		Image newImgBill = imgBill.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newIconBill = new ImageIcon(newImgBill);
 		
-		JButton btnHoaDon = new JButton("      HÓA ĐƠN");
-		btnHoaDon.addActionListener(new ActionListener() {
+		JButton btnPhieuMuon = new JButton("PHIẾU MƯỢN");
+		btnPhieuMuon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				changeButtonColor(btnHoaDon);
+				changeButtonColor(btnPhieuMuon);
 				cardLayout.show(cardPanel, "panelHoaDon");
 			}
 		});
-		btnHoaDon.setHorizontalAlignment(SwingConstants.LEFT);
-		btnHoaDon.setBackground(new Color(0xE2FF99));
-		btnHoaDon.setOpaque(true);
-		btnHoaDon.setBorderPainted(false);
-		btnHoaDon.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnHoaDon.setBounds(0, 51, 238, 75);
-		panel_Left.add(btnHoaDon);
-		btnHoaDon.setIcon(newIconBill);
+		btnPhieuMuon.setHorizontalAlignment(SwingConstants.LEFT);
+		btnPhieuMuon.setBackground(new Color(0xE2FF99));
+		btnPhieuMuon.setOpaque(true);
+		btnPhieuMuon.setBorderPainted(false);
+		btnPhieuMuon.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnPhieuMuon.setBounds(0, 51, 238, 75);
+		panel_Left.add(btnPhieuMuon);
+		btnPhieuMuon.setIcon(newIconBill);
 		
 		ImageIcon iconMnBooks = new ImageIcon(MainView.class.getResource("/images/mnbooks.png"));
 		Image imgMnBooks = iconMnBooks.getImage();
 		Image newImgMnBooks = imgMnBooks.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newIconMnBooks = new ImageIcon(newImgMnBooks);
 		
-		JButton btnQuanLySach = new JButton("  QUẢN LÝ SÁCH");
-		btnQuanLySach.addActionListener(new ActionListener() {
+		JButton btnQLPhieuMuon = new JButton("QLý PHIẾU MƯỢN");
+		btnQLPhieuMuon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				changeButtonColor(btnQuanLySach);
+				changeButtonColor(btnQLPhieuMuon);
 				cardLayout.show(cardPanel, "panelQuanLySach");
 			}
 		});
-		btnQuanLySach.setHorizontalAlignment(SwingConstants.LEADING);
-		btnQuanLySach.setBackground(new Color(0xE2FF99));
-		btnQuanLySach.setOpaque(true);
-		btnQuanLySach.setBorderPainted(false);
-		btnQuanLySach.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnQuanLySach.setBounds(0, 136, 238, 75);
-		panel_Left.add(btnQuanLySach);
-		btnQuanLySach.setIcon(newIconMnBooks);
+		btnQLPhieuMuon.setHorizontalAlignment(SwingConstants.LEADING);
+		btnQLPhieuMuon.setBackground(new Color(0xE2FF99));
+		btnQLPhieuMuon.setOpaque(true);
+		btnQLPhieuMuon.setBorderPainted(false);
+		btnQLPhieuMuon.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnQLPhieuMuon.setBounds(0, 136, 238, 75);
+		panel_Left.add(btnQLPhieuMuon);
+		btnQLPhieuMuon.setIcon(newIconMnBooks);
 		
 		ImageIcon iconExChange = new ImageIcon(MainView.class.getResource("/images/exchange.png"));
 		Image imgExChange = iconExChange.getImage();
 		Image newImgExChange = imgExChange.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newIconExChange = new ImageIcon(newImgExChange);
 		
-		JButton btnMuonSach = new JButton("    MƯỢN SÁCH");
+		JButton btnMuonSach = new JButton("QUẢN LÝ SÁCH");
 		btnMuonSach.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btnMuonSach);
@@ -193,21 +195,21 @@ public class MainView extends JFrame {
 		Image newImgTrend = imgTrend.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newIconTrend = new ImageIcon(newImgTrend);
 		
-		JButton btnThongKe = new JButton("     THỐNG KÊ");
-		btnThongKe.addActionListener(new ActionListener() {
+		JButton btnQuanLyNhap = new JButton("QUẢN LÝ NHẬP");
+		btnQuanLyNhap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				changeButtonColor(btnThongKe);
+				changeButtonColor(btnQuanLyNhap);
 				cardLayout.show(cardPanel, "panelThongKe");
 			}
 		});
-		btnThongKe.setHorizontalAlignment(SwingConstants.LEADING);
-		btnThongKe.setBackground(new Color(0xE2FF99));
-		btnThongKe.setOpaque(true);
-		btnThongKe.setBorderPainted(false);
-		btnThongKe.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnThongKe.setBounds(0, 306, 238, 75);
-		panel_Left.add(btnThongKe);
-		btnThongKe.setIcon(newIconTrend);
+		btnQuanLyNhap.setHorizontalAlignment(SwingConstants.LEADING);
+		btnQuanLyNhap.setBackground(new Color(0xE2FF99));
+		btnQuanLyNhap.setOpaque(true);
+		btnQuanLyNhap.setBorderPainted(false);
+		btnQuanLyNhap.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnQuanLyNhap.setBounds(0, 306, 238, 75);
+		panel_Left.add(btnQuanLyNhap);
+		btnQuanLyNhap.setIcon(newIconTrend);
 		
 		ImageIcon iconMember = new ImageIcon(MainView.class.getResource("/images/member.png"));
 		Image imgMember = iconMember.getImage();
@@ -251,18 +253,18 @@ public class MainView extends JFrame {
 		lblNewLabel_4.setBounds(0, 0, 849, 548);
 		panelHome.add(lblNewLabel_4);
 	  	
-	  	JPanel panelHoaDon = new JPanel();
-	  	panelHoaDon.setBackground(new Color(255, 255, 255));
-	  	cardPanel.add(panelHoaDon, "panelHoaDon");
+	  	JPanel panelPhieuMuon = new JPanel();
+	  	panelPhieuMuon.setBackground(new Color(255, 255, 255));
+	  	cardPanel.add(panelPhieuMuon, "panelHoaDon");
+	  	
+	  	JPanel panelQLPhieuMuon = new JPanel();
+	  	panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
+	  	cardPanel.add(panelQLPhieuMuon, "panelQuanLySach");
 	  	
 	  	JPanel panelQuanLySach = new JPanel();
 	  	panelQuanLySach.setBackground(new Color(255, 255, 255));
-	  	cardPanel.add(panelQuanLySach, "panelQuanLySach");
-	  	
-	  	JPanel panelMuonSach = new JPanel();
-	  	panelMuonSach.setBackground(new Color(255, 255, 255));
-	  	cardPanel.add(panelMuonSach, "panelMuonSach");
-	  	panelMuonSach.setLayout(null);
+	  	cardPanel.add(panelQuanLySach, "panelMuonSach");
+	  	panelQuanLySach.setLayout(null);
 	  	
 	  	tableMuonSach = new JTable();
 	  	tableMuonSach.setModel(new DefaultTableModel(
@@ -279,28 +281,43 @@ public class MainView extends JFrame {
 	  	
 	  	JScrollPane scrollPane = new JScrollPane(tableMuonSach);
 	  	scrollPane.setBounds(10, 178, 829, 360);
-	  	panelMuonSach.add(scrollPane);
+	  	panelQuanLySach.add(scrollPane);
 	  	
 	  	JLabel lblNewLabel_2 = new JLabel("New label");
 	  	lblNewLabel_2.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 	  	lblNewLabel_2.setBounds(0, 0, 849, 548);
-	  	panelMuonSach.add(lblNewLabel_2);
+	  	panelQuanLySach.add(lblNewLabel_2);
 	  	
-	  	JPanel panelThongKe = new JPanel();
-	  	panelThongKe.setBackground(new Color(255, 255, 255));
-	  	cardPanel.add(panelThongKe, "panelThongKe");
-	  	panelThongKe.setLayout(null);
+	  	JPanel panelQuanLyNhap = new JPanel();
+	  	panelQuanLyNhap.setBackground(new Color(255, 255, 255));
+	  	cardPanel.add(panelQuanLyNhap, "panelThongKe");
+	  	panelQuanLyNhap.setLayout(null);
 	  	
 	  	panelTheThanhVien = new JPanel();
 	  	cardPanel.add(panelTheThanhVien, "panelTheThanhVien");
-	  	//panelTaiKhoan.setBackground(new Color(51, 51, 255));
 	  	panelTheThanhVien.setLayout(null);
 	  	
-	  	JLabel lblNewLabel_1 = new JLabel("New label");
-	  	lblNewLabel_1.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-	  	lblNewLabel_1.setBounds(0, 0, 777, 545);
-	  	panelTheThanhVien.add(lblNewLabel_1);
+	  	JPanel panel = new JPanel();
+	  	panel.setBounds(10, 195, 829, 343);
+	  	panelTheThanhVien.add(panel);
 	  	
+	  	table = new JTable();
+	  	table.setModel(new DefaultTableModel(
+	  		new Object[][] {
+	  			{null, null, null, null, null, null, null},
+	  		},
+	  		new String[] {
+	  			"New column", "New column", "New column", "New column", "New column", "New column", "New column"
+	  		}
+	  	));
+	  	
+	  	scrollPane.setBounds(10, 178, 829, 360);
+	  	panel.setLayout(null);
+	  	JScrollPane scrollPane_1 = new JScrollPane(table);
+	  	scrollPane_1.setBounds(0, 0, 829, 343);
+	  	panel.add(scrollPane_1);
+	  	
+
 	}
 	
 	private void changeButtonColor(JButton button) {
