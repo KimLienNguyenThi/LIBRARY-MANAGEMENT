@@ -307,7 +307,7 @@ public class MainView extends JFrame {
 	  			{null, null, null, null, null, null, null},
 	  		},
 	  		new String[] {
-	  			"New column", "New column", "New column", "New column", "New column", "New column", "New column"
+	  			"M\u00E3 TV", "H\u1ECD t\u00EAn", "S\u0110T", "\u0110\u1ECBa ch\u1EC9", "Th\u1EDDi gian \u0110K", "H\u1EA1n th\u1EBB", "Ph\u00ED \u0111\u0103ng k\u00FD"
 	  		}
 	  	));
 	  	
