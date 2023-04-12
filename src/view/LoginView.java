@@ -63,6 +63,7 @@ public class LoginView extends JFrame {
 		lblNewLabel.setBounds(149, 93, 114, 22);
 		contentPane.add(lblNewLabel);
 		
+		
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(149, 120, 297, 46);
