@@ -40,6 +40,7 @@ public class MainView extends JFrame {
 	private JTable table_1;
 	private JTextField textFieldTimKiemQLNhap;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -269,10 +270,204 @@ public class MainView extends JFrame {
 	  	cardPanel.add(panelPhieuMuon, "panelHoaDon");
 	  	panelPhieuMuon.setLayout(null);
 	  	
+	  	//////////////////////////////////////////////////// Phieu muon ///////////////////////////////////////
+	  	JPanel jPanel_PhieuMuon = new JPanel();
+	  	jPanel_PhieuMuon.setBounds(71, 37, 658, 384);
+	  	panelPhieuMuon.add(jPanel_PhieuMuon);
+	  	jPanel_PhieuMuon.setLayout(null);
+	  	
+	  	JLabel jLabel_TenPhieuMuon = new JLabel("Thông tin khách hàng");
+	  	jLabel_TenPhieuMuon.setFont(new Font("Tahoma", Font.BOLD, 22));
+	  	jLabel_TenPhieuMuon.setHorizontalAlignment(SwingConstants.CENTER);
+	  	jLabel_TenPhieuMuon.setBounds(169, 21, 323, 42);
+	  	jPanel_PhieuMuon.add(jLabel_TenPhieuMuon);
+	  	
+	  	JLabel jLabel_DiaChi = new JLabel("Địa chỉ:");
+	  	jLabel_DiaChi.setBounds(27, 193, 64, 14);
+	  	jPanel_PhieuMuon.add(jLabel_DiaChi);
+	  	
+	  	JLabel jLabel_SDT = new JLabel("SĐT:");
+	  	jLabel_SDT.setBounds(27, 93, 64, 14);
+	  	jPanel_PhieuMuon.add(jLabel_SDT);
+	  	
+	  	JLabel jLabel_HoTen = new JLabel("Họ và tên:");
+	  	jLabel_HoTen.setBounds(27, 143, 64, 14);
+	  	jPanel_PhieuMuon.add(jLabel_HoTen);
+	  	
+	  	JLabel jLabel_SoLuong = new JLabel("Số lượng:");
+	  	jLabel_SoLuong.setBounds(27, 290, 89, 14);
+	  	jPanel_PhieuMuon.add(jLabel_SoLuong);
+	  	
+	  	JLabel jLabel_PhiMuon_1 = new JLabel("Phí mượn:");
+	  	jLabel_PhiMuon_1.setBounds(335, 196, 89, 14);
+	  	jPanel_PhieuMuon.add(jLabel_PhiMuon_1);
+	  	
+	  	JLabel jLabel_TenSach = new JLabel("Tên sách:");
+	  	jLabel_TenSach.setBounds(27, 237, 64, 14);
+	  	jPanel_PhieuMuon.add(jLabel_TenSach);
+	  	
+	  	JLabel jLabel_ThoiGianMuon = new JLabel("Thời gian mượn:");
+	  	jLabel_ThoiGianMuon.setBounds(335, 96, 89, 14);
+	  	jPanel_PhieuMuon.add(jLabel_ThoiGianMuon);
+	  	
+	  	JLabel jLabel_NgayTra = new JLabel("Ngày trả:");
+	  	jLabel_NgayTra.setBounds(335, 143, 89, 14);
+	  	jPanel_PhieuMuon.add(jLabel_NgayTra);
+	  	
+	  	JLabel jLabel_PhiCoc_1 = new JLabel("Phí cọc:");
+	  	jLabel_PhiCoc_1.setBounds(335, 237, 89, 14);
+	  	jPanel_PhieuMuon.add(jLabel_PhiCoc_1);
+	  	
+	  	JLabel jLabel_TinhTongTien = new JLabel("  Tổng tiền của bạn:");
+	  	jLabel_TinhTongTien.setFont(new Font("Tahoma", Font.BOLD, 13));
+	  	jLabel_TinhTongTien.setOpaque(true);
+	  	jLabel_TinhTongTien.setBackground(Color.WHITE);
+	  	jLabel_TinhTongTien.setBounds(335, 291, 260, 36);
+	  	jPanel_PhieuMuon.add(jLabel_TinhTongTien);
+	  	
+	  	JTextField textField_SDT = new JTextField();
+	  	textField_SDT.setColumns(10);
+	  	textField_SDT.setBounds(115, 90, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_SDT);
+	  	
+	  	JTextField textField_HoVaTen = new JTextField();
+	  	textField_HoVaTen.setColumns(10);
+	  	textField_HoVaTen.setBounds(115, 140, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_HoVaTen);
+	  	
+	  	JTextField textField_DiaChi = new JTextField();
+	  	textField_DiaChi.setColumns(10);
+	  	textField_DiaChi.setBounds(115, 190, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_DiaChi);
+	  	
+	  	JTextField textField_TenSach = new JTextField();
+	  	textField_TenSach.setColumns(10);
+	  	textField_TenSach.setBounds(115, 234, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_TenSach);
+	  	
+	  	JTextField textField_SoLuong = new JTextField();
+	  	textField_SoLuong.setColumns(10);
+	  	textField_SoLuong.setBounds(115, 287, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_SoLuong);
+	  	
+	  	JTextField textField_ThoiGianMuon = new JTextField();
+	  	textField_ThoiGianMuon.setColumns(10);
+	  	textField_ThoiGianMuon.setBounds(435, 93, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_ThoiGianMuon);
+	  	
+	  	JTextField textField_NgayTra = new JTextField();
+	  	textField_NgayTra.setColumns(10);
+	  	textField_NgayTra.setBounds(435, 140, 160, 20);
+	  	jPanel_PhieuMuon.add(textField_NgayTra);
+	  	
+	  	JLabel jLabel_PhiMuon = new JLabel("aaaaaaaaaaa");
+	  	jLabel_PhiMuon.setBackground(new Color(240, 240, 240));
+	  	jLabel_PhiMuon.setOpaque(true);
+	  	jLabel_PhiMuon.setBounds(434, 190, 161, 20);
+	  	jPanel_PhieuMuon.add(jLabel_PhiMuon);
+	  	
+	  	JLabel jLabel_PhiCoc = new JLabel("bbbbbbbbbb");
+	  	jLabel_PhiCoc.setBounds(434, 237, 160, 14);
+	  	jPanel_PhieuMuon.add(jLabel_PhiCoc);
+	  	
+	  	
+	  	JButton jButton_InHoaDon = new JButton("In phiếu");
+	  	jButton_InHoaDon.setBounds(156, 452, 97, 39);
+	  	panelPhieuMuon.add(jButton_InHoaDon);
+	  	
+	  	JButton jButton_HuyThaoTac = new JButton("Huỷ thao tác");
+	  	jButton_HuyThaoTac.setBounds(340, 452, 97, 39);
+	  	panelPhieuMuon.add(jButton_HuyThaoTac);
+	  	
+	  	JButton jButton_ThanhVien = new JButton("Thành viên");
+	  	jButton_ThanhVien.addActionListener(new ActionListener() {
+	  		public void actionPerformed(ActionEvent e) {
+	  			
+	  		}
+	  	});
+	  	jButton_ThanhVien.setBounds(528, 452, 153, 39);
+	  	panelPhieuMuon.add(jButton_ThanhVien);
+	  	
+
+
+	  
+	  	
 	  	JPanel panelQLPhieuMuon = new JPanel();
 	  	panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
 	  	cardPanel.add(panelQLPhieuMuon, "panelQuanLySach");
 	  	panelQLPhieuMuon.setLayout(null);
+	  	
+	  	JScrollPane jTable_HienThongTin = new JScrollPane();
+	  	jTable_HienThongTin.setBounds(10, 122, 829, 415);
+	  	panelQLPhieuMuon.add(jTable_HienThongTin);
+	  	
+	  	table_1 = new JTable();
+	  	table_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+	  	table_1.setModel(new DefaultTableModel(
+	  		new Object[][] {
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
+	  		},
+	  		new String[] {
+	  			"M\u00E3 phi\u1EBFu", "M\u00E3 kh\u00E1ch h\u00E0ng", "S\u0110T", "H\u1ECD v\u00E0 t\u00EAn", "T\u00EAn s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng", "Ng\u00E0y tr\u1EA3", "T\u1ED5ng ti\u1EC1n", "T\u00ECnh tr\u1EA1ng"
+	  		}
+	  	));
+	  	table_1.getColumnModel().getColumn(0).setPreferredWidth(86);
+	  	table_1.getColumnModel().getColumn(1).setPreferredWidth(86);
+	  	table_1.getColumnModel().getColumn(2).setPreferredWidth(64);
+	  	table_1.getColumnModel().getColumn(3).setPreferredWidth(78);
+	  	table_1.getColumnModel().getColumn(4).setPreferredWidth(89);
+	  	table_1.getColumnModel().getColumn(5).setPreferredWidth(52);
+	  	table_1.getColumnModel().getColumn(6).setPreferredWidth(69);
+	  	table_1.getColumnModel().getColumn(7).setPreferredWidth(67);
+	  	jTable_HienThongTin.setViewportView(table_1);
+	  	
+	  	JLabel jLabel_TongKhachChuaTraSach = new JLabel("Số lượng khách chưa trả sách: ");
+	  	jLabel_TongKhachChuaTraSach.setHorizontalAlignment(SwingConstants.CENTER);
+	  	jLabel_TongKhachChuaTraSach.setOpaque(true);
+	  	jLabel_TongKhachChuaTraSach.setFont(new Font("Tahoma", Font.BOLD, 13));
+	  	jLabel_TongKhachChuaTraSach.setBounds(34, 57, 301, 26);
+	  	panelQLPhieuMuon.add(jLabel_TongKhachChuaTraSach);
+	  	
+	  	JButton btnTimKiemQLNhap_2 = new JButton("");
+	  	btnTimKiemQLNhap_2.addActionListener(new ActionListener() {
+	  		public void actionPerformed(ActionEvent e) {
+	  		}
+	  	});
+	  	btnTimKiemQLNhap_2.setOpaque(true);
+	  	btnTimKiemQLNhap_2.setBorderPainted(false);
+	  	btnTimKiemQLNhap_2.setBackground(new Color(226, 255, 153));
+	  	btnTimKiemQLNhap_2.setBounds(470, 11, 45, 45);
+	  	panelQLPhieuMuon.add(btnTimKiemQLNhap_2);
+	  	btnTimKiemQLNhap_2.setIcon(iconTimKiem);
+	  	
+	  	textField_1 = new JTextField();
+	  	textField_1.setText("  Search");
+	  	textField_1.setForeground(Color.LIGHT_GRAY);
+	  	textField_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	  	textField_1.setColumns(10);
+	  	textField_1.setBackground(new Color(226, 255, 153));
+	  	textField_1.setBounds(513, 11, 300, 45);
+	  	panelQLPhieuMuon.add(textField_1);
+	  	///////////////////////////////////////////////////////////////////////////////////////////
+	  	
+//	  	JPanel panelQLPhieuMuon = new JPanel();
+//	  	panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
+//	  	cardPanel.add(panelQLPhieuMuon, "panelQuanLySach");
+//	  	panelQLPhieuMuon.setLayout(null);
 	  	
 	  	JPanel panelQuanLySach = new JPanel();
 	  	panelQuanLySach.setBackground(new Color(255, 255, 255));
@@ -304,9 +499,9 @@ public class MainView extends JFrame {
 	  	table_1.getColumnModel().getColumn(3).setPreferredWidth(89);
 	  	table_1.getColumnModel().getColumn(4).setPreferredWidth(101);
 	  	
-	  	JScrollPane scrollPane_2 = new JScrollPane(table_1);
-	  	scrollPane_2.setBounds(0, 0, 829, 415);
-	  	panel_1.add(scrollPane_2);
+	  	JScrollPane scrollPane_3 = new JScrollPane(table_1);
+	  	scrollPane_3.setBounds(0, 0, 829, 415);
+	  	panel_1.add(scrollPane_3);
 	  	
 	  	JButton btnSuaQLNhap = new JButton("Sửa");
 	  	btnSuaQLNhap.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -319,6 +514,10 @@ public class MainView extends JFrame {
 	  	panelQuanLyNhap.add(btnThemQLNhap);
 	  	
 	  	JButton btnTimKiemQLNhap = new JButton("");
+	  	btnTimKiemQLNhap.addActionListener(new ActionListener() {
+	  		public void actionPerformed(ActionEvent e) {
+	  		}
+	  	});
 	  	btnTimKiemQLNhap.setOpaque(true);
 	  	btnTimKiemQLNhap.setBorderPainted(false);
 	  	btnTimKiemQLNhap.setBackground(new Color(226, 255, 153));
@@ -340,10 +539,10 @@ public class MainView extends JFrame {
 	  	btnXemChiTietLo.setBounds(661, 68, 149, 45);
 	  	panelQuanLyNhap.add(btnXemChiTietLo);
 	  	
-	  	JLabel lblNewLabel_1 = new JLabel("New label");
-	  	lblNewLabel_1.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-	  	lblNewLabel_1.setBounds(0, 0, 849, 548);
-	  	panelQuanLyNhap.add(lblNewLabel_1);
+	  	JLabel lblNewLabel_2 = new JLabel("New label");
+	  	lblNewLabel_2.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+	  	lblNewLabel_2.setBounds(0, 0, 849, 548);
+	  	panelQuanLyNhap.add(lblNewLabel_2);
 	  	
 	  	panelTheThanhVien = new JPanel();
 	  	cardPanel.add(panelTheThanhVien, "panelTheThanhVien");
@@ -412,10 +611,10 @@ public class MainView extends JFrame {
 	  	btnTimKiemQLNhap_1.setIcon(newIconTimKiem);
 	  	panelQuanLySach.add(btnTimKiemQLNhap_1);
 	  	
-	  	JLabel lblNewLabel_2 = new JLabel("New label");
-	  	lblNewLabel_2.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-	  	lblNewLabel_2.setBounds(0, 0, 849, 548);
-	  	panelQuanLySach.add(lblNewLabel_2);
+	  	JLabel lblNewLabel_32 = new JLabel("New label");
+	  	lblNewLabel_32.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+	  	lblNewLabel_32.setBounds(0, 0, 849, 548);
+	  	panelQuanLySach.add(lblNewLabel_32);
 	  	panel.setLayout(null);
 	  	
 	  	JScrollPane scrollPane_1 = new JScrollPane(table);
