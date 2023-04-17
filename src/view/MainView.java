@@ -23,6 +23,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import database.LoginService;
+
 import java.awt.Component;
 import javax.swing.JTextField;
 
@@ -41,16 +44,18 @@ public class MainView extends JFrame {
 	private JTextField textFieldTimKiemQLNhap;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	JLabel lblNewLabel_6 = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
 	
-	public MainView(){
+	public MainView(String hotendn){
+		
 		setResizable(false);
 		this.init();
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
+		lblNewLabel_6.setText(hotendn);
 	}
 
 	/**
@@ -123,6 +128,10 @@ public class MainView extends JFrame {
 		btnUser.setBounds(1018, 2, 58, 58);
 		panel_Top.add(btnUser);
 		btnUser.setIcon(newIconUser);
+		
+		
+		lblNewLabel_6.setBounds(531, 10, 95, 31);
+		panel_Top.add(lblNewLabel_6);
 		
 		JPanel panel_Left = new JPanel();
 		panel_Left.setBackground(new Color(0xE2FF99));
@@ -264,6 +273,10 @@ public class MainView extends JFrame {
 		lblNewLabel_4.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 		lblNewLabel_4.setBounds(0, 0, 849, 548);
 		panelHome.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(82, 148, 195, 75);
+		panelHome.add(lblNewLabel_1);
 	  	
 	  	JPanel panelPhieuMuon = new JPanel();
 	  	panelPhieuMuon.setBackground(new Color(255, 255, 255));

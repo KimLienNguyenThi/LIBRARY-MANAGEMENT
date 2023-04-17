@@ -3,7 +3,12 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.LoginService;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -12,6 +17,7 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class LoginView extends JFrame {
 
@@ -69,7 +75,7 @@ public class LoginView extends JFrame {
 		textField.setBounds(149, 120, 297, 46);
 		contentPane.add(textField);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(149, 203, 297, 46);
 		contentPane.add(textField_1);
@@ -83,8 +89,30 @@ public class LoginView extends JFrame {
 		JButton btnNewButton = new JButton("Đăng nhập");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MainView().setVisible(true);
-				dispose();
+				String matkhau = textField_1.getText();
+				String taikhoan = textField.getText();
+				
+				
+				
+				String login = LoginService.Login(taikhoan, matkhau);
+				if(login != "") {
+					 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+				        JOptionPane.showMessageDialog(frame,
+				                "Đăng nhập thành công",
+				                "THÔNG BÁO",
+				                JOptionPane.INFORMATION_MESSAGE);
+				        System.out.println("connect failure!");
+					new MainView(login).setVisible(true);
+					dispose();
+				}
+				else {
+					 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+				        JOptionPane.showMessageDialog(frame,
+				                "Tài khoản hoặc Mật khẩu sai",
+				                "THÔNG BÁO",
+				                JOptionPane.ERROR_MESSAGE);
+				}
+	
 			}
 		});
 		btnNewButton.setForeground(new Color(0, 0, 153));
@@ -95,7 +123,7 @@ public class LoginView extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(LoginView.class.getResource("/images/background.png")));
-		lblNewLabel_2.setBounds(0, -7, 586, 374);
+		lblNewLabel_2.setBounds(10, -7, 586, 374);
 		contentPane.add(lblNewLabel_2);
 	}
 }

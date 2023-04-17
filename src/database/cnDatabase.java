@@ -9,9 +9,9 @@ public class cnDatabase {
 		Connection c = null;
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			String url = "jdbc:mySQL://localhost:3306/...";
+			String url = "jdbc:mySQL://localhost:3306/quanlythuvien";
 			String user = "root";
-			String password = "";
+			String password = "123456";
 			c = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
