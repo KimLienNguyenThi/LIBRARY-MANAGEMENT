@@ -34,7 +34,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controler.ThemThanhVien;
 import database.LoginService;
 import database.ThanhVien;
 import database.cnDatabase;
