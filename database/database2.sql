@@ -52,8 +52,8 @@ CREATE TABLE PhieuMuon(
 );
 CREATE TABLE TheDocGia (
 	MaThe INT PRIMARY KEY AUTO_INCREMENT,
-    NgayDK DATETIME,
-    HanThe DATETIME,
+    NgayDK DATE,
+    HanThe DATE,
     MaDG INT,
     PhiDK INT,
     FOREIGN KEY (MaDG) REFERENCES DocGia(MaDG)
