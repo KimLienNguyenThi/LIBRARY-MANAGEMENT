@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Image;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
@@ -19,32 +20,60 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controler.ThemThanhVien;
 import database.LoginService;
+import database.ThanhVien;
+import database.cnDatabase;
+import model.DocGia;
+import model.TheThanhVien;
 
 import java.awt.Component;
 import javax.swing.JTextField;
+import javax.swing.Box;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class MainView extends JFrame {
+	private static final JTable DefaultTableModel = null;
+
 	JFrame frame = new JFrame();
 	
 	private JPanel contentPane;
 	private CardLayout cardLayout;
 	private JPanel cardPanel;
 	private JButton lastClicked;
-	private JPanel panelTheThanhVien;
+	private JPanel panelThemThanhVien;
 	private JTable tableMuonSach;
-	private JTable table;
-	private JTextField textFieldTimKiemTTV;
+	private JTextField textField_TimKiem_QLTV;
 	private JTable table_1;
 	private JTextField textFieldTimKiemQLNhap;
 	private JTextField textField;
 	private JTextField textField_1;
 	JLabel lblNewLabel_6 = new JLabel("");
+	private JTextField textField_TenDocGia_TTV;
+	private JTextField textField_NgaySinh_TTV;
+	private JTextField textField_SDT_TTV;
+	private JTextField textField_Diachi_TTV;
+	private JTextField textField_HanThe_TTV;
+	private JTextField textField_PhiDangKy_TTV;
+	private JTable table_QLTV;
+
 	/**
 	 * Launch the application.
 	 */
@@ -253,6 +282,21 @@ public class MainView extends JFrame {
 		panel_Left.add(btnTheThanhVien);
 		btnTheThanhVien.setIcon(newIconMember);
 		
+		JButton btnQLyThanhVien = new JButton("QLý Thành Viên");
+		btnQLyThanhVien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeButtonColor(btnQLyThanhVien);
+				cardLayout.show(cardPanel, "panelQlyDocGia");
+			}
+		});
+		btnQLyThanhVien.setOpaque(true);
+		btnQLyThanhVien.setHorizontalAlignment(SwingConstants.LEADING);
+		btnQLyThanhVien.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnQLyThanhVien.setBorderPainted(false);
+		btnQLyThanhVien.setBackground(new Color(226, 255, 153));
+		btnQLyThanhVien.setBounds(0, 462, 238, 75);
+		panel_Left.add(btnQLyThanhVien);
+		
 		cardPanel = new JPanel(cardLayout);
 		cardPanel.setBounds(237, 65, 849, 548);
 		contentPane.add(cardPanel);
@@ -283,7 +327,6 @@ public class MainView extends JFrame {
 	  	cardPanel.add(panelPhieuMuon, "panelHoaDon");
 	  	panelPhieuMuon.setLayout(null);
 	  	
-	  	//////////////////////////////////////////////////// Phieu muon ///////////////////////////////////////
 	  	JPanel jPanel_PhieuMuon = new JPanel();
 	  	jPanel_PhieuMuon.setBounds(71, 37, 658, 384);
 	  	panelPhieuMuon.add(jPanel_PhieuMuon);
@@ -401,9 +444,6 @@ public class MainView extends JFrame {
 	  	jButton_ThanhVien.setBounds(528, 452, 153, 39);
 	  	panelPhieuMuon.add(jButton_ThanhVien);
 	  	
-
-
-	  
 	  	
 	  	JPanel panelQLPhieuMuon = new JPanel();
 	  	panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
@@ -475,12 +515,6 @@ public class MainView extends JFrame {
 	  	textField_1.setBackground(new Color(226, 255, 153));
 	  	textField_1.setBounds(513, 11, 300, 45);
 	  	panelQLPhieuMuon.add(textField_1);
-	  	///////////////////////////////////////////////////////////////////////////////////////////
-	  	
-//	  	JPanel panelQLPhieuMuon = new JPanel();
-//	  	panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
-//	  	cardPanel.add(panelQLPhieuMuon, "panelQuanLySach");
-//	  	panelQLPhieuMuon.setLayout(null);
 	  	
 	  	JPanel panelQuanLySach = new JPanel();
 	  	panelQuanLySach.setBackground(new Color(255, 255, 255));
@@ -557,23 +591,13 @@ public class MainView extends JFrame {
 	  	lblNewLabel_2.setBounds(0, 0, 849, 548);
 	  	panelQuanLyNhap.add(lblNewLabel_2);
 	  	
-	  	panelTheThanhVien = new JPanel();
-	  	cardPanel.add(panelTheThanhVien, "panelTheThanhVien");
-	  	panelTheThanhVien.setLayout(null);
 	  	
-	  	JPanel panel = new JPanel();
-	  	panel.setBounds(10, 122, 829, 415);
-	  	panelTheThanhVien.add(panel);
 	  	
-	  	table = new JTable();
-	  	table.setModel(new DefaultTableModel(
-	  		new Object[][] {
-	  			{null, null, null, null, null, null, null},
-	  		},
-	  		new String[] {
-	  			"M\u00E3 TV", "H\u1ECD t\u00EAn", "S\u0110T", "\u0110\u1ECBa ch\u1EC9", "Th\u1EDDi gian \u0110K", "H\u1EA1n th\u1EBB", "Ph\u00ED \u0111\u0103ng k\u00FD"
-	  		}
-	  	));
+	  	
+	  ///////////////////////////////////////////////////////////////////////////////////////////
+	  	panelThemThanhVien = new JPanel();
+	  	cardPanel.add(panelThemThanhVien, "panelTheThanhVien");
+	  	panelThemThanhVien.setLayout(null);
 	  	
 	  	JPanel panel_2 = new JPanel();
 	  	panel_2.setBounds(10, 123, 829, 415);
@@ -628,56 +652,175 @@ public class MainView extends JFrame {
 	  	lblNewLabel_32.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 	  	lblNewLabel_32.setBounds(0, 0, 849, 548);
 	  	panelQuanLySach.add(lblNewLabel_32);
+	  	
+	  	JPanel panel = new JPanel();
+	  	panel.setBackground(new Color(255, 255, 255));
+	  	panel.setBounds(102, 41, 635, 437);
+	  	panelThemThanhVien.add(panel);
 	  	panel.setLayout(null);
 	  	
-	  	JScrollPane scrollPane_1 = new JScrollPane(table);
-	  	scrollPane_1.setBounds(0, 0, 829, 415);
-	  	panel.add(scrollPane_1);
+	  	JLabel labelTitle_TTV = new JLabel("THẺ THÀNH VIÊN");
+	  	labelTitle_TTV.setForeground(new Color(0, 0, 0));
+	  	labelTitle_TTV.setHorizontalAlignment(SwingConstants.CENTER);
+	  	labelTitle_TTV.setFont(new Font("Times New Roman", Font.BOLD, 25));
+	  	labelTitle_TTV.setBounds(200, 26, 236, 50);
+	  	panel.add(labelTitle_TTV);
 	  	
-	  	JButton btnSuaTheThanhVien = new JButton("Sửa");
-	  	btnSuaTheThanhVien.addActionListener(new ActionListener() {
+	  	JLabel label_TenThanhVien_TTV = new JLabel("Tên thành viên");
+	  	label_TenThanhVien_TTV.setBounds(55, 125, 72, 14);
+	  	panel.add(label_TenThanhVien_TTV);
+	  	
+	  	JLabel label_NgaySinh_TTV = new JLabel("Ngày sinh");
+	  	label_NgaySinh_TTV.setBounds(55, 180, 72, 14);
+	  	panel.add(label_NgaySinh_TTV);
+	  	
+	  	JLabel label_SDT_TTV = new JLabel("Số điện thoại");
+	  	label_SDT_TTV.setBounds(58, 234, 69, 14);
+	  	panel.add(label_SDT_TTV);
+	  	
+	  	JLabel label_PhiDangKy_TTV = new JLabel("Phí đăng ký");
+	  	label_PhiDangKy_TTV.setBounds(340, 234, 69, 14);
+	  	panel.add(label_PhiDangKy_TTV);
+	  	
+	  	JLabel label_HanThe_TTV = new JLabel("Hạn thẻ");
+	  	label_HanThe_TTV.setBounds(340, 180, 69, 14);
+	  	panel.add(label_HanThe_TTV);
+	  	
+	  	JLabel label_DiaChi_TTV = new JLabel("Địa chỉ");
+	  	label_DiaChi_TTV.setBounds(340, 125, 69, 14);
+	  	panel.add(label_DiaChi_TTV);
+	  	
+	  	textField_TenDocGia_TTV = new JTextField();
+	  	textField_TenDocGia_TTV.setColumns(10);
+	  	textField_TenDocGia_TTV.setBounds(137, 122, 130, 20);
+	  	panel.add(textField_TenDocGia_TTV);
+	  	
+	  	textField_NgaySinh_TTV = new JTextField();
+	  	textField_NgaySinh_TTV.setColumns(10);
+	  	textField_NgaySinh_TTV.setBounds(137, 177, 130, 20);
+	  	panel.add(textField_NgaySinh_TTV);
+	  	
+	  	textField_SDT_TTV = new JTextField();
+	  	textField_SDT_TTV.setColumns(10);
+	  	textField_SDT_TTV.setBounds(137, 231, 130, 20);
+	  	panel.add(textField_SDT_TTV);
+	  	
+	  	textField_Diachi_TTV = new JTextField();
+	  	textField_Diachi_TTV.setColumns(10);
+	  	textField_Diachi_TTV.setBounds(430, 122, 130, 20);
+	  	panel.add(textField_Diachi_TTV);
+	  	
+	  	textField_HanThe_TTV = new JTextField();
+	  	textField_HanThe_TTV.setColumns(10);
+	  	textField_HanThe_TTV.setBounds(430, 177, 130, 20);
+	  	panel.add(textField_HanThe_TTV);
+	  	
+	  	textField_PhiDangKy_TTV = new JTextField();
+	  	textField_PhiDangKy_TTV.setColumns(10);
+	  	textField_PhiDangKy_TTV.setBounds(430, 231, 130, 20);
+	  	panel.add(textField_PhiDangKy_TTV);
+	  	
+	  	JButton button_Luu_TTV = new JButton("Lưu");
+	  	button_Luu_TTV.addActionListener(new ActionListener() {
 	  		public void actionPerformed(ActionEvent e) {
+	  			themThanhVien();
 	  		}
 	  	});
-	  	btnSuaTheThanhVien.setFont(new Font("Tahoma", Font.BOLD, 16));
-	  	btnSuaTheThanhVien.setBounds(10, 67, 120, 45);
-	  	panelTheThanhVien.add(btnSuaTheThanhVien);
+	  	button_Luu_TTV.setFont(new Font("Times New Roman", Font.BOLD, 15));
+	  	button_Luu_TTV.setBounds(175, 363, 109, 33);
+	  	panel.add(button_Luu_TTV);
 	  	
-	  	JButton btnThemTheThanhVien_1 = new JButton("Thêm");
-	  	btnThemTheThanhVien_1.addActionListener(new ActionListener() {
+	  	JButton button_HuyThaoTac_TTV = new JButton("Huỷ thao tác");
+	  	button_HuyThaoTac_TTV.addActionListener(new ActionListener() {
 	  		public void actionPerformed(ActionEvent e) {
-	  			new DialogThemTTVView(frame).setVisible(true);
+	  			huyThemThanhVien();
 	  		}
 	  	});
-	  	btnThemTheThanhVien_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-	  	btnThemTheThanhVien_1.setBounds(200, 67, 120, 45);
-	  	panelTheThanhVien.add(btnThemTheThanhVien_1);
+	  	button_HuyThaoTac_TTV.setFont(new Font("Times New Roman", Font.BOLD, 15));
+	  	button_HuyThaoTac_TTV.setBounds(340, 363, 115, 33);
+	  	panel.add(button_HuyThaoTac_TTV);
 	  	
-	  	textFieldTimKiemTTV = new JTextField();
-	  	textFieldTimKiemTTV.setBackground(new Color(0xE2FF99));
-	  	textFieldTimKiemTTV.setForeground(new Color(192, 192, 192));
-	  	textFieldTimKiemTTV.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	  	textFieldTimKiemTTV.setText("  Search");
-	  	textFieldTimKiemTTV.setBounds(510, 10, 300, 45);
-	  	panelTheThanhVien.add(textFieldTimKiemTTV);
-	  	textFieldTimKiemTTV.setColumns(10);
-	  	
-	  	
-	  	
-	  	JButton btnTimKiemTTV = new JButton("");
-	  	btnTimKiemTTV.setBackground(new Color(0xE2FF99));
-	  	btnTimKiemTTV.setOpaque(true);
-	  	btnTimKiemTTV.setBorderPainted(false);
-	  	btnTimKiemTTV.setBounds(467, 10, 45, 45);
-	  	panelTheThanhVien.add(btnTimKiemTTV);
-	  	btnTimKiemTTV.setIcon(newIconTimKiem);
+	  	JLabel lblNewLabel_7 = new JLabel("Vui lòng điền đầy đủ thông tin trước khi nhấn lưu");
+	  	lblNewLabel_7.setForeground(new Color(128, 128, 128));
+	  	lblNewLabel_7.setBackground(new Color(255, 255, 255));
+	  	lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+	  	lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 12));
+	  	lblNewLabel_7.setBounds(168, 319, 318, 14);
+	  	panel.add(lblNewLabel_7);
 	  	
 	  	JLabel lblNewLabel_5 = new JLabel("New label");
 	  	lblNewLabel_5.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 	  	lblNewLabel_5.setBounds(0, 0, 849, 548);
-	  	panelTheThanhVien.add(lblNewLabel_5);
+	  	panelThemThanhVien.add(lblNewLabel_5);
 	  	
-
+	  	JPanel panelQlyDocGia = new JPanel();
+	  	panelQlyDocGia.setBackground(new Color(255, 255, 255));
+	  	cardPanel.add(panelQlyDocGia, "panelQlyDocGia");
+	  	panelQlyDocGia.setLayout(null);
+	  	
+	  	textField_TimKiem_QLTV = new JTextField();
+	  	textField_TimKiem_QLTV.setBackground(new Color(0xE2FF99));
+	  	textField_TimKiem_QLTV.setForeground(new Color(192, 192, 192));
+	  	textField_TimKiem_QLTV.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	  	textField_TimKiem_QLTV.setBounds(510, 10, 300, 45);
+	  	panelQlyDocGia.add(textField_TimKiem_QLTV);
+	  	textField_TimKiem_QLTV.setColumns(10);
+	  	
+	  	JButton btnTimKiem_QLTV = new JButton("");
+	  	btnTimKiem_QLTV.addActionListener(new ActionListener() {
+	  		public void actionPerformed(ActionEvent e) {
+	  			hienThiThongTinThanhVien();
+	  		}
+	  	});
+	  	btnTimKiem_QLTV.setBackground(new Color(0xE2FF99));
+	  	btnTimKiem_QLTV.setOpaque(true);
+	  	btnTimKiem_QLTV.setBorderPainted(false);
+	  	btnTimKiem_QLTV.setBounds(467, 10, 45, 45);
+	  	panelQlyDocGia.add(btnTimKiem_QLTV);
+	  	btnTimKiem_QLTV.setIcon(newIconTimKiem);
+	  	
+	  	JPanel panel_3 = new JPanel();
+	  	panel_3.setBounds(10, 114, 829, 423);
+	  	panelQlyDocGia.add(panel_3);
+	  	panel_3.setLayout(null);
+	  	
+	  	JScrollPane scrollPane_1 = new JScrollPane();
+	  	scrollPane_1.setBounds(0, 0, 829, 423);
+	  	panel_3.add(scrollPane_1);
+	  	
+	  	table_QLTV = new JTable();
+	  	table_QLTV.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	  	table_QLTV.setFont(new Font("Tahoma", Font.PLAIN, 13));
+	  	table_QLTV.setModel(new DefaultTableModel(
+	  		new Object[][] {
+	  		},
+	  		new String[] {
+	  			"M\u00E3 TV", "H\u1ECD v\u00E0 t\u00EAn", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "Ng\u00E0y sinh", "\u0110\u1ECBa ch\u1EC9", "TG \u0111\u0103ng k\u00FD", "H\u1EA1n th\u1EBB", "Ph\u00ED \u0111\u0103ng k\u00FD"
+	  		}
+	  	));
+	  	table_QLTV.getColumnModel().getColumn(0).setPreferredWidth(44);
+	  	table_QLTV.getColumnModel().getColumn(1).setPreferredWidth(91);
+	  	table_QLTV.getColumnModel().getColumn(2).setPreferredWidth(73);
+	  	table_QLTV.getColumnModel().getColumn(3).setPreferredWidth(67);
+	  	table_QLTV.getColumnModel().getColumn(4).setPreferredWidth(125);
+	  	table_QLTV.getColumnModel().getColumn(5).setPreferredWidth(73);
+	  	table_QLTV.getColumnModel().getColumn(6).setPreferredWidth(69);
+	  	table_QLTV.getColumnModel().getColumn(7).setPreferredWidth(65);
+	  	scrollPane_1.setViewportView(table_QLTV);
+	  	
+	  	JButton btnNewButton = new JButton("");
+	  	btnNewButton.addActionListener(new ActionListener() {
+	  		public void actionPerformed(ActionEvent e) {
+	  			suaThongTinThanhVien();
+	  		}
+	  	});
+	  	btnNewButton.setBackground(new Color(255, 255, 255));
+	  	btnNewButton.setBorderPainted(false);
+	  	btnNewButton.setIcon(new ImageIcon("D:\\CODE\\Java\\BaiTapLon2023\\src\\images\\suaThongTin.png"));
+	  	btnNewButton.setBounds(56, 31, 60, 59);
+	  	panelQlyDocGia.add(btnNewButton);
+	  	
+	  	///////////////////////////////////////////////////////////////////////////////////////
 	}
 	
 	private void changeButtonColor(JButton button) {
@@ -687,6 +830,153 @@ public class MainView extends JFrame {
         button.setBackground(new Color(0X7A8F44));
         lastClicked = button;
     }
+	
+	
+	public void themThanhVien() {
+
+		DocGia docGia = new DocGia();
+		TheThanhVien theThanhVien = new TheThanhVien();
+		
+		// Biến dùng kiểm tra tính đúng đắn của dữ liệu
+		Pattern patternDate = Pattern.compile("^\\d{4}[-|/]\\d{2}[-|/]\\d{2}$");
+		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
+		
+		
+		// Kiểm tra thông tin có đủ không
+		if(textField_TenDocGia_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE);
+	        
+	        	       
+		}else if (textField_NgaySinh_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE);
+	        
+	        
+		}else if(patternDate.matcher(textField_NgaySinh_TTV.getText()).matches() == false) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đúng định dạng ngày sinh!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE); 
+	        
+	        
+		}else if (textField_SDT_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE);
+	        
+	        
+		} else if(patternSDT.matcher(textField_SDT_TTV.getText()).matches() == false) {
+				JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+		        JOptionPane.showMessageDialog(frame,
+		                "Vui lòng điền đúng định dạng số điện thoại!!!",
+		                "THÔNG BÁO",
+		                JOptionPane.ERROR_MESSAGE); 
+		        
+	        
+		}else if (textField_Diachi_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE);
+	        
+	        
+		}else if (textField_HanThe_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE);
+	        
+	        
+		}else if(patternDate.matcher(textField_HanThe_TTV.getText()).matches() == false) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đúng định dạng hạn thẻ!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE); 
+	        
+
+		}else if (textField_PhiDangKy_TTV.getText().equals("")) {		
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+	        JOptionPane.showMessageDialog(frame,
+	                "Vui lòng điền đủ thông tin!!!",
+	                "THÔNG BÁO",
+	                JOptionPane.ERROR_MESSAGE); 
+		}else {
+			
+			// Lấy dữ liệu nhập
+			docGia.setTenDocGia(textField_TenDocGia_TTV.getText()); 
+			
+			String ngaySinh = textField_NgaySinh_TTV.getText();
+			java.sql.Date date1 = Date.valueOf(ngaySinh);
+			docGia.setNgaySinh(date1);
+
+			docGia.setSDT(textField_SDT_TTV.getText()); 
+
+			docGia.setDiaChi(textField_Diachi_TTV.getText()); 
+
+			long millis = System.currentTimeMillis();
+	        java.sql.Date date2 = new java.sql.Date(millis);
+			theThanhVien.setNgayDangKy(date2);
+			
+			String hanThe = textField_HanThe_TTV.getText();
+	        Date date3 = Date.valueOf(hanThe);
+	        theThanhVien.setHanThe(date3);
+
+			String phiDK = textField_PhiDangKy_TTV.getText();
+	        int PDK = Integer.valueOf(phiDK);
+	        theThanhVien.setPhiDangKy(PDK); 
+			 
+			new Dialog_ThemThanhVien(this, docGia, theThanhVien); // hien thi dialog
+			 
+				// Xoá dữ liệu nhập trên màn hình
+				textField_TenDocGia_TTV.setText("");
+				textField_NgaySinh_TTV.setText("");
+				textField_SDT_TTV.setText("");
+				textField_Diachi_TTV.setText("");
+				textField_HanThe_TTV.setText("");
+				textField_PhiDangKy_TTV.setText("");
+		}	
+	}
+	
+	
+	public void huyThemThanhVien() {
+		textField_TenDocGia_TTV.setText("");
+		textField_NgaySinh_TTV.setText("");
+		textField_SDT_TTV.setText("");
+		textField_Diachi_TTV.setText("");
+		textField_HanThe_TTV.setText("");
+		textField_PhiDangKy_TTV.setText("");
+	}
+	
+	
+	public void hienThiThongTinThanhVien() {
+		// Xoá toàn bộ dữ liệu trên bảng
+		DefaultTableModel dtm = (DefaultTableModel) table_QLTV.getModel();
+		dtm.setRowCount(0);
+		
+		if(textField_TimKiem_QLTV.getText().equals("")) {
+			ThanhVien.getInstance().selectAll(table_QLTV);
+		}else {
+			ThanhVien.getInstance().selectBySDT(table_QLTV, textField_TimKiem_QLTV.getText());
+		}
+	}
+	
+	
+	public void suaThongTinThanhVien() {
+		new Dialog_SuaThongTinThanhVien(this, textField_TimKiem_QLTV.getText());
+	}
 }
 
 
