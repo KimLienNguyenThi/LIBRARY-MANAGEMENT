@@ -1,4 +1,4 @@
--- DROP DATABASE QuanLyThuVien;
+DROP DATABASE QuanLyThuVien;
 CREATE DATABASE QuanLyThuVien;
 USE QuanLyThuVien;
 CREATE TABLE NhanVien (
@@ -41,14 +41,14 @@ CREATE TABLE DocGia(
 
 CREATE TABLE PhieuMuon(
 	MaPM INT PRIMARY KEY AUTO_INCREMENT,
-    MaNV INT,
-    MaDG INT,
+    MaNV INT ,
+    MaDG INT ,
     foreign key (MaNV) references NhanVien(MANV),
     FOREIGN KEY (MaDG) REFERENCES DocGia (MaDG),
     MaSach INT ,
     FOREIGN KEY (MaSach) REFERENCES Sach(Masach),
-    NgayMuon DATE,
-    NgayTra DATE
+    NgayMuon DATETIME,
+    NgayTra DATETIME
 );
 CREATE TABLE TheDocGia (
 	MaThe INT PRIMARY KEY AUTO_INCREMENT,
@@ -73,7 +73,7 @@ CREATE TABLE ChiTietLo (
 
 
 CREATE TABLE Login (
-MANV INT PRIMARY KEY AUTO_INCREMENT,
+MANV INT,
 FOREIGN KEY (MANV) REFERENCES NhanVien(MANV),
 MatKhau VARCHAR(20) NOT NULL
 ) ;
