@@ -2,7 +2,7 @@ package model;
 import java.sql.Date;
 
 public class DocGia {
-	private String maDocGia;
+	private int maDocGia;
 	private String tenDocGia;
 	private String SDT;
 	private String diaChi;
@@ -11,7 +11,7 @@ public class DocGia {
 	public DocGia() {
 	}
 
-	public DocGia(String maDocGia, String tenDocGia, String sDT, String diaChi, Date ngaySinh) {
+	public DocGia(int maDocGia, String tenDocGia, String sDT, String diaChi, Date ngaySinh) {
 		super();
 		this.maDocGia = maDocGia;
 		this.tenDocGia = tenDocGia;
@@ -20,11 +20,11 @@ public class DocGia {
 		this.ngaySinh = ngaySinh;
 	}
 
-	public String getMaDocGia() {
+	public int getMaDocGia() {
 		return maDocGia;
 	}
 
-	public void setMaDocGia(String maDocGia) {
+	public void setMaDocGia(int maDocGia) {
 		this.maDocGia = maDocGia;
 	}
 

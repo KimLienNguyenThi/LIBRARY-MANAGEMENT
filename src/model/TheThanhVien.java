@@ -1,18 +1,19 @@
 package model;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class TheThanhVien {
-	private String maThe;
+	private int maThe;
 	private Date ngayDangKy;
 	private Date hanThe;
-	private String maDocGia;
+	private int maDocGia;
 	private int phiDangKy;
 
 	
 	public TheThanhVien() {
 	}
 
-	public TheThanhVien(String maThe, Date ngayDangKy, Date hanThe, String maDocGia, int phiDangKy) {
+	public TheThanhVien(int maThe, Date ngayDangKy, Date hanThe, int maDocGia, int phiDangKy) {
 		super();
 		this.maThe = maThe;
 		this.ngayDangKy = ngayDangKy;
@@ -21,11 +22,11 @@ public class TheThanhVien {
 		this.phiDangKy = phiDangKy;
 	}
 
-	public String getMaThe() {
+	public int getMaThe() {
 		return maThe;
 	}
 
-	public void setMaThe(String maThe) {
+	public void setMaThe(int maThe) {
 		this.maThe = maThe;
 	}
 
@@ -45,11 +46,11 @@ public class TheThanhVien {
 		this.hanThe = hanThe;
 	}
 
-	public String getMaDocGia() {
+	public int getMaDocGia() {
 		return maDocGia;
 	}
 
-	public void setMaDocGia(String maDocGia) {
+	public void setMaDocGia(int maDocGia) {
 		this.maDocGia = maDocGia;
 	}
 
