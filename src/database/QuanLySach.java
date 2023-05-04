@@ -10,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
+
+
 public class QuanLySach {
 	public static QuanLySach getInstance() {
 		return new QuanLySach();
@@ -20,6 +22,7 @@ public class QuanLySach {
 		
 		
 		try {
+			
 			
 			// B1: Tạo kết nối đến CSDL
 			Connection connection = cnDatabase.getConnection();
