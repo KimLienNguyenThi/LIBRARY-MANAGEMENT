@@ -23,6 +23,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -31,12 +33,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
+import database.QuanLySach;
 import database.ThanhVien;
 import model.DocGia;
 import model.TheThanhVien;
 
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 
 public class MainView extends JFrame {
 	JFrame frame = new JFrame();
@@ -66,7 +72,9 @@ public class MainView extends JFrame {
 	private JTable tableMuonSach;
 	private JComboBox comboBox_HanThe;
 
-	private JTextField textField;
+	private JTextField textField_Search;
+
+	private JTable tableQuanLySach;
 	/**
 	 * Launch the application.
 	 */
@@ -202,6 +210,8 @@ public class MainView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QLPhieuMuon_left);
 				cardLayout.show(cardPanel, "panelQuanLySach");
+//				changeButtonColor(btn_QLPhieuMuon_left);
+//				cardLayout.show(cardPanel, "panelQuanLySach");
 			}
 		});
 		btn_QLPhieuMuon_left.setHorizontalAlignment(SwingConstants.LEADING);
@@ -223,6 +233,8 @@ public class MainView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLySach_left);
 				cardLayout.show(cardPanel, "panelMuonSach");
+//				changeButtonColor(btn_QuanLySach_left);
+//				cardLayout.show(cardPanel, "panelMuonSach");
 			}
 		});
 		btn_QuanLySach_left.setHorizontalAlignment(SwingConstants.LEADING);
@@ -441,47 +453,72 @@ public class MainView extends JFrame {
 	  	panelThemThanhVien = new JPanel();
 	  	cardPanel.add(panelThemThanhVien, "panelTheThanhVien");
 	  	panelThemThanhVien.setLayout(null);
-	  	
+	  	// Quan Ly Sach
 	  	JPanel panel_2 = new JPanel();
 	  	panel_2.setBounds(10, 123, 829, 415);
 	  	panelQuanLySach.add(panel_2);
 	  	
-	  	tableMuonSach = new JTable();
-	  	tableMuonSach.setModel(new DefaultTableModel(
+	  	table_QuanLySach = new JTable();
+	  	table_QuanLySach.setModel(new DefaultTableModel(
 	  		new Object[][] {
-	  			{null, null, null, null, null, null, null, null, null, null},
+	  			{null, null, null, null, null, null, null, null, null},
 	  		},
 	  		new String[] {
-	  			"M\u00E3 HD", "M\u00E3 KH", "H\u1ECD t\u00EAn", "S\u0110T", "\u0110\u1ECBa \u0111i\u1EC3m", "S\u00E1ch m\u01B0\u1EE3n", "Ng\u00E0y m\u01B0\u1EE3n", "Ng\u00E0y tr\u1EA3", "S\u1ED1 l\u01B0\u1EE3ng", "Ph\u00ED m\u01B0\u1EE3n"
+	  			"ID", "Tên Sách", "Tác giả", "Nhà XB", "Năm XB", "Thể Loại", "Giá Sách", "Ngôn ngữ", "Tình trạng"
 	  		}
 	  	));
-	  	tableMuonSach.getColumnModel().getColumn(0).setPreferredWidth(40);
-	  	tableMuonSach.getColumnModel().getColumn(1).setPreferredWidth(40);
-	  	tableMuonSach.getColumnModel().getColumn(8).setPreferredWidth(51);
+	  	table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(40);
+	  	table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(40);
+	  	table_QuanLySach.getColumnModel().getColumn(8).setPreferredWidth(51);
 	  	panel_2.setLayout(null);
-	  	
-	  	JScrollPane scrollPane = new JScrollPane(tableMuonSach);
+	  	table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
+//	  	table_QuanLySach = QuanLySach.getInstance().selectbyTenSach(table_QuanLySach);
+	  	JScrollPane scrollPane = new JScrollPane(table_QuanLySach);
 	  	scrollPane.setBounds(0, 0, 829, 415);
 	  	panel_2.add(scrollPane);
 	  	
-	  	JButton btnThemQLNhap_1 = new JButton("Thêm");
-	  	btnThemQLNhap_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-	  	btnThemQLNhap_1.setBounds(200, 67, 120, 45);
-	  	panelQuanLySach.add(btnThemQLNhap_1);
+//	  	JButton btnThemQLNhapSach = new JButton("Thêm");
+//	  	btnThemQLNhapSach.setFont(new Font("Tahoma", Font.BOLD, 16));
+//	  	btnThemQLNhapSach.setBounds(200, 67, 120, 45);
+//	  	panelQuanLySach.add(btnThemQLNhapSach);
+//	  	
+////	  	JButton btnSuaQLNhapSach = new JButton("Sửa");
+////	  	btnSuaQLNhapSach.addActionListener(new ActionListener() {
+//	  		public void actionPerformed(ActionEvent e) {
+//	  		}
+//	  	});
+//	  	btnSuaQLNhapSach.setFont(new Font("Tahoma", Font.BOLD, 16));
+//	  	btnSuaQLNhapSach.setBounds(10, 67, 120, 45);
+//	  	panelQuanLySach.add(btnSuaQLNhapSach);
 	  	
-	  	JButton btnSuaQLNhap_1 = new JButton("Sửa");
-	  	btnSuaQLNhap_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-	  	btnSuaQLNhap_1.setBounds(10, 67, 120, 45);
-	  	panelQuanLySach.add(btnSuaQLNhap_1);
-	  	
-	  	textField = new JTextField();
-	  	textField.setText("  Search");
-	  	textField.setForeground(Color.LIGHT_GRAY);
-	  	textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	  	textField.setColumns(10);
-	  	textField.setBackground(new Color(226, 255, 153));
-	  	textField.setBounds(510, 10, 300, 45);
-	  	panelQuanLySach.add(textField);
+	  	textField_Search = new JTextField();
+	  	textField_Search.setForeground(Color.LIGHT_GRAY);
+	  	textField_Search.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	  	textField_Search.setColumns(10);
+	  	textField_Search.setBackground(new Color(226, 255, 153));
+	  	textField_Search.setBounds(510, 10, 300, 45);
+	  	panelQuanLySach.add(textField_Search);
+	 // ----------->Xử lý tìm kiếm cho table_QuanLySach<-----------
+
+	 		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
+	 		TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(table_QuanLySach.getModel());
+
+	 		// Đặt TableRowSorter cho bảng
+	 		table_QuanLySach.setRowSorter(sorter1);
+
+	 		// Tạo sự kiện KeyReleased cho JTextField
+	 		textField_Search.addKeyListener(new KeyAdapter() {
+	 			public void keyReleased(KeyEvent e) {
+	 				String input = textField_Search.getText().trim(); // Lấy dữ liệu từ JTextField
+	 				if (input.length() == 0) {
+	 					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
+	 					sorter1.setRowFilter(null);
+	 				} else {
+	 					// Lọc dữ liệu theo nội dung JTextField
+	 					sorter1.setRowFilter(RowFilter.regexFilter("(?i)" + input));
+	 				}
+	 			}
+	 		});
 	  	
 	  	JButton btnTimKiemQLNhap_1 = new JButton("");
 	  	btnTimKiemQLNhap_1.setOpaque(true);
@@ -822,7 +859,7 @@ public class MainView extends JFrame {
 	public void suaThongTinThanhVien() {
 		new Dialog_SuaThongTinThanhVien(this, textField_TimKiem_QLTV.getText());
 	}
-
+	
 }
 
 
