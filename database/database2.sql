@@ -1,16 +1,16 @@
-DROP DATABASE QuanLyThuVien;
-CREATE DATABASE QuanLyThuVien;
-USE QuanLyThuVien;
+DROP DATABASE QuanLyThuVienAlpha2;
+CREATE DATABASE QuanLyThuVienAlpha2;
+USE QuanLyThuVienAlpha2;
 CREATE TABLE NhanVien (
-	MaNV VARCHAR(50) PRIMARY KEY,
+	MaNV INT PRIMARY KEY AUTO_INCREMENT,
 	HoTenNV VARCHAR(50),
 	DiaChi VARCHAR(100),
 	SDT VARCHAR(50),
 	GioiTinh VARCHAR(50),
-	NgaySinh DATE CHECK (NgaySinh <= sysdate())
+	NgaySinh DATE
 );
 CREATE TABLE SACH(
-	MaSach VARCHAR(50) PRIMARY KEY,
+	MaSach INT PRIMARY KEY AUTO_INCREMENT,
     TenSach VARCHAR(100) NOT NULL ,
     TheLoai VARCHAR(100) NOT NULL,
     NamXB YEAR NOT NULL, 
@@ -23,7 +23,7 @@ CREATE TABLE SACH(
 );
 
 CREATE TABLE LoSach(
-	MaLo VARCHAR(50) PRIMARY KEY,
+	MaLo INT PRIMARY KEY AUTO_INCREMENT,
     TenNhaCC VARCHAR(100) NOT NULL,
     NgayNhap DATE NOT NULL,
     SDTNCC VARCHAR(50),
@@ -32,51 +32,60 @@ CREATE TABLE LoSach(
 );
 
 CREATE TABLE DocGia(
-	MaDG VARCHAR(50) PRIMARY KEY,
+	MaDG INT PRIMARY KEY AUTO_INCREMENT,
     TenDG VARCHAR(50),
     SDT VARCHAR(50),
     DiaChi VARCHAR(100),
-    NgaySinh DATE CHECK (NgaySinh <= sysdate())
+    NgaySinh DATE
 );
 
-CREATE TABLE PhieuMuon(
-	MaPM VARCHAR(50) PRIMARY KEY,
-    MaNV VARCHAR(50),
-    MaDG VARCHAR(50),
-    foreign key (MaNV) references NhanVien(MANV),
-    FOREIGN KEY (MaDG) REFERENCES DocGia (MaDG),
-    MaSach VARCHAR(50) ,
-    FOREIGN KEY (MaSach) REFERENCES Sach(Masach),
-    NgayMuon TIMESTAMP,
-    NgayTra DATE
-);
 CREATE TABLE TheDocGia (
-	MaThe VARCHAR(50) PRIMARY KEY,
-    NgayDK TIMESTAMP,
+	MaThe INT PRIMARY KEY AUTO_INCREMENT,
+    NgayDK DATE,
     HanThe DATE,
-    MaDG VARCHAR(50),
+    MaDG INT,
     PhiDK INT,
     FOREIGN KEY (MaDG) REFERENCES DocGia(MaDG)
 );
+
+CREATE TABLE PhieuMuon(
+	MaPM INT PRIMARY KEY AUTO_INCREMENT,
+    MaDG INT ,
+    MaSach INT ,
+    NgayMuon DATETIME,
+    NgayTra DATETIME,
+    FOREIGN KEY (MaDG) REFERENCES docgia (MaDG),
+	FOREIGN KEY (MaSach) REFERENCES Sach(Masach)
+);
+
+CREATE TABLE ChiTietPhieuMuon (
+	MaPM INT ,
+    MaSach INT ,
+	TenSach VARCHAR(100),
+    SoLuong INT,
+    PRIMARY KEY (MaPM, MaSach),
+    FOREIGN KEY (MaPM) REFERENCES PhieuMuon(MaPM),
+    FOREIGN KEY (MaSach) REFERENCES Sach(MaSach)
+);
+
 CREATE TABLE ChiTietLo (
-	MaDS VARCHAR(50) PRIMARY KEY,
+	MaDS INT PRIMARY KEY AUTO_INCREMENT,
     TenSach VARCHAR(100),
     TheLoai VARCHAR(50),
     NXB VARCHAR(100) NOT NULL ,
     TacGia VARCHAR(50) NOT NULL ,
     SoLuong INT,
-    MaLo VARCHAR(50),
-     MaSach VARCHAR(50) ,
+    MaLo INT,
+     MaSach INT ,
     FOREIGN KEY (MaSach) REFERENCES Sach(Masach),
     FOREIGN KEY (MaLo) REFERENCES LoSach(MaLo)
 );
 
-
 CREATE TABLE Login (
-MANV VARCHAR(50),
+MANV INT,
 FOREIGN KEY (MANV) REFERENCES NhanVien(MANV),
 MatKhau VARCHAR(20) NOT NULL
-) ;
+);
 
 
 insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh) values (1, 'Niki Louiset', '61737 Brown Trail', '393-744-1011', 'Female', '2003-12-25');
@@ -102,11 +111,6 @@ insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (5, 'Otis Bazoche
 insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (6, 'Trstram Leven', '665-546-0991', '158 Waubesa Plaza', '1976-02-03');
 
 
-insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (1, '2023-1-31', '2023-2-5',1,1,1);
-insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (2, '2023-1-31', '2023-2-5',1,3,1);
-insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (3, '2023-1-31', '2023-2-5',3,1,1);
-insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (4, '2023-5-26', '2023-5-30',4,3,1);
-insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (5, '2023-4-21', '2023-4-24',5,2,1);
 
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (1, '2023-2-5', '2022-8-1',3,100000);
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (2, '2023-6-3', '2022-6-21',4,100000);
@@ -115,8 +119,70 @@ insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (4, '2023-3-1',
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (5, '2023-3-4', '2022-5-20',5,100000);
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (6, '2023-3-4', '2022-5-20',6,100000);
 
+-- **********
+-- insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (1, '2023-1-31', '2023-2-5', 1, 1, 1);
+-- insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (2, '2023-1-31', '2023-2-5', 1, 3, 1);
+-- insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (3, '2023-1-31', '2023-2-5', 3, 1, 1);
+-- insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (4, '2023-5-26', '2023-5-30', 4, 3, 1);
+-- insert into PhieuMuon (MaPM, NgayMuon, NgayTra, MaDG, MaSach,MaNV) values (5, '2023-4-21', '2023-4-24', 5, 2, 1);
+
+insert into PhieuMuon (MaPM, MaDG, MaSach, NgayMuon, NgayTra) values (1, 4, 3, '2023-1-31', '2023-2-5');
+insert into PhieuMuon (MaPM, MaDG, MaSach, NgayMuon, NgayTra) values (2, 1, 2, '2023-1-31', '2023-2-5');
+insert into PhieuMuon (MaPM, MaDG, MaSach, NgayMuon, NgayTra) values (3, 3, 1, '2023-1-31', '2023-2-5');
+insert into PhieuMuon (MaPM, MaDG, MaSach, NgayMuon, NgayTra) values (4, 5, 3, '2023-5-26', '2023-5-30');
+insert into PhieuMuon (MaPM, MaDG, MaSach, NgayMuon, NgayTra) values (5, 2, 2, '2023-4-21', '2023-4-24');
+
+insert into ChiTietPhieuMuon (MaPM, MaSach, TenSach, SoLuong) values (2, 3, 'Tuổi thơ dữ dội ', 2);
+insert into ChiTietPhieuMuon (MaPM, MaSach, TenSach, SoLuong) values (2, 1, 'Cơ hội của Chúa', 3);
+insert into ChiTietPhieuMuon (MaPM, MaSach, TenSach, SoLuong) values (1, 2, 'Tuổi 20 yêu dấu', 1);
+insert into ChiTietPhieuMuon (MaPM, MaSach, TenSach, SoLuong) values (1, 3, 'Tuổi thơ dữ dội ', 5);
+insert into ChiTietPhieuMuon (MaPM, MaSach, TenSach, SoLuong) values (3, 3, 'Tuổi thơ dữ dội ', 7);
+-- **********
+
 insert into ChiTietLo (MaDS, TenSach, TheLoai, NXB, TacGia, MaLo, MaSach, SoLuong) values (1, 'Cơ hội của Chúa', 'tiểu thuyết', 'Kim Đồng', 'Nguyễn Việt Hà', 1, 1, 50);
 insert into ChiTietLo (MaDS, TenSach, TheLoai, NXB, TacGia, MaLo, MaSach, SoLuong) values (2, 'Tuổi 20 yêu dấu', 'truyện', 'Trẻ', 'Nguyễn Huy Thiệp', 2, 2, 50);
 insert into ChiTietLo (MaDS, TenSach, TheLoai, NXB, TacGia, MaLo, MaSach, SoLuong) values (3, 'Cơ hội của Chúa', 'tiểu thuyết', 'Kim Đồng', 'Nguyễn Việt Hà', 5, 1, 50);
 insert into ChiTietLo (MaDS, TenSach, TheLoai, NXB, TacGia, MaLo, MaSach, SoLuong) values (4, 'Tuổi thơ dữ dội ', 'thơ', 'Kim Đồng', 'Phùng Quán', 2, 3, 50);
 insert into ChiTietLo (MaDS, TenSach, TheLoai, NXB, TacGia, MaLo, MaSach, SoLuong) values (5, 'Cơ hội của Chúa', 'tiểu thuyết', 'Kim Đồng', 'Nguyễn Việt Hà', 4, 1, 50);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

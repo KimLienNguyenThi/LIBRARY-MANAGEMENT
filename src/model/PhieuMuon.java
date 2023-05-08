@@ -1,58 +1,46 @@
 package model;
 import java.sql.Date;
 
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
 public class PhieuMuon {
-	private String maPM;
-	private String maNV;
-	private String maDocGia;
-	private String maSach;
+	private int maPM;
+	private int maThe;
 	private Date ngayMuon;
 	private Date ngayTra;
-	
+	private String tenNv;
+	private String hoTen;
+	private String sdt;
+	private String diaChi;
+	private JTable tableSachMuon;
+	public static JTextArea textAreaModel = new JTextArea();
 	
 	public PhieuMuon() {
 	}
 
-	public PhieuMuon(String maPM, String maNV, String maDocGia, String maSach, Date ngayMuon, Date ngayTra) {
+	public PhieuMuon(JTable tableSachMuon) {
 		super();
-		this.maPM = maPM;
-		this.maNV = maNV;
-		this.maDocGia = maDocGia;
-		this.maSach = maSach;
-		this.ngayMuon = ngayMuon;
-		this.ngayTra = ngayTra;
+		this.tableSachMuon = tableSachMuon;
+		//this.maPM = maPM;
+		//this.maThe = maThe;
+		//this.ngayTra = ngayTra;
 	}
 
-	public String getMaPM() {
+	public int getMaPM() {
 		return maPM;
 	}
 
-	public void setMaPM(String maPM) {
+	public void setMaPM(int maPM) {
 		this.maPM = maPM;
 	}
 
-	public String getMaNV() {
-		return maNV;
+	public int getMaThe() {
+		return maThe;
 	}
 
-	public void setMaNV(String maNV) {
-		this.maNV = maNV;
-	}
-
-	public String getMaDocGia() {
-		return maDocGia;
-	}
-
-	public void setMaDocGia(String maDocGia) {
-		this.maDocGia = maDocGia;
-	}
-
-	public String getMaSach() {
-		return maSach;
-	}
-
-	public void setMaSach(String maSach) {
-		this.maSach = maSach;
+	public void setMaThe(int maThe) {
+		this.maThe = maThe;
 	}
 
 	public Date getNgayMuon() {
@@ -70,6 +58,44 @@ public class PhieuMuon {
 	public void setNgayTra(Date ngayTra) {
 		this.ngayTra = ngayTra;
 	}
-	
-	
+
+	public String getTenNv() {
+		return tenNv;
+	}
+
+	public void setTenNv(String tenNv) {
+		this.tenNv = tenNv;
+	}
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public String getSdt() {
+		return sdt;
+	}
+
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+
+	public String getDiaChi() {
+		return diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
+	public JTable getTableSachMuon() {
+		return tableSachMuon;
+	}
+
+	public void setTableSachMuon(JTable tableSachMuon) {
+		this.tableSachMuon = tableSachMuon;
+	}
 }

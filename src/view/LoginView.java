@@ -90,10 +90,7 @@ public class LoginView extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String matkhau = textField_1.getText();
-				String taikhoan = textField.getText();
-				
-				
-				
+				String taikhoan = textField.getText();	
 				String login = LoginService.Login(taikhoan, matkhau);
 				if(login != "") {
 					 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
