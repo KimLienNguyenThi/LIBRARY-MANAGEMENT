@@ -9,7 +9,7 @@ public class cnDatabase {
 		Connection c = null;
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			String url = "jdbc:mySQL://localhost:3306/quanlythuvien";
+			String url = "jdbc:mySQL://localhost:3306/QuanLyThuVien";
 			String user = "root";
 			String password = "123456";
 			c = DriverManager.getConnection(url, user, password);

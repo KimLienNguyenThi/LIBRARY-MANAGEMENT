@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 public class Dialog_ThemThanhVien extends JDialog {
 	JFrame frame = new JFrame();
@@ -51,6 +52,8 @@ public class Dialog_ThemThanhVien extends JDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ThanhVien.getInstance().themThanhVien(docGia, theThanhVien);
+				((DefaultTableModel) MainView.table_QLTV.getModel()).setRowCount(0);
+				ThanhVien.getInstance().selectAll(MainView.table_QLTV);
 				dispose();
 				
 			}
