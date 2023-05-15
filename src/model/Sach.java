@@ -7,16 +7,17 @@ public class Sach {
 	private int namXuatBan;
 	private String NXB;
 	private String tacGia;
-	private int soLuongHangTon;
+	private int soLuong;
 	private String ngonNgu;
 	private String tinhTrang;
-	private String giaSach;
+	private int giaSach;
+	private int MaDS;
 	
 	public Sach() {
 	}
 	
 	public Sach(String maSach, String tenSach, String theLoai, int namXuatBan, String nXB, String tacGia,
-			int soLuongHangTon, String ngonNgu, String tinhTrang, String giaSach) {
+			int soLuong, String ngonNgu, String tinhTrang, int giaSach) {
 		super();
 		this.maSach = maSach;
 		this.tenSach = tenSach;
@@ -24,7 +25,7 @@ public class Sach {
 		this.namXuatBan = namXuatBan;
 		this.NXB = nXB;
 		this.tacGia = tacGia;
-		this.soLuongHangTon = soLuongHangTon;
+		this.soLuong = soLuong;
 		this.ngonNgu = ngonNgu;
 		this.tinhTrang = tinhTrang;
 		this.giaSach = giaSach;
@@ -78,12 +79,12 @@ public class Sach {
 		this.tacGia = tacGia;
 	}
 
-	public int getSoLuongHangTon() {
-		return soLuongHangTon;
+	public int getSoLuong() {
+		return soLuong;
 	}
 
-	public void setSoLuongHangTon(int soLuongHangTon) {
-		this.soLuongHangTon = soLuongHangTon;
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
 	}
 
 	public String getNgonNgu() {
@@ -102,14 +103,21 @@ public class Sach {
 		this.tinhTrang = tinhTrang;
 	}
 
-	public String getGiaSach() {
+	public int getGiaSach() {
 		return giaSach;
 	}
 
-	public void setGiaSach(String giaSach) {
+	public void setGiaSach(int giaSach) {
 		this.giaSach = giaSach;
 	}
 
-	
+	public int getMaDS() {
+		return MaDS;
+	}
+
+	public void setMaDS(int maDauSach) {
+		this.MaDS = maDauSach;
+	}
+
 	
 }

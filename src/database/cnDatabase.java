@@ -8,7 +8,7 @@ public class cnDatabase {
 	public static Connection getConnection() {
 		Connection c = null;
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 			String url = "jdbc:mySQL://localhost:3306/quanlythuvien";
 			String user = "root";
 			String password = "123456";

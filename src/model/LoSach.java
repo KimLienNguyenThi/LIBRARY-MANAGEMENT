@@ -1,8 +1,9 @@
 package model;
-import java.sql.Date;
+
+import java.util.Date;
 
 public class LoSach {
-	private String maLo;
+	private int maLo;
 	private String tenNhaCungCap;
 	private Date ngayNhap;
 	private String sdtNhaCungCap;
@@ -13,8 +14,7 @@ public class LoSach {
 	public LoSach() {
 	}
 
-	public LoSach(String maLo, String tenNhaCungCap, Date ngayNhap, String sdtNhaCungCap, String diaChiNhaCungCap,
-			int tongTienNhap) {
+	public LoSach(int maLo, String tenNhaCungCap, Date ngayNhap, String sdtNhaCungCap, String diaChiNhaCungCap,int tongTienNhap) {
 		super();
 		this.maLo = maLo;
 		this.tenNhaCungCap = tenNhaCungCap;
@@ -24,11 +24,11 @@ public class LoSach {
 		this.tongTienNhap = tongTienNhap;
 	}
 
-	public String getMaLo() {
+	public int getMaLo() {
 		return maLo;
 	}
 
-	public void setMaLo(String maLo) {
+	public void setMaLo(int maLo) {
 		this.maLo = maLo;
 	}
 
