@@ -3,19 +3,21 @@ package view;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import java.awt.Image;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Desktop;
-
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -26,6 +28,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,33 +62,55 @@ import javax.swing.RowFilter;
 
 public class MainView extends JFrame {
 	JFrame frame = new JFrame();
+	private CardLayout cardLayout;
 
 	public static ArrayList<Integer> arrMaSach = new ArrayList<>();
-	private JPanel contentPane;
-	private CardLayout cardLayout;
-	private JPanel cardPanel;
-	private JButton lastClicked;
-	private JPanel panelTheDocGia;
-	private JTable table_QuanLySach;
-	private JTable table_QuanLyNhapLo;
 	public static JTable table_QuanLyPhieuMuon;
+
+	private JPanel panel_Top;
+	private JPanel panel_pm;
+	private JPanel contentPane;
+	private JPanel cardPanel;
+	private JPanel panelTheDocGia;
+
 	private JTextField textField_TimKiem_qlnl;
 	private JTextField textField_TimKiem_qls;
 	private JTextField textField_TimKiem_qlpm;
 	private JTextField textField_TimKiem_qldg;
-	private JTable table_QuanLyDocGia;
-	static JTable table_pm;
 	private JTextField textField_TimKiem_pm;
+
+	public static JTable table_pm;
+	private JTable table_QuanLyDocGia;
 	private JTable table_DocGia_pm;
-	private JPanel panel_pm;
+	private JTable table_QuanLySach;
+	private JTable table_QuanLyNhapLo;
+
 	private JLabel lbl_TenNhanVien = new JLabel();
-	private int MaPM;
+	private JLabel lbl_HovaTen_pm;
+	private JLabel lbl_SDT_pm;
+	private JLabel lbl_DiaChi_pm;
+	private JLabel lbl_Time_pm;
+	private JLabel lbl_NgayMuon_pm;
+	private JLabel lbl_MaThe_pm;
+
+	private JButton lastClicked;
+	private JButton btn_TheDocGia_left;
+	private JButton btn_Library_top;
+	private JButton btn_PhieuMuon_left;
+	private JButton btn_QLPhieuMuon_left;
+	private JButton btn_QuanLySach_left;
+	private JButton btn_QuanLyNhapLo_left;
+	private JButton btn_QuanLyDocGia_left;
 
 	private java.sql.Date ngayTra;
 	private java.sql.Date ngayMuon;
+
+	private int MaPM;
 	private int maTheDocGia;
-	private JLabel lbl_MaThe_pm;
 	private int SlHangTablePm = 0;
+
+	private JComboBox<Integer> comboBox_NgayTra_pm;
+	private SimpleDateFormat formatter;
 
 	/**
 	 * Launch the application.
@@ -115,30 +141,34 @@ public class MainView extends JFrame {
 
 		cardLayout = new CardLayout();
 
+		// Formate Date
 		Date date = new Date();
-		SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		String formattedDate = formatter1.format(date);
-		String formattedDateTime = formatter2.format(date);
+		formatter = new SimpleDateFormat("dd/MM/yyyy");
+		String formattedDate = formatter.format(date);
 
-		JPanel panel_Top = new JPanel();
+		panel_Top = new JPanel();
 		panel_Top.setBorder(new MatteBorder(1, 1, 5, 1, (Color) new Color(0, 0, 0)));
 		panel_Top.setBackground(new Color(0xE2FF99));
 		panel_Top.setBounds(0, 0, 1086, 66);
 		contentPane.add(panel_Top);
 		panel_Top.setLayout(null);
 
-		ImageIcon iconlibrary = new ImageIcon(MainView.class.getResource("/images/books.png"));
-		Image imglibrary = iconlibrary.getImage();
-		Image newImglibrary = imglibrary.getScaledInstance(58, 58, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconlibrary = new ImageIcon(newImglibrary);
+		// Khởi tạo và set các icon
+		ImageIcon newIconLibrary = getScaledIcon("/images/books.png", 58, 58);
+		ImageIcon newIconTimKiem = getScaledIcon("/images/search.png", 25, 25);
+		ImageIcon newIconUser = getScaledIcon("/images/exit.png", 29, 29);
+		ImageIcon newIconBill = getScaledIcon("/images/bill.png", 20, 20);
+		ImageIcon newIconMnBooks = getScaledIcon("/images/mnbooks.png", 20, 20);
+		ImageIcon newIconExChange = getScaledIcon("/images/exchange.png", 20, 20);
+		ImageIcon newIconTrend = getScaledIcon("/images/trend.png", 20, 20);
+		ImageIcon newIconMember = getScaledIcon("/images/member.png", 20, 20);
+		ImageIcon newIconReading = getScaledIcon("/images/reading.png", 20, 20);
 
-		ImageIcon iconTimKiem = new ImageIcon(MainView.class.getResource("/images/search.png"));
-		Image imgTimKiem = iconTimKiem.getImage();
-		Image newImgTimKiem = imgTimKiem.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconTimKiem = new ImageIcon(newImgTimKiem);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_1.setBounds(0, 0, 849, 548);
 
-		JButton btn_Library_top = new JButton("");
+		btn_Library_top = new JButton("");
 		btn_Library_top.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_Library_top);
@@ -150,18 +180,13 @@ public class MainView extends JFrame {
 		btn_Library_top.setBackground(new Color(226, 255, 153));
 		btn_Library_top.setBounds(10, 2, 58, 58);
 		panel_Top.add(btn_Library_top);
-		btn_Library_top.setIcon(newIconlibrary);
+		btn_Library_top.setIcon(newIconLibrary);
 
 		JLabel lbl_Namelibrary_top = new JLabel("QUẢN LÝ THƯ VIỆN ABC");
 		lbl_Namelibrary_top.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lbl_Namelibrary_top.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_Namelibrary_top.setBounds(105, 10, 336, 46);
 		panel_Top.add(lbl_Namelibrary_top);
-
-		ImageIcon iconUser = new ImageIcon(MainView.class.getResource("/images/exit.png"));
-		Image imgUser = iconUser.getImage();
-		Image newImgUser = imgUser.getScaledInstance(29, 29, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconUser = new ImageIcon(newImgUser);
 
 		JButton btn_Logout_top = new JButton("");
 		btn_Logout_top.addActionListener(new ActionListener() {
@@ -192,12 +217,7 @@ public class MainView extends JFrame {
 		lbl_ChucNang_left.setBounds(0, 0, 238, 25);
 		panel_Left.add(lbl_ChucNang_left);
 
-		ImageIcon iconBill = new ImageIcon(MainView.class.getResource("/images/bill.png"));
-		Image imgBill = iconBill.getImage();
-		Image newImgBill = imgBill.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconBill = new ImageIcon(newImgBill);
-
-		JButton btn_PhieuMuon_left = new JButton("PHIẾU MƯỢN");
+		btn_PhieuMuon_left = new JButton("PHIẾU MƯỢN");
 		btn_PhieuMuon_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_PhieuMuon_left);
@@ -213,14 +233,10 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_PhieuMuon_left);
 		btn_PhieuMuon_left.setIcon(newIconBill);
 
-		ImageIcon iconMnBooks = new ImageIcon(MainView.class.getResource("/images/mnbooks.png"));
-		Image imgMnBooks = iconMnBooks.getImage();
-		Image newImgMnBooks = imgMnBooks.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconMnBooks = new ImageIcon(newImgMnBooks);
-
-		JButton btn_QLPhieuMuon_left = new JButton("QLý PHIẾU MƯỢN");
+		btn_QLPhieuMuon_left = new JButton("QLý PHIẾU MƯỢN");
 		btn_QLPhieuMuon_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Lấy dữ liệu dưới sql lên table
 				Service23.getInstance().UpdateTinhTrangPhieuMuonQuahan();
 
 				// Cập nhật bảng Quản lý phiếu mượn
@@ -240,12 +256,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QLPhieuMuon_left);
 		btn_QLPhieuMuon_left.setIcon(newIconMnBooks);
 
-		ImageIcon iconExChange = new ImageIcon(MainView.class.getResource("/images/exchange.png"));
-		Image imgExChange = iconExChange.getImage();
-		Image newImgExChange = imgExChange.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconExChange = new ImageIcon(newImgExChange);
-
-		JButton btn_QuanLySach_left = new JButton("QUẢN LÝ SÁCH");
+		btn_QuanLySach_left = new JButton("QUẢN LÝ SÁCH");
 		btn_QuanLySach_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLySach_left);
@@ -261,12 +272,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QuanLySach_left);
 		btn_QuanLySach_left.setIcon(newIconExChange);
 
-		ImageIcon iconTrend = new ImageIcon(MainView.class.getResource("/images/trend.png"));
-		Image imgTrend = iconTrend.getImage();
-		Image newImgTrend = imgTrend.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconTrend = new ImageIcon(newImgTrend);
-
-		JButton btn_QuanLyNhapLo_left = new JButton("QLý NHẬP LÔ");
+		btn_QuanLyNhapLo_left = new JButton("QLý NHẬP LÔ");
 		btn_QuanLyNhapLo_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLyNhapLo_left);
@@ -282,12 +288,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QuanLyNhapLo_left);
 		btn_QuanLyNhapLo_left.setIcon(newIconTrend);
 
-		ImageIcon iconMember = new ImageIcon(MainView.class.getResource("/images/member.png"));
-		Image imgMember = iconMember.getImage();
-		Image newImgMember = imgMember.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconMember = new ImageIcon(newImgMember);
-
-		JButton btn_TheDocGia_left = new JButton(" THẺ ĐỘC GIẢ");
+		btn_TheDocGia_left = new JButton(" THẺ ĐỘC GIẢ");
 		btn_TheDocGia_left.setHorizontalAlignment(SwingConstants.LEADING);
 		btn_TheDocGia_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -303,12 +304,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_TheDocGia_left);
 		btn_TheDocGia_left.setIcon(newIconMember);
 
-		ImageIcon iconReading = new ImageIcon(MainView.class.getResource("/images/reading.png"));
-		Image imgReading = iconReading.getImage();
-		Image newImgReading = imgReading.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newIconReading = new ImageIcon(newImgReading);
-
-		JButton btn_QuanLyDocGia_left = new JButton("QLý ĐỘC GIẢ");
+		btn_QuanLyDocGia_left = new JButton("QLý ĐỘC GIẢ");
 		btn_QuanLyDocGia_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLyDocGia_left);
@@ -338,11 +334,7 @@ public class MainView extends JFrame {
 		lbl_XinChao_home.setFont(new Font("Tahoma", Font.BOLD, 70));
 		lbl_XinChao_home.setBounds(10, 10, 829, 172);
 		panelHome.add(lbl_XinChao_home);
-
-		JLabel lbl_image_home = new JLabel("New label");
-		lbl_image_home.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-		lbl_image_home.setBounds(0, 0, 849, 548);
-		panelHome.add(lbl_image_home);
+		panelHome.add(lblNewLabel_1);
 
 		JPanel panelPhieuMuon = new JPanel();
 		panelPhieuMuon.setBackground(new Color(255, 255, 255));
@@ -360,28 +352,16 @@ public class MainView extends JFrame {
 		lbl0_pm.setBounds(10, 0, 480, 47);
 		panel_pm.add(lbl0_pm);
 
-		JLabel lbl_Time_pm = new JLabel("");
+		lbl_Time_pm = new JLabel("");
 		lbl_Time_pm.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbl_Time_pm.setBounds(330, 54, 120, 20);
 		panel_pm.add(lbl_Time_pm);
+		TimeNow(lbl_Time_pm);
 
 		lbl_TenNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbl_TenNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_TenNhanVien.setBounds(120, 54, 131, 20);
 		panel_pm.add(lbl_TenNhanVien);
-
-		// Gọi lại hàm sau 1 giây
-		Timer timer = new Timer(1000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Date date = new Date();
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-				String formattedDate = formatter.format(date);
-				lbl_Time_pm.setText(formattedDate);
-			}
-		});
-		// Bắt đầu gọi
-		timer.start();
 
 		JLabel lbl7_pm = new JLabel("Nhân viên: ");
 		lbl7_pm.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -430,28 +410,28 @@ public class MainView extends JFrame {
 		lbl6_pm.setBounds(270, 230, 71, 20);
 		panel_pm.add(lbl6_pm);
 
-		JLabel lbl_SDT_pm = new JLabel("");
+		lbl_SDT_pm = new JLabel("");
 		lbl_SDT_pm.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_SDT_pm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbl_SDT_pm.setBackground(Color.WHITE);
 		lbl_SDT_pm.setBounds(180, 140, 270, 20);
 		panel_pm.add(lbl_SDT_pm);
 
-		JLabel lbl_HovaTen_pm = new JLabel("");
+		lbl_HovaTen_pm = new JLabel("");
 		lbl_HovaTen_pm.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_HovaTen_pm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbl_HovaTen_pm.setBackground(Color.WHITE);
 		lbl_HovaTen_pm.setBounds(180, 170, 270, 20);
 		panel_pm.add(lbl_HovaTen_pm);
 
-		JLabel lbl_DiaChi_pm = new JLabel("");
+		lbl_DiaChi_pm = new JLabel("");
 		lbl_DiaChi_pm.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_DiaChi_pm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbl_DiaChi_pm.setBackground(Color.WHITE);
 		lbl_DiaChi_pm.setBounds(180, 200, 270, 20);
 		panel_pm.add(lbl_DiaChi_pm);
 
-		JLabel lbl_NgayMuon_pm = new JLabel("" + formattedDate);
+		lbl_NgayMuon_pm = new JLabel("" + formattedDate);
 		lbl_NgayMuon_pm.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_NgayMuon_pm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbl_NgayMuon_pm.setBackground(Color.WHITE);
@@ -463,7 +443,7 @@ public class MainView extends JFrame {
 		ngayMuon = new java.sql.Date(now.getTime());
 		System.err.println(ngayMuon);
 
-		JComboBox comboBox_NgayTra_pm = new JComboBox();
+		comboBox_NgayTra_pm = new JComboBox<>();
 		comboBox_NgayTra_pm.setFont(new Font("Tahoma", Font.BOLD, 12));
 		comboBox_NgayTra_pm.setModel(new DefaultComboBoxModel(
 				new String[] { "Chọn hạn trả", "1 tháng", "3 tháng", "5 tháng", "7 tháng", "10 tháng", "12 tháng" }));
@@ -473,33 +453,20 @@ public class MainView extends JFrame {
 			public void itemStateChanged(ItemEvent event) {
 				if (event.getStateChange() == ItemEvent.SELECTED) {
 					String selectedItem = comboBox_NgayTra_pm.getSelectedItem().toString();
-
 					if (selectedItem.equals("Chọn hạn trả")) {
 						ngayTra = null;
 					} else if (selectedItem.equals("1 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 1);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(1);
 					} else if (selectedItem.equals("3 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 3);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(3);
 					} else if (selectedItem.equals("5 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 5);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(5);
 					} else if (selectedItem.equals("7 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 7);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(7);
 					} else if (selectedItem.equals("10 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 10);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(10);
 					} else if (selectedItem.equals("12 tháng")) {
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.MONTH, 12);
-						ngayTra = new java.sql.Date(cal.getTimeInMillis());
+						ComboBoxNgayTra(12);
 					}
 				}
 			}
@@ -582,9 +549,9 @@ public class MainView extends JFrame {
 		scrollPane_pm2.setBounds(0, 0, 299, 238);
 		panel_3.add(scrollPane_pm2);
 
+		// Lấy dữ liệu dưới sql lên table
 		Service23.getInstance().SelectAllTheDocGia(table_DocGia_pm);
 
-		//////////////
 		table_DocGia_pm.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -601,28 +568,8 @@ public class MainView extends JFrame {
 			}
 		});
 
-		// ----------->Xử lý tìm kiếm cho table_docgia_pm<-----------
-
-		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
-		TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(table_DocGia_pm.getModel());
-
-		// Đặt TableRowSorter cho bảng
-		table_DocGia_pm.setRowSorter(sorter1);
-
-		// Tạo sự kiện KeyReleased cho JTextField
-		textField_TimKiem_pm.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				String input = textField_TimKiem_pm.getText().trim(); // Lấy dữ liệu từ JTextField
-				if (input.length() == 0) {
-					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
-					sorter1.setRowFilter(null);
-				} else {
-					// Lọc dữ liệu theo nội dung JTextField
-					sorter1.setRowFilter(RowFilter.regexFilter("(?i)" + input));
-				}
-			}
-		});
-		// ----------------------------------------------------------
+		// Xử lý sự kiện tìm kiếm cho table
+		SearchTable(table_DocGia_pm, textField_TimKiem_pm);
 
 		JButton btn_ThemSach_pm = new JButton("Thêm sách");
 		btn_ThemSach_pm.addActionListener(new ActionListener() {
@@ -637,24 +584,7 @@ public class MainView extends JFrame {
 		JButton btn_XoaSach_pm = new JButton("Xóa sách");
 		btn_XoaSach_pm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int row = table_pm.getSelectedRow(); // lấy chỉ số của hàng được chọn trong table.
-				if (row == -1) {
-					JOptionPane.showMessageDialog(null, "Hãy chọn sách muốn xóa!");
-				} else {
-					int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn xóa?", "Thông báo",
-							JOptionPane.YES_NO_OPTION);
-					if (dialogResult == JOptionPane.YES_OPTION) {
-						// Xử lý khi người dùng chọn Yes
-						int maSach = (int) table_pm.getValueAt(row, 0);
-						arrMaSach.remove(Integer.valueOf(maSach));
-						// arrMaSach.re
-
-						DefaultTableModel model = (DefaultTableModel) table_pm.getModel();
-						model.removeRow(row);
-					} else {
-						// Xử lý khi người dùng chọn No
-					}
-				}
+				ActionBtn_XoaSach_Pm();
 			}
 		});
 		btn_XoaSach_pm.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -664,21 +594,7 @@ public class MainView extends JFrame {
 		JButton btn_Huy_pm = new JButton("Hủy");
 		btn_Huy_pm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn hủy không?", "Thông báo",
-						JOptionPane.YES_NO_OPTION);
-				if (dialogResult == JOptionPane.YES_OPTION) {
-					// Xử lý khi người dùng chọn Yes
-					lbl_MaThe_pm.setText("");
-					lbl_HovaTen_pm.setText("");
-					lbl_SDT_pm.setText("");
-					lbl_DiaChi_pm.setText("");
-					comboBox_NgayTra_pm.setSelectedIndex(0);
-					// table_pm.setModel(null);
-					((DefaultTableModel) table_pm.getModel()).setRowCount(0);
-					arrMaSach.clear();
-				} else {
-					// Xử lý khi người dùng chọn No
-				}
+				ActionBtn_Huy_Pm();
 			}
 		});
 		btn_Huy_pm.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -688,133 +604,7 @@ public class MainView extends JFrame {
 		JButton btn_InPhieu_pm = new JButton("In phiếu");
 		btn_InPhieu_pm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int maPmLonNhat;
-
-				if (lbl_MaThe_pm.getText() == "") {
-					JOptionPane.showMessageDialog(null, "Hãy chọn thông tin độc giả!");
-				} else {
-					if (ngayTra == null) {
-						JOptionPane.showMessageDialog(null, "Hãy chọn ngày trả!");
-					} else {
-
-						if (SlHangTablePm == 0) {
-							JOptionPane.showMessageDialog(null, "Hãy Thêm sách!");
-						} else {
-							int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn không?",
-									"Thông báo", JOptionPane.YES_NO_OPTION);
-							if (dialogResult == JOptionPane.YES_OPTION) {
-								Service23.getInstance().InsertPhieuMuon(maTheDocGia, ngayMuon, ngayTra);
-								ArrayList<Integer> arr = Service23.getInstance().SelectAllMaPm(maTheDocGia);
-								maPmLonNhat = Collections.max(arr);
-
-								if (arr.isEmpty()) {
-									// Xử lý trường hợp khi ArrayList là rỗng
-								} else {
-									for (int i = 0; i < arrMaSach.size(); i++) {
-										Service23.getInstance().InsertChiTietPhieuMuon(maPmLonNhat, arrMaSach.get(i));
-										Service23.getInstance().UpdateTinhTrangSachHet(maPmLonNhat);
-									}
-									// Cập nhật bảng Quản lý phiếu mượn
-									((DefaultTableModel) MainView.table_QuanLyPhieuMuon.getModel()).setRowCount(0);
-									Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
-
-									// Cập nhật bảng Thêm sách
-									((DefaultTableModel) DiaLog_ThemSach_PM.table.getModel()).setRowCount(0);
-									Service23.getInstance().SelectAllSachCon(DiaLog_ThemSach_PM.table);
-
-									// Gắn dữ liệu vào PhieuMuonView.java
-									PhieuMuonView.lbl_time.setText(lbl_Time_pm.getText());
-									PhieuMuonView.lbl_MaPm.setText(maPmLonNhat + "");
-									PhieuMuonView.lbl_MaThe.setText(lbl_MaThe_pm.getText());
-									PhieuMuonView.lbl_HoTen.setText(lbl_HovaTen_pm.getText());
-									PhieuMuonView.lbl_SDT.setText(lbl_SDT_pm.getText());
-									PhieuMuonView.lbl_DiaChi.setText(lbl_DiaChi_pm.getText());
-									PhieuMuonView.lbl_NgayMuon.setText(lbl_NgayMuon_pm.getText());
-
-									// SimpleDateFormat formatterNgayTra = new SimpleDateFormat("dd/MM/yyyy");
-									String formattedNgayTra = formatter1.format(ngayTra);
-
-									PhieuMuonView.lbl_NgayTra.setText(formattedNgayTra + "");
-									PhieuMuonView.rowCount = SlHangTablePm;
-
-									// Đổ dữ liệu từ table table_pm vào PhieuMuonView.textArea
-									SetDataTextarea(table_pm, 0, PhieuMuonView.textArea_MaSach);
-									SetDataTextarea(table_pm, 1, PhieuMuonView.textArea_TenSach);
-									SetDataTextarea(table_pm, 2, PhieuMuonView.textArea_TacGia);
-
-									// Set tất cả dữ liệu trên phiếu mượn về null
-									lbl_MaThe_pm.setText("");
-									lbl_HovaTen_pm.setText("");
-									lbl_SDT_pm.setText("");
-									lbl_DiaChi_pm.setText("");
-									comboBox_NgayTra_pm.setSelectedIndex(0);
-									// table_pm.setModel(null);
-									((DefaultTableModel) table_pm.getModel()).setRowCount(0);
-									arrMaSach.clear();
-
-									new PhieuMuonView().setVisible(false);
-									
-									
-									
-
-										try {
-											// Tạo đối tượng BufferedImage với kích thước tương ứng
-											Dimension size = PhieuMuonView.panel.getSize();
-											BufferedImage image = new BufferedImage(size.width, size.height,
-													BufferedImage.TYPE_INT_RGB);
-
-											// Tạo đối tượng Graphics2D từ BufferedImage
-											Graphics2D g2 = image.createGraphics();
-
-											// Vẽ nội dung của JPanel lên Graphics2D
-											PhieuMuonView.panel.paint(g2);
-
-											// Tạo đối tượng Document
-											Document document = new Document();
-
-											// Khởi tạo PdfWriter với Document và FileOutputStream để ghi vào file PDF
-											PdfWriter.getInstance(document, new FileOutputStream(
-													"File PDF Phiếu Mượn/PhieuMuon Mã[" + maPmLonNhat + "].pdf"));
-
-											// Mở Document
-											document.open();
-
-											// Chèn ảnh từ BufferedImage vào PDF
-											com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(
-													new java.awt.image.BufferedImage(image.getColorModel(),
-															image.copyData(null), image.isAlphaPremultiplied(), null),
-													null);
-											document.add(pdfImage);
-
-											// Đóng Document
-											document.close();
-										} catch (FileNotFoundException e2) {
-											e2.printStackTrace();
-										} catch (BadElementException e2) {
-											e2.printStackTrace();
-										} catch (DocumentException e2) {
-											e2.printStackTrace();
-										} catch (IOException e2) {
-											e2.printStackTrace();
-										}
-
-									
-									// Mở file pdf của phiếu mượn
-									try {
-										File file = new File("File PDF Phiếu Mượn/PhieuMuon Mã[" + maPmLonNhat + "].pdf");
-										Desktop.getDesktop().open(file);
-									} catch (IOException e1) {
-										e1.printStackTrace();
-									}
-									
-								}
-							} else {
-								// Xử lý khi người dùng chọn No
-							}
-						}
-
-					}
-				}
+				ActionBtn_InPhieu_Pm();
 			}
 		});
 
@@ -866,8 +656,7 @@ public class MainView extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				int row = table_QuanLyPhieuMuon.getSelectedRow(); // lấy chỉ số của hàng được chọn trong table.
 				if (row >= 0) { // Đảm bảo là có hàng được chọn
-					Object value = table_QuanLyPhieuMuon.getValueAt(row, 0); // Lấy giá trị của cột đầu tiên (chỉ số cột
-																				// là 0)
+					Object value = table_QuanLyPhieuMuon.getValueAt(row, 0);
 					MaPM = ((Integer) value).intValue();
 				}
 			}
@@ -876,35 +665,14 @@ public class MainView extends JFrame {
 		// Lấy dữ liệu Quảng lý phiếu mượn từ sql lên table
 		Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
 
-		// ----------->Xử lý tìm kiếm cho table_QuanLyPhieuMuon<-----------
-
-		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
-		TableRowSorter<TableModel> sorter2 = new TableRowSorter<>(table_QuanLyPhieuMuon.getModel());
-
-		// Đặt TableRowSorter cho bảng
-		table_QuanLyPhieuMuon.setRowSorter(sorter2);
-
-		// Tạo sự kiện KeyReleased cho JTextField
-		textField_TimKiem_qlpm.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				String input = textField_TimKiem_qlpm.getText().trim(); // Lấy dữ liệu từ JTextField
-				if (input.length() == 0) {
-					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
-					sorter2.setRowFilter(null);
-				} else {
-					// Lọc dữ liệu theo nội dung JTextField
-					sorter2.setRowFilter(RowFilter.regexFilter("(?i)" + input));
-				}
-			}
-		});
-		// ----------------------------------------------------------
+		// Sự kiện Tìm kiếm trong bảng quản lý phiếu mượn
+		SearchTable(table_QuanLyPhieuMuon, textField_TimKiem_qlpm);
 
 		JButton btn_TimKiem_qlpm = new JButton("");
 		btn_TimKiem_qlpm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
 		btn_TimKiem_qlpm.setOpaque(true);
 		btn_TimKiem_qlpm.setBorderPainted(false);
 		btn_TimKiem_qlpm.setBackground(new Color(226, 255, 153));
@@ -912,19 +680,8 @@ public class MainView extends JFrame {
 		panelQLPhieuMuon.add(btn_TimKiem_qlpm);
 		btn_TimKiem_qlpm.setIcon(newIconTimKiem);
 
-		JButton btn_XemChiTiet_qlpm = new JButton("Xem chi tiết");
-		btn_XemChiTiet_qlpm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (MaPM == 0) {
-					JOptionPane.showMessageDialog(null, "Hãy chọn phiếu mượn muốn xem!");
-				} else {
-					new Dialog_XemChiTiet_QLPM(frame, MaPM).setVisible(true);
-				}
-			}
-		});
-		btn_XemChiTiet_qlpm.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btn_XemChiTiet_qlpm.setBounds(10, 43, 160, 45);
-		panelQLPhieuMuon.add(btn_XemChiTiet_qlpm);
+		// Tạo popupMenu khi click chuộc phải vào hàng table
+		setupPopupMenu(table_QuanLyPhieuMuon, frame);
 
 		JPanel panelQuanLySach = new JPanel();
 		panelQuanLySach.setBackground(new Color(255, 255, 255));
@@ -1054,6 +811,202 @@ public class MainView extends JFrame {
 
 	}
 
+	// Sự kiện btn_Huy_pm
+	private void ActionBtn_Huy_Pm() {
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn hủy không?", "Thông báo",
+				JOptionPane.YES_NO_OPTION);
+		if (dialogResult == JOptionPane.YES_OPTION) {
+			// Xử lý khi người dùng chọn Yes
+			lbl_MaThe_pm.setText("");
+			lbl_HovaTen_pm.setText("");
+			lbl_SDT_pm.setText("");
+			lbl_DiaChi_pm.setText("");
+			comboBox_NgayTra_pm.setSelectedIndex(0);
+			// table_pm.setModel(null);
+			((DefaultTableModel) table_pm.getModel()).setRowCount(0);
+			arrMaSach.clear();
+		} else {
+			// Xử lý khi người dùng chọn No
+		}
+	}
+
+	// Sự kiện btn_XoaSach_pm
+	private void ActionBtn_XoaSach_Pm() {
+		int row = table_pm.getSelectedRow(); // lấy chỉ số của hàng được chọn trong table.
+		if (row == -1) {
+			JOptionPane.showMessageDialog(null, "Hãy chọn sách muốn xóa!");
+		} else {
+			int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn xóa?", "Thông báo",
+					JOptionPane.YES_NO_OPTION);
+			if (dialogResult == JOptionPane.YES_OPTION) {
+				// Xử lý khi người dùng chọn Yes
+				int maSach = (int) table_pm.getValueAt(row, 0);
+				arrMaSach.remove(Integer.valueOf(maSach));
+
+				DefaultTableModel model = (DefaultTableModel) table_pm.getModel();
+				model.removeRow(row);
+			} else {
+				// Xử lý khi người dùng chọn No
+			}
+		}
+	}
+
+	// Hàm Tạo và lưu file PDF phiếu mượn
+	private void ActionSavePDF(int MaPhieuMuonLonNhat) {
+
+		// Vẽ tất cả hình ảnh trong jPanel thành file PDF
+		try {
+			Dimension size = PhieuMuonView.panel.getSize();
+			BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g2 = image.createGraphics();
+			PhieuMuonView.panel.paint(g2);
+			Document document = new Document();
+			FileOutputStream fileOutputStream = new FileOutputStream(
+					"File PDF Phiếu Mượn/PhieuMuon Mã[" + MaPhieuMuonLonNhat + "].pdf");
+			PdfWriter.getInstance(document, fileOutputStream);
+			document.open();
+			com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(new java.awt.image.BufferedImage(
+					image.getColorModel(), image.copyData(null), image.isAlphaPremultiplied(), null), null);
+			document.add(pdfImage);
+			document.close();
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		} catch (BadElementException e2) {
+			e2.printStackTrace();
+		} catch (DocumentException e2) {
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+
+		// Mở file pdf của phiếu mượn
+		try {
+			File file = new File("File PDF Phiếu Mượn/PhieuMuon Mã[" + MaPhieuMuonLonNhat + "].pdf");
+			Desktop.getDesktop().open(file);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	// Sự kiện btn_InPhieu_pm
+	private void ActionBtn_InPhieu_Pm() {
+		int maPmLonNhat;
+
+		if (lbl_MaThe_pm.getText() == "") {
+			JOptionPane.showMessageDialog(null, "Hãy chọn thông tin độc giả!");
+		} else {
+			if (ngayTra == null) {
+				JOptionPane.showMessageDialog(null, "Hãy chọn ngày trả!");
+			} else {
+
+				if (SlHangTablePm == 0) {
+					JOptionPane.showMessageDialog(null, "Hãy Thêm sách!");
+				} else {
+					int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn không?", "Thông báo",
+							JOptionPane.YES_NO_OPTION);
+					if (dialogResult == JOptionPane.YES_OPTION) {
+						Service23.getInstance().InsertPhieuMuon(maTheDocGia, ngayMuon, ngayTra);
+						ArrayList<Integer> arr = Service23.getInstance().SelectAllMaPm(maTheDocGia);
+						maPmLonNhat = Collections.max(arr);
+
+						if (arr.isEmpty()) {
+							// Xử lý trường hợp khi ArrayList là rỗng
+						} else {
+							for (int i = 0; i < arrMaSach.size(); i++) {
+								Service23.getInstance().InsertChiTietPhieuMuon(maPmLonNhat, arrMaSach.get(i));
+								Service23.getInstance().UpdateTinhTrangSachHet(maPmLonNhat);
+							}
+							// Cập nhật bảng Quản lý phiếu mượn
+							((DefaultTableModel) MainView.table_QuanLyPhieuMuon.getModel()).setRowCount(0);
+							Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
+
+							// Cập nhật bảng Thêm sách
+							((DefaultTableModel) DiaLog_ThemSach_PM.table.getModel()).setRowCount(0);
+							Service23.getInstance().SelectAllSachCon(DiaLog_ThemSach_PM.table);
+
+							// Gắn dữ liệu vào PhieuMuonView.java
+							PhieuMuonView.lbl_time.setText(lbl_Time_pm.getText());
+							PhieuMuonView.lbl_MaPm.setText(maPmLonNhat + "");
+							PhieuMuonView.lbl_MaThe.setText(lbl_MaThe_pm.getText());
+							PhieuMuonView.lbl_HoTen.setText(lbl_HovaTen_pm.getText());
+							PhieuMuonView.lbl_SDT.setText(lbl_SDT_pm.getText());
+							PhieuMuonView.lbl_DiaChi.setText(lbl_DiaChi_pm.getText());
+							PhieuMuonView.lbl_NgayMuon.setText(lbl_NgayMuon_pm.getText());
+
+							// SimpleDateFormat formatterNgayTra = new SimpleDateFormat("dd/MM/yyyy");
+							String formattedNgayTra = formatter.format(ngayTra);
+
+							PhieuMuonView.lbl_NgayTra.setText(formattedNgayTra + "");
+							PhieuMuonView.rowCount = SlHangTablePm;
+
+							// Đổ dữ liệu từ table table_pm vào PhieuMuonView.textArea
+							SetDataTextarea(table_pm, 0, PhieuMuonView.textArea_MaSach);
+							SetDataTextarea(table_pm, 1, PhieuMuonView.textArea_TenSach);
+							SetDataTextarea(table_pm, 2, PhieuMuonView.textArea_TacGia);
+
+							// Set tất cả dữ liệu trên phiếu mượn về null
+							lbl_MaThe_pm.setText("");
+							lbl_HovaTen_pm.setText("");
+							lbl_SDT_pm.setText("");
+							lbl_DiaChi_pm.setText("");
+							comboBox_NgayTra_pm.setSelectedIndex(0);
+							// table_pm.setModel(null);
+							((DefaultTableModel) table_pm.getModel()).setRowCount(0);
+							arrMaSach.clear();
+
+							new PhieuMuonView().setVisible(false);
+
+							ActionSavePDF(maPmLonNhat);
+
+						}
+					} else {
+						// Xử lý khi người dùng chọn No
+					}
+				}
+
+			}
+		}
+	}
+
+	// Hàm Xử lý Tìm kiếm trong table
+	public static void SearchTable(JTable table, JTextField textField) {
+		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
+		TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(table.getModel());
+
+		// Đặt TableRowSorter cho bảng
+		table.setRowSorter(sorter1);
+
+		// Tạo sự kiện KeyReleased cho JTextField
+		textField.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				String input = textField.getText().trim(); // Lấy dữ liệu từ JTextField
+				if (input.length() == 0) {
+					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
+					sorter1.setRowFilter(null);
+				} else {
+					// Lọc dữ liệu theo nội dung JTextField
+					sorter1.setRowFilter(RowFilter.regexFilter("(?i)" + input));
+				}
+			}
+		});
+	}
+
+	// Hàm lấy thời gian hiện tại và hiển thị liên tục
+	private void TimeNow(JLabel lable) {
+		// Gọi lại hàm sau 1 giây
+		Timer timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date date = new Date();
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+				String formattedDate = formatter.format(date);
+				lable.setText(formattedDate);
+			}
+		});
+		timer.start();
+	}
+
+	// Hàm đổi màu khi ấn vào button
 	private void changeButtonColor(JButton button) {
 		if (lastClicked != null) {
 			lastClicked.setBackground(new Color(0xE2FF99));
@@ -1062,6 +1015,7 @@ public class MainView extends JFrame {
 		lastClicked = button;
 	}
 
+	// Hàm đổ dữ liệu từ table vào Textarea
 	public void SetDataTextarea(JTable table, int columTable, JTextArea textArea) {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < table.getRowCount(); i++) {
@@ -1070,5 +1024,73 @@ public class MainView extends JFrame {
 			buffer.append("\n");
 		}
 		textArea.setText(buffer.toString());
+	}
+
+	// Hàm set image
+	private static ImageIcon getScaledIcon(String imagePath, int width, int height) {
+		ImageIcon icon = new ImageIcon(MainView.class.getResource(imagePath));
+		Image img = icon.getImage();
+		Image newImg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+		return new ImageIcon(newImg);
+	}
+
+	// Hàm set ComboBox ngày trả
+	private void ComboBoxNgayTra(int thang) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, thang);
+		ngayTra = new java.sql.Date(cal.getTimeInMillis());
+	}
+
+	// Hàm set PopupMenu khi chuộc phải vào hàng trong table
+	private void setupPopupMenu(JTable table, JFrame jFrame) {
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if (e.getButton() == MouseEvent.BUTTON3) { // kiểm tra chuột phải
+					int row = table.rowAtPoint(e.getPoint()); // lấy chỉ số dòng được nhấn chuột
+					table.setRowSelectionInterval(row, row); // chọn dòng được nhấn chuột
+
+					JPopupMenu popupMenu = new JPopupMenu();
+					popupMenu.setBackground(Color.BLUE);
+
+					JMenuItem menuItemXemChiTiet = new JMenuItem("Xem chi tiết");
+					menuItemXemChiTiet.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							new Dialog_XemChiTiet_QLPM(jFrame, row + 1).setVisible(true);
+						}
+					});
+
+					JMenuItem menuItemĐanhauDaTra = new JMenuItem("Đánh dấu đã trả");
+					menuItemĐanhauDaTra.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn không?",
+									"Thông báo", JOptionPane.YES_NO_OPTION);
+							if (dialogResult == JOptionPane.YES_OPTION) {
+								// Xử lý khi người dùng chọn Yes
+								Service23.getInstance().UpdateTinhTrangPhieuMuonDaTra(MaPM);
+								Service23.getInstance().UpdateTinhTrangSachCon(MaPM);
+
+								// Cập nhật bảng Quản lý phiếu mượn
+								((DefaultTableModel) table.getModel()).setRowCount(0);
+								Service23.getInstance().SelectAllPhieuMuon(table);
+
+								JOptionPane.showMessageDialog(null, "Đã cập nhật!");
+							} else {
+								// Xử lý khi người dùng chọn No
+							}
+						}
+					});
+
+					popupMenu.add(menuItemXemChiTiet);
+					popupMenu.add(menuItemĐanhauDaTra);
+					popupMenu.show(table, e.getX(), e.getY()); // hiển thị menu
+				}
+			}
+		});
 	}
 }

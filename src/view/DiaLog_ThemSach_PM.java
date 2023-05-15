@@ -86,31 +86,12 @@ public class DiaLog_ThemSach_PM extends JDialog {
 			public void valueChanged(ListSelectionEvent e) {
 			}
 		});
-
+		
+		// Lấy dữ liệu dưới database truyền vào bảng
 		Service23.getInstance().SelectAllSachCon(table);
-
-		// ----------->Xử lý tìm kiếm cho table<-----------
-
-		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
-		TableRowSorter<TableModel> sorter2 = new TableRowSorter<>(table.getModel());
-
-		// Đặt TableRowSorter cho bảng
-		table.setRowSorter(sorter2);
-
-		// Tạo sự kiện KeyReleased cho JTextField
-		textField_TimKiem.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				String input = textField_TimKiem.getText().trim(); // Lấy dữ liệu từ JTextField
-				if (input.length() == 0) {
-					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
-					sorter2.setRowFilter(null);
-				} else {
-					// Lọc dữ liệu theo nội dung JTextField
-					sorter2.setRowFilter(RowFilter.regexFilter("(?i)" + input));
-				}
-			}
-		});
-		// ----------------------------------------------------------
+		
+		// Xử lý sự kiện tìm kiếm của table
+		MainView.SearchTable(table, textField_TimKiem);
 
 		ImageIcon iconTimKiem = new ImageIcon(MainView.class.getResource("/images/search.png"));
 		Image imgTimKiem = iconTimKiem.getImage();
