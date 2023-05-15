@@ -327,7 +327,7 @@ public class Dialog_SuaSach_XemChiTiet_QLNL extends JDialog {
 			_sach.setTacGia(textField_TacGia_SuaSach_QLNL.getText());
 			_sach.setNamXuatBan(Integer.valueOf(textField_NamXB_SuaSach_QLNL.getText()));
 			_sach.setNXB(textField_NhaXB_SuaSach_QLNL.getText());
-			_sach.setGiaSach(textField_GiaSach_SuaSach_QLNL.getText());
+			_sach.setGiaSach(Integer.valueOf(textField_GiaSach_SuaSach_QLNL.getText()));
 			_sach.setSoLuong(Integer.valueOf(textField_SoLuong_SuaSach_QLNL.getText()));
 			_sach.setNgonNgu(comboBox_NgonNgu_SuaSach_QLNL.getSelectedItem().toString());
 			_sach.setTheLoai(comboBox_TheLoai_SuaSach_QLNL.getSelectedItem().toString());
