@@ -39,6 +39,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
@@ -121,13 +122,16 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-		try {
-            MaskFormatter formatter = new MaskFormatter("##########");
-            formatter.setAllowsInvalid(false);
-            table_ChiTietSach.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatter)));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+	
+			 NumberFormat format = NumberFormat.getInstance();
+			 NumberFormatter formatter2 = new NumberFormatter(format);
+			
+			 //formatter2.setValueClass(Integer.class);
+			 //formatter2.setCommitsOnValidEdit(true);
+			 formatter2.setMaximum(999999); 
+			 formatter2.setAllowsInvalid(false);
+            table_ChiTietSach.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatter2)));
+  
 		table_ChiTietSach.getSelectionModel().addListSelectionListener(new ListSelectionListener() { // su kien chon 1
 			// o tren table
 			public void valueChanged(ListSelectionEvent event) {
@@ -400,11 +404,15 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			Sach sach = new Sach();
 			sach.setTenSach((String) table_ChiTietSach.getValueAt(i, 1));
 			sach.setTheLoai((String) table_ChiTietSach.getValueAt(i, 5));
-			sach.setNamXuatBan((int) table_ChiTietSach.getValueAt(i, 3));
+			
+			//System.out.println( table_ChiTietSach.getValueAt(i, 3));	
+			// vì gdien hieu là string nên integer.parseInt
+			//trim bỏ khoảng trắng 2 đuầ
+			sach.setNamXuatBan(Integer.parseInt( table_ChiTietSach.getValueAt(i, 3).toString().trim()));
 			sach.setNXB((String) table_ChiTietSach.getValueAt(i, 2));
 			sach.setTacGia((String) table_ChiTietSach.getValueAt(i, 4));
 			sach.setNgonNgu((String) table_ChiTietSach.getValueAt(i, 6));
-			sach.setGiaSach((int) table_ChiTietSach.getValueAt(i, 7));
+			sach.setGiaSach(Integer.parseInt( table_ChiTietSach.getValueAt(i, 7).toString().trim().replace(",", "")));
 
 			QuanLyNhapLo.getInstance().UpdateSach(sach, maDauSach);
 			
