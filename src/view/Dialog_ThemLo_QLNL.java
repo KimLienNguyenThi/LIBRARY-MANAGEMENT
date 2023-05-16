@@ -48,7 +48,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class Dialog_ThemLo_QLNL extends JDialog {
 	JFrame frame = new JFrame();
-	public Quan_Ly_Nhap_Lo_View frameParent;
+	public MainView frameParent;
 	private JPanel contentPane;
 	private JTextField textField_NgayNhap_ThemLo;
 	private JTextField textField_SDT_ThemLo;
@@ -62,7 +62,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 	public DefaultTableModel model;
 	private JDateChooser chooser_NgayNhap_QLNL;
 
-	public Dialog_ThemLo_QLNL(Quan_Ly_Nhap_Lo_View parent) {
+	public Dialog_ThemLo_QLNL(MainView parent) {
 		super(parent, "Thêm Lô", true);
 		this.setLocationRelativeTo(null);
 		this.init();

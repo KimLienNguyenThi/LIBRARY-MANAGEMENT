@@ -50,7 +50,7 @@ import model.Sach;
 public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 	JFrame frame = new JFrame();
-	public Quan_Ly_Nhap_Lo_View frameParent;
+	public MainView frameParent;
 	public int idMaLoTruyenTuParent = 0;
 	private JPanel contentPane;
 	private JTextField textField_TenNCC_XemChiTiet;
@@ -68,7 +68,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 	public int rowTruocEdit = 0;
 	public int columnTruocEdit = 0;
 
-	public Dialog_XemChiTiet_QLNL(Quan_Ly_Nhap_Lo_View parent, int idMaLo) {
+	public Dialog_XemChiTiet_QLNL(MainView parent, int idMaLo) {
 
 		super(parent, "XEM CHI TIẾT", true);
 		this.setLocationRelativeTo(null);
