@@ -143,6 +143,7 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 
 		chooser_NgaySinh_DialogSTTTV = new JDateChooser();
 		chooser_NgaySinh_DialogSTTTV.setDateFormatString("dd/MM/yyyy");
+		chooser_NgaySinh_DialogSTTTV.getJCalendar().setMaxSelectableDate(new java.util.Date());
 		chooser_NgaySinh_DialogSTTTV.setBounds(147, 195, 129, 20);
 		chooser_NgaySinh_DialogSTTTV.setDate(docGia.getNgaySinh());
 		contentPane_DialogSTTTV.add(chooser_NgaySinh_DialogSTTTV);

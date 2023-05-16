@@ -717,6 +717,7 @@ public class MainView extends JFrame {
 
 		chooser_NgaySinh_TTV = new JDateChooser();
 		chooser_NgaySinh_TTV.setDateFormatString("dd/MM/yyyy");
+		chooser_NgaySinh_TTV.getJCalendar().setMaxSelectableDate(new java.util.Date());
 		chooser_NgaySinh_TTV.setBounds(137, 178, 130, 20);
 		panel_TTV.add(chooser_NgaySinh_TTV);
 
@@ -871,6 +872,10 @@ public class MainView extends JFrame {
 
 		DocGia docGia = new DocGia();
 		TheThanhVien theThanhVien = new TheThanhVien();
+		
+		// Date now
+		long millis = System.currentTimeMillis();
+		java.sql.Date dateNow = new java.sql.Date(millis);
 
 		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
 		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
@@ -930,9 +935,7 @@ public class MainView extends JFrame {
 
 			docGia.setDiaChi(textField_Diachi_TTV.getText());
 
-			long millis = System.currentTimeMillis();
-			java.sql.Date date2 = new java.sql.Date(millis);
-			theThanhVien.setNgayDangKy(date2);
+			theThanhVien.setNgayDangKy(dateNow);
 
 			// Nhập hạn thẻ
 			Calendar c = Calendar.getInstance();
