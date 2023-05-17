@@ -1551,7 +1551,7 @@ public class MainView extends JFrame {
 		}
 		else {
 		new Dialog_XemChiTiet_QLNL(this, idSelectedLoSach).setVisible(true);
-		
+	
 		}
 		
 	}

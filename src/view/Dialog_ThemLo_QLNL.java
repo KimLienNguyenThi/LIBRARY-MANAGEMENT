@@ -410,54 +410,5 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		this.setVisible(false);
 	}
 
-//	public void initDatePicker() {
-//		UtilDateModel model = new UtilDateModel();
-//
-//		// Sét ngày hiện tại làm mặc định
-//		Calendar cal = Calendar.getInstance();
-//		model.setDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-//		model.setSelected(true);
-//
-//		// Khởi tạo 1 date picker
-//		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-//		date_NgayNhap_ThemLo = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-//		date_NgayNhap_ThemLo.setBounds(467, 13, 124, 19);
-//		//date_NgayNhap_ThemLo.setma
-//		
-//		//date_NgayNhap_ThemLo.getComponent(1).setEnabled(false);
-////		date_NgayNhap_ThemLo.(param -> new DateCell() {
-////	        @Override
-////	        public void updateItem(LocalDate date, boolean empty) {
-////	            super.updateItem(date, empty);
-////	            setDisable(empty || date.compareTo(LocalDate.now()) > 0 );
-////	        }
-////	    });
-//		
-//		contentPane.add(date_NgayNhap_ThemLo);
-//
-//	}
 
-//	public class DateLabelFormatter extends AbstractFormatter {
-//
-//		private String datePattern = "yyyy-MM-dd";
-//		private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-//
-//		@Override
-//		public Object stringToValue(String text) throws ParseException {
-//			return dateFormatter.parseObject(text);
-//		}
-//
-//		@Override
-//		public String valueToString(Object value) throws ParseException {
-//			if (value != null) {
-//				Calendar cal = (Calendar) value;
-//				
-//				//System.out.print("âdad");
-//				return dateFormatter.format(cal.getTime());
-//			}
-//
-//			return "";
-//		}
-//
-//	}
 }
