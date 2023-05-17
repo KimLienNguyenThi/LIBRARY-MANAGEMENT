@@ -1,8 +1,10 @@
 package view;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -42,6 +44,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 	JFrame frame = new JFrame();
 	public boolean isThemSach = false;
 	private JPanel contentPane;
+	private Dialog_ThemLo_QLNL frameParent;
 	private JTextField textField_NhaXB_ThemSach_QLNL;
 	private JTextField textField_TacGia_ThemSach_QLNL;
 	private JTextField textField_TongSL_ThemLo;
@@ -52,18 +55,21 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 	private JComboBox comboBox_NgonNgu_ThemSach_QLNL;
 	private JComboBox comboBox_TheLoai_ThemSach_QLNL;
 	public Sach _sach = new Sach();
-	public DiaLog_ThemSach_QLNL(JFrame frame) {
-		super(frame, "Thêm Sách", true);
+	public DiaLog_ThemSach_QLNL(Dialog_ThemLo_QLNL parent) {
+		super(parent, "Thêm Sách", true);
+		frameParent = parent;
 		this.setLocationRelativeTo(null);
 		this.init();
 		this.setVisible(false);
 	}
 
 	public void init() {
-		setBounds(100, 100, 673, 270);
+		setBounds(100, 100, 673, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
-
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -116,6 +122,8 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		btn_ThemSach_QLNL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				themSach();			
+				frameParent.them_sach_Table(_sach);
+				frameParent.ThanhToan();
 			}
 		});
 		btn_ThemSach_QLNL.setBounds(355, 195, 84, 28);
@@ -258,22 +266,11 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 
 			_sach.setNgonNgu(comboBox_NgonNgu_ThemSach_QLNL.getSelectedItem().toString());
 			_sach.setTheLoai(comboBox_TheLoai_ThemSach_QLNL.getSelectedItem().toString());
-		
-			// diaLogParent là dialog Thêm Lô, gọi hàm thêm 1 row sách vào
-			isThemSach = true;
-			this.setVisible(false);
-			//System.out.println(dialog_Parent.getInputMethodListeners());
 			
-//			QuanLyNhapLo.getInstance().InsertData(_Losach);
+			// diaLogParent là dialog Thêm Lô, gọi hàm thêm 1 row sách vào
+//			isThemSach = true;
+			this.setVisible(false);
 
-			// new Dialog_ThemLo_QLNL(frame); // hien thi dialog
-
-//			 Xoá dữ liệu nhập trên màn hình
-//			textField_TenNCC_ThemLo.setText("");
-//			textField_NgayNhap_ThemLo.setText("");
-//			textField_SDT_ThemLo.setText("");
-//			textField_DiaChi_ThemLo.setText("");
-//			textField_ThanhToan_ThemLo.setText("");
 		}
 	}
 }

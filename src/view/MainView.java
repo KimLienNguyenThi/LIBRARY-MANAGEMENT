@@ -1463,48 +1463,28 @@ public class MainView extends JFrame {
 	
 	//QuanLyNhapLo
 	public void initTableQuanLyNhapLo() {
-		// khoi tao lần đầu
-		table_QuanLyNhapLo = new JTable();
+
 		
-		table_QuanLyNhapLo.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"1", "C\u00F4ng Ty TNHH \u0110\u0103ng Nguy\u00EAn", "0987654321", "187 Gi\u1EA3ng V\u00F5, Q. \u0110\u1ED1ng \u0110a, H\u00E0 N\u1ED9i", null, new Integer(50)},
-				{"2", "C\u00F4ng Ty C\u1ED5 Ph\u1EA7n S\u00E1ch Mcbooks ", "0985236741", "14/35, \u0110\u00E0o Duy Anh, P.9, Q. Ph\u00FA Nhu\u1EADn, Tp. H\u1ED3 Ch\u00ED Minh (TPHCM)", null, new Integer(10000)},
-				{"12", "nguy\u1EC5n Th\u1ECB Kim Li\u00EAn ", "0365812847", "Th\u00E0nh Ph\u1ED1 Th\u1EE7 \u0110\u1EE9c ", null, new Integer(345000)},
-				{"6", "update ten", "0987654321", "qu\u1EADn 9", null, new Integer(123456)},
-				{"15", "Q10", "0987654321", "QUAN 10", null, new Integer(1450)},
-				{"24", "sadfg", "0321456987", "\u00E1df", null, new Integer(123)},
-				{"26", "q\u01B0ef", "0987654321", "q\u01B0edf", null, new Integer(1234)},
-				{"27", "\u00E1dfghj", "0321789456", "fghjk", null, new Integer(203000)},
-				{"23", "selectedValue", "0391111111", "selectedValue", null, new Integer(1)},
-				{"25", "\u00E1df", "0987654321", "ads", null, new Integer(230000)},
-				{"21", "Tr\u1EA7n Ph\u01B0\u01A1ng Loan", "0987654321", "q1", null, new Integer(123000)},
-				{"16", "Kim Li\u00EAn ", "0987654321", "quan 9 tp hcm", null, new Integer(200000)},
-				{"10", "Gia Huy", "0987654321", "quan 9", null, new Integer(1524000)},
-				{"17", "ok17", "0391111111", "ok17", null, new Integer(11)},
-				{"18", "tete", "0391111111", "tete", null, new Integer(111)},
-				{"19", "estet", "0391111111", "estet", null, new Integer(11)},
-				{"20", "testaa", "0391111111", "testaa", null, new Integer(21)},
-				{"22", "test111111111111", "0391111111", "test111111111111", null, new Integer(11)},
-				{"5", "TNHH V\u0103n H\u00F3a Vi\u1EC7t Long", "0987654321", "L\u00F4 34E, Khu \u0110\u1EA5u Gi\u00E1 3ha, P. Ph\u00FAc Di\u1EC5m, Q. B\u1EAFc T\u1EEB Li\u00EAm, H\u00E0 N\u1ED9i", null, new Integer(72)},
-				{"9", "Thanh Tuan", "0987654321", "dgsFB", null, new Integer(120000)},
-				{"4", "C\u00F4ng Ty C\u1ED5 Ph\u1EA7n S\u00E1ch & Thi\u1EBFt B\u1ECB Tr\u01B0\u1EDDng H\u1ECDc Ki\u00EAn Giang", "430-195-4725", "289A Khu\u1EA5t Duy Ti\u1EBFn, P. Trung H\u00F2a, Q. C\u1EA7u Gi\u1EA5y, H\u00E0 N\u1ED9i", null, new Integer(78)},
-				{"3", "Nh\u00E0 S\u00E1ch Tr\u1EF1c Tuy\u1EBFn BOOKBUY.VN", "494-233-5837", "147 Pasteur, P. 6, Q. 3, Tp. H\u1ED3 Ch\u00ED Minh (TPHCM)", null, new Integer(78)},
-				{"7", "tesst", "0321145879", "ascadv", null, new Integer(1234568)},
-				{"11", "123", "0987654321", "123", null, new Integer(123)},
-				{"13", "789", "0987654321", "789", null, new Integer(789)},
-				{"8", "acbb", "0987654321", "123", null, new Integer(100000)},
-				{"14", "90980", "0987654321", "890890", null, new Integer(89089)},
-			},
-			new String[] {
-				"M\u00E3 l\u00F4", "T\u00EAn NCC", "S\u0110T NCC", "\u0110\u1ECBa ch\u1EC9", "Ng\u00E0y nh\u1EADp", "T\u1ED5ng ti\u1EC1n"
-			}
-		));
-		table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(37);
-		table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(63);
-		table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(74);
-		table_QuanLyNhapLo.getColumnModel().getColumn(3).setPreferredWidth(89);
-		table_QuanLyNhapLo.getColumnModel().getColumn(4).setPreferredWidth(101);
+		
+		// khoi tao lần đầu
+				table_QuanLyNhapLo = new JTable();
+				
+				table_QuanLyNhapLo.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null } },
+						new String[] { "Mã lô", "Tên NCC", "SĐT NCC", "Địa chỉ", "Ngày nhập", "Tổng tiền" }) {
+					
+					// ngăn chặn chỉnh sửa giá trị
+					public boolean isCellEditable(int row, int column) {
+						if (column == 0 || column == 1 || column == 2|| column == 3 || column == 4 || column ==5 )
+							return false;
+						return super.isCellEditable(row, column);
+					}
+				});
+				table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(37);
+				table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(63);
+				table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(74);
+				table_QuanLyNhapLo.getColumnModel().getColumn(3).setPreferredWidth(89);
+				table_QuanLyNhapLo.getColumnModel().getColumn(4).setPreferredWidth(101);
+				
 		table_QuanLyNhapLo.getSelectionModel().addListSelectionListener(new ListSelectionListener() { // su kien chon 1
 			// o tren table
 			public void valueChanged(ListSelectionEvent event) {
@@ -1514,14 +1494,13 @@ public class MainView extends JFrame {
 							.valueOf(table_QuanLyNhapLo.getValueAt(table_QuanLyNhapLo.getSelectedRow(), 0).toString());
 					System.out.println(idSelectedLoSach);
 				}
+				
 			}
 		});
 
 		table_QuanLyNhapLo.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table_QuanLyNhapLo.setFillsViewportHeight(true);
-//		_jscrollPane = new JScrollPane(table_QuanLyNhapLo);
-//		_jscrollPane.setBounds(0, 88, 540, 180);
-//		contentPane.add(_jscrollPane);
+
 		LoadDataList();
 		AddPopUp();
 		
@@ -1537,11 +1516,7 @@ public class MainView extends JFrame {
 		panelQuanLyNhapLo.add(panel_table_qlnl);
 		panel_table_qlnl.setLayout(null);
 
-//		table_QuanLyNhapLo = new JTable();
-//		table_QuanLyNhapLo.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-//				new String[] { "M\u00E3 l\u00F4", "Ng\u00E0y nh\u1EADp", "Thanh to\u00E1n", "Nh\u00E0 cung c\u1EA5p",
-//						"\u0110\u1ECBa ch\u1EC9 cung c\u1EA5p", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i" }));
-		
+			
 
 		JScrollPane scrollPane_qlnl = new JScrollPane(table_QuanLyNhapLo);
 		scrollPane_qlnl.setBounds(0, 0, 829, 415);
@@ -1605,7 +1580,7 @@ public class MainView extends JFrame {
 		public RowPopup(JTable table) {
 			
 			// dùng để show popup Thêm
-						JMenuItem detail_Update = new JMenuItem("Thêm");
+						JMenuItem detail_Update = new JMenuItem("Thêm Lô");
 						detail_Update.addActionListener(new ActionListener() {
 
 							@Override
@@ -1618,7 +1593,7 @@ public class MainView extends JFrame {
 
 						add(detail_Update);
 			// dùng để show popup xem chi tiết
-			JMenuItem detail = new JMenuItem("Xem chi tiết");
+			JMenuItem detail = new JMenuItem("Xem Chi Tiết + Sửa Lô");
 			detail.addActionListener(new ActionListener() {
 
 				@Override
@@ -1703,7 +1678,13 @@ public class MainView extends JFrame {
 	}
 
 	public void xemchitiet() {
+		if(idSelectedLoSach == 0) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng chọn lô muốn xem!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		new Dialog_XemChiTiet_QLNL(this, idSelectedLoSach).setVisible(true);
+		
 	}
 	
 	public void themThanhVien() {
@@ -1761,6 +1742,7 @@ public class MainView extends JFrame {
 
 		} else {
 
+			
 			// Lấy dữ liệu nhập
 			docGia.setTenDocGia(textField_TenDocGia_TTV.getText());
 

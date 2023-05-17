@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="src/lib/protobuf-java-3.19.4.jar"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="lib" path="src/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Java new/Baitaplon/LIBRARY-MANAGEMENT/src/lib/itext.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

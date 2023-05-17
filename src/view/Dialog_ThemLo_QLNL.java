@@ -56,8 +56,8 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 	private JTextField textField_ThanhToan_ThemLo;
 	private JTextField textField_TenNCC_ThemLo;
 	private JTextField textField_DiaChi_ThemLo;
-
-	//private JDatePickerImpl date_NgayNhap_ThemLo;
+	private int thanhtoan = 0;
+	// private JDatePickerImpl date_NgayNhap_ThemLo;
 	public JTable table;
 	public DefaultTableModel model;
 	private JDateChooser chooser_NgayNhap_QLNL;
@@ -66,7 +66,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		super(parent, "Thêm Lô", true);
 		this.setLocationRelativeTo(null);
 		this.init();
-		//this.initDatePicker();
+		// this.initDatePicker();
 		this.setVisible(false);
 		// hiện thị trung tâm màn hình
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -79,7 +79,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		setBounds(100, 100, 673, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
-
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -127,6 +127,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		contentPane.add(textField_DiaChi_ThemLo);
 
 		textField_ThanhToan_ThemLo = new JTextField();
+		textField_ThanhToan_ThemLo.setEnabled(false);
 		textField_ThanhToan_ThemLo.setBounds(156, 40, 174, 19);
 		textField_ThanhToan_ThemLo.setColumns(10);
 		contentPane.add(textField_ThanhToan_ThemLo);
@@ -152,6 +153,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			}
 		});
+		
 		textField_SDT_ThemLo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -171,12 +173,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 				Save();
 				frameParent.LoadDataList();
-				// ((DefaultTable)
-				// Quan_Ly_Nhap_Lo_View.table_QuanLyNhapLo.get()).setRowCount(0);
-//					QuanLyNhapLo.getInstance().SelectAll(Quan_Ly_Nhap_Lo_View.table_QuanLyNhapLo);
-//				 DefaultTable table = (DefaultTableModel) .getModel();
-//				 tableModel.setRowCount(0);
-				// Quan_Ly_Nhap_Lo_View.table_QuanLyNhapLo.repaint();
+
 			}
 		});
 		btn_Luu_ThemLo.setBounds(466, 286, 69, 28);
@@ -198,9 +195,9 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		String nXB = null;
 		String tacGia = null;
 		int soLuong = 0;
+		int giaSach = 0;
 		String ngonNgu = null;
 		String tinhTrang = null;
-		String giaSach = null;
 
 		// Đặt lại tên cho biến Table'
 		String[] columnNames = { "Tên sách", "Thể loại", "Năm Xuất bản", "Nhà xuất bản", "Tác giả", "Số lượng",
@@ -215,51 +212,54 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		JButton btn_ThemSach_ThemLo = new JButton("Thêm Sách");
 		btn_ThemSach_ThemLo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DiaLog_ThemSach_QLNL jdiaLogThemSach = new DiaLog_ThemSach_QLNL(frame);
-				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-				jdiaLogThemSach.setLocation(dim.width / 2 - jdiaLogThemSach.getSize().width / 2,
-						dim.height / 2 - jdiaLogThemSach.getSize().height / 2);
-				jdiaLogThemSach.setVisible(true);
-				// nếu dialog thêm sách mà nhập thông tin ok hết, thì cờ này sẽ true, thì bên
-				// dialog này tiến hành thêm vào
-				// table
-				if (jdiaLogThemSach.isThemSach) {
-					them_sach_Table(jdiaLogThemSach._sach);
-				}
+				//cachs 1
+				tinh_ThanhToan();
+				//casch 2
+//				DiaLog_ThemSach_QLNL jdiaLogThemSach = new DiaLog_ThemSach_QLNL(frame);
+//				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//				jdiaLogThemSach.setLocation(dim.width / 2 - jdiaLogThemSach.getSize().width / 2,
+//						dim.height / 2 - jdiaLogThemSach.getSize().height / 2);
+//				jdiaLogThemSach.setVisible(true);
+//				// nếu dialog thêm sách mà nhập thông tin ok hết, thì cờ này sẽ true, thì bên
+//				// dialog này tiến hành thêm vào
+//				// table
+//				if (jdiaLogThemSach.isThemSach) {
+//					them_sach_Table(jdiaLogThemSach._sach);
+//					ThanhToan();
+//				}
 			}
 		});
 		btn_ThemSach_ThemLo.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		btn_ThemSach_ThemLo.setBounds(48, 95, 124, 33);
 		contentPane.add(btn_ThemSach_ThemLo);
 
-	
 		chooser_NgayNhap_QLNL = new JDateChooser();
 		chooser_NgayNhap_QLNL.setDateFormatString("dd/MM/yyyy");
 		chooser_NgayNhap_QLNL.setBounds(467, 13, 124, 19);
 		chooser_NgayNhap_QLNL.getJCalendar().setMaxSelectableDate(new java.util.Date());
 		contentPane.add(chooser_NgayNhap_QLNL);
 	}
-
+	public void tinh_ThanhToan() {
+		new DiaLog_ThemSach_QLNL(this).setVisible(true);
+	}
 	public int themLo() {
 		// This method must return a result of type int/ bat buoc return
 		LoSach _Losach = new LoSach();
-		
+
 		Pattern patternDate = Pattern.compile("^\\d{2}[-|/]\\d{2}[-|/]\\d{4}$");
-		//Pattern patternDate = Pattern.compile("^\\d{4}[-]\\d{2}[-]\\d{2}$");
+		// Pattern patternDate = Pattern.compile("^\\d{4}[-]\\d{2}[-]\\d{2}$");
 		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
 
 		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
-				SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
-				String formattedD = d.format(chooser_NgayNhap_QLNL.getDate());
-				System.out.println(formattedD);
-		
+		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
+		String formattedD = d.format(chooser_NgayNhap_QLNL.getDate());
+		System.out.println(formattedD);
+
 		if (textField_TenNCC_ThemLo.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 			return -6;
-
-
 
 		} else if (textField_SDT_ThemLo.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
@@ -284,12 +284,12 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 			return -6;
-		} else	if (patternDate.matcher(formattedD).matches() == false) {
-				JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-				JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
-						JOptionPane.ERROR_MESSAGE);
-				
-				return -6;
+		} else if (patternDate.matcher(formattedD).matches() == false) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+
+			return -6;
 		} else {
 
 			// Lấy dữ liệu nhập
@@ -298,9 +298,10 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 			_Losach.setDiaChiNhaCungCap(textField_DiaChi_ThemLo.getText());
 
 			// đoạn này lấy ngày selected trên giao diện, kiểm tra vs ngày hiện tại đi
-			//thì check them
-			//java.util.Date selectedValue = (java.util.Date) date_NgayNhap_ThemLo.getModel().getValue();
-			//_Losach.setNgayNhap(selectedValue);
+			// thì check them
+			// java.util.Date selectedValue = (java.util.Date)
+			// date_NgayNhap_ThemLo.getModel().getValue();
+			// _Losach.setNgayNhap(selectedValue);
 			_Losach.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
 			_Losach.setSdtNhaCungCap(textField_SDT_ThemLo.getText());
 			_Losach.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
@@ -311,7 +312,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			// Xoá dữ liệu nhập trên màn hình
 			textField_TenNCC_ThemLo.setText("");
-			//textField_NgayNhap_ThemLo.setText("");
+			
 			textField_SDT_ThemLo.setText("");
 			textField_DiaChi_ThemLo.setText("");
 			textField_ThanhToan_ThemLo.setText("");
@@ -322,18 +323,12 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 	}
 
 	public void them_sach_Table(Sach sach) {
-
 		// muốn check thêm thì check, này kiểm tra xem có bị thiếu thông tin gì của sách
 		if (sach == null || sach.getTenSach() == null || sach.getSoLuong() < 0) {
 			System.out.println("1111");
 			return;
 		}
 
-		// String maSach, String tenSach, String theLoai, int namXuatBan, String nXB,
-		// String tacGia,
-		// int soLuong, String ngonNgu, String tinhTrang, String giaSach
-		// Sach _sach = new Sach("0", "COn báo", "qq", 2000,"qq", "ww",11,"Tieng
-		// viet","", "100");
 		Object[] obj = { sach.getTenSach(), sach.getTheLoai(), sach.getNamXuatBan(), sach.getNXB(), sach.getTacGia(),
 				sach.getSoLuong(), sach.getNgonNgu(), sach.getGiaSach() };
 
@@ -341,6 +336,20 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setFillsViewportHeight(true);
 		model.addRow(obj);
+	}
+
+	public void ThanhToan() {
+		int soLuong = 0;
+		int giaSach = 0;
+		thanhtoan = 0;
+		Object[] rowData = new Object[table.getRowCount()];
+		for (int i = 0; i < table.getRowCount(); i++) { // lấy từng row của table sách để thực thi
+
+			soLuong = (int) table.getValueAt(i, 5);
+			giaSach = (int) table.getValueAt(i, 7);
+			thanhtoan = thanhtoan + (soLuong * giaSach);
+		}
+		textField_ThanhToan_ThemLo.setText(String.valueOf(thanhtoan) );
 	}
 
 	public void Save() {
@@ -371,8 +380,6 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			int chitietLoNew = QuanLyNhapLo.getInstance().InsertDataChiTietLo(chitietLo);
 
-//			String[] columnNames = { "Tên sách", "Thể loại", "Năm Xuất bản", "Nhà xuất bản", "Tác giả", "Số lượng",
-//					"Ngôn ngữ", "Giá sách" };
 			Sach sach = new Sach();
 			sach.setTenSach((String) table.getValueAt(i, 0));
 			sach.setTheLoai((String) table.getValueAt(i, 1));

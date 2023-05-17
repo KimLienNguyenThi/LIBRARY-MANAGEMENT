@@ -85,15 +85,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		//DefaultTableModel model;
 	} 
 	
-//	CellEditorListener ChangeNotification = new CellEditorListener() {
-//        public void editingCanceled(ChangeEvent e) {
-//            System.out.println("The user canceled editing.");
-//        }
-//
-//        public void editingStopped(ChangeEvent e) {
-//            System.out.println("The user stopped editing successfully.");
-//        }
-//    };
+
 
 	public void initTableSach() {
 		 	//NumberFormat nf = NumberFormat.getCurrencyInstance();
@@ -148,8 +140,6 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		
 		table_ChiTietSach.getModel().addTableModelListener(new TableModelListener() {		  
 		      public void tableChanged(TableModelEvent e) {
-		    	  
-		    	  
 		         System.out.println("ccasca");
 		      }
 		    });
@@ -171,7 +161,8 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		setBounds(100, 100, 673, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
-
+		
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
