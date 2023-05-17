@@ -173,7 +173,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 				Save();
 				frameParent.LoadDataList();
-
+				frameParent.LoadTableSach();
 			}
 		});
 		btn_Luu_ThemLo.setBounds(466, 286, 69, 28);
@@ -238,6 +238,16 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		chooser_NgayNhap_QLNL.setBounds(467, 13, 124, 19);
 		chooser_NgayNhap_QLNL.getJCalendar().setMaxSelectableDate(new java.util.Date());
 		contentPane.add(chooser_NgayNhap_QLNL);
+		
+		JButton btn_Huy_ThemLo = new JButton("Hủy");
+		btn_Huy_ThemLo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btn_Huy_ThemLo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Huy_ThemLo.setBounds(227, 286, 69, 28);
+		contentPane.add(btn_Huy_ThemLo);
 	}
 	public void tinh_ThanhToan() {
 		new DiaLog_ThemSach_QLNL(this).setVisible(true);
@@ -397,6 +407,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 			}
 			;
 		}
+		this.setVisible(false);
 	}
 
 //	public void initDatePicker() {

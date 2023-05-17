@@ -64,7 +64,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 	}
 
 	public void init() {
-		setBounds(100, 100, 673, 380);
+		setBounds(100, 100, 673, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

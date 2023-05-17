@@ -149,10 +149,24 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		// _jscrollPane.setViewportView(table_QuanLyNhapLo);
 		_jscrollPane = new JScrollPane(table_ChiTietSach);
 
-		_jscrollPane.setBounds(20, 138, 629, 138);
+		_jscrollPane.setBounds(21, 140, 629, 138);
 		contentPane.add(_jscrollPane);
+		
+		JButton btn_Huy_XemChiTiet = new JButton("Hủy");
+		btn_Huy_XemChiTiet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btn_Huy_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Huy_XemChiTiet.setBounds(198, 290, 104, 28);
+		contentPane.add(btn_Huy_XemChiTiet);
+		
 	}
-
+public void khoa_man_hinh()
+{
+	
+}
 	/**
 	 * Create the frame.
 	 */
@@ -167,32 +181,32 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		contentPane.setLayout(null);
 
 		JLabel lbl_TenNCC_XemChiTiet = new JLabel("Tên nhà cung cấp: ");
-		lbl_TenNCC_XemChiTiet.setBounds(227, 13, 143, 20);
+		lbl_TenNCC_XemChiTiet.setBounds(235, 13, 143, 20);
 		lbl_TenNCC_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_TenNCC_XemChiTiet);
 
 		JLabel lbl_SDT_XemChiTiet = new JLabel("Số điện thoại:");
-		lbl_SDT_XemChiTiet.setBounds(227, 43, 102, 20);
+		lbl_SDT_XemChiTiet.setBounds(235, 56, 102, 20);
 		lbl_SDT_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_SDT_XemChiTiet);
 
 		JLabel lbl_Diachi_XemChiTiet = new JLabel("Địa chỉ:");
-		lbl_Diachi_XemChiTiet.setBounds(227, 73, 56, 20);
+		lbl_Diachi_XemChiTiet.setBounds(235, 100, 56, 20);
 		lbl_Diachi_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_Diachi_XemChiTiet);
 
 		JLabel lbl_ThanhToan_XemChiTiet = new JLabel("Thanh Toán:");
-		lbl_ThanhToan_XemChiTiet.setBounds(10, 43, 96, 20);
+		lbl_ThanhToan_XemChiTiet.setBounds(21, 56, 96, 20);
 		lbl_ThanhToan_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_ThanhToan_XemChiTiet);
 
 		JLabel lbl_NgayNhap_XemChiTiet = new JLabel("Ngày nhập:");
-		lbl_NgayNhap_XemChiTiet.setBounds(10, 73, 85, 20);
+		lbl_NgayNhap_XemChiTiet.setBounds(21, 100, 85, 20);
 		lbl_NgayNhap_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_NgayNhap_XemChiTiet);
 
 		JLabel lblNewLabel_7 = new JLabel("Vui lòng điền đầy đủ thông tin trước khi nhấn lưu");
-		lblNewLabel_7.setBounds(395, 286, 254, 15);
+		lblNewLabel_7.setBounds(362, 318, 254, 15);
 		lblNewLabel_7.setForeground(new Color(128, 128, 128));
 		lblNewLabel_7.setBackground(new Color(255, 255, 255));
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -205,23 +219,23 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		contentPane.add(textField_TenNCC_XemChiTiet);
 
 		textField_DiaChi_XemChiTiet = new JTextField();
-		textField_DiaChi_XemChiTiet.setBounds(375, 76, 274, 19);
+		textField_DiaChi_XemChiTiet.setBounds(375, 103, 274, 19);
 		textField_DiaChi_XemChiTiet.setColumns(10);
 		contentPane.add(textField_DiaChi_XemChiTiet);
 
 		textField_ThanhToan_XemChiTiet = new JTextField();
-		textField_ThanhToan_XemChiTiet.setBounds(110, 46, 107, 19);
+		textField_ThanhToan_XemChiTiet.setBounds(118, 59, 107, 19);
 		textField_ThanhToan_XemChiTiet.setColumns(10);
 		contentPane.add(textField_ThanhToan_XemChiTiet);
 
 		textField_NgayNhap_XemChiTiet = new JTextField();
 		textField_NgayNhap_XemChiTiet.setEnabled(false);
-		textField_NgayNhap_XemChiTiet.setBounds(110, 76, 107, 19);
+		textField_NgayNhap_XemChiTiet.setBounds(118, 100, 107, 19);
 		textField_NgayNhap_XemChiTiet.setColumns(10);
 		contentPane.add(textField_NgayNhap_XemChiTiet);
 
 		textField_SDT_XemChiTiet = new JTextField();
-		textField_SDT_XemChiTiet.setBounds(375, 43, 274, 19);
+		textField_SDT_XemChiTiet.setBounds(375, 59, 274, 19);
 		textField_SDT_XemChiTiet.setColumns(10);
 		contentPane.add(textField_SDT_XemChiTiet);
 
@@ -259,22 +273,23 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			    getListSach(idMaLoParent);
 				//frameParent.LoadDataUpdate();
 			    frameParent.LoadDataList();
+			    
 			}
 		});
 
-		btn_Luu_XemChiTiet.setBounds(479, 305, 104, 28);
+		btn_Luu_XemChiTiet.setBounds(444, 290, 104, 28);
 		btn_Luu_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		contentPane.add(btn_Luu_XemChiTiet);
 
 		JLabel lbl_Malo_XemChiTiet = new JLabel("Mã Lô:");
 		lbl_Malo_XemChiTiet.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbl_Malo_XemChiTiet.setBounds(10, 13, 56, 20);
+		lbl_Malo_XemChiTiet.setBounds(23, 13, 56, 20);
 		contentPane.add(lbl_Malo_XemChiTiet);
 
 		textField_MaLo_XemChiTiet = new JTextField();
 		textField_MaLo_XemChiTiet.setEnabled(false);
 		textField_MaLo_XemChiTiet.setColumns(10);
-		textField_MaLo_XemChiTiet.setBounds(110, 13, 107, 19);
+		textField_MaLo_XemChiTiet.setBounds(118, 16, 107, 19);
 		contentPane.add(textField_MaLo_XemChiTiet);
 
 	}
@@ -408,9 +423,10 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			QuanLyNhapLo.getInstance().UpdateSach(sach, maDauSach);
 			
 			
-			//this.setVisible(false);
+			
 		}
 		JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
+		this.setVisible(false);
 	}
 	
 	public void getListSach(int idMaLo) {

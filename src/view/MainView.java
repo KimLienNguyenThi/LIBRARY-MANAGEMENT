@@ -739,105 +739,6 @@ public class MainView extends JFrame {
 	  	table_QuanLySach = new JTable();
 	  	table_QuanLySach.setModel(new DefaultTableModel(
 	  		new Object[][] {
-	  			{new Integer(1), "\u0110\u1EAFc nh\u00E2n t\u00E2m", "nguy\u1EC5n nh\u1EADt \u00E1nh", "NXB Tr\u1EBB", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123456", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "H\u1EBFt"},
-	  			{new Integer(2), "B\u00ED m\u1EADt c\u1EE7a t\u01B0 duy gi\u00E0u c\u00F3", "T. Harv Eker", "NXB Ph\u1EE5 N\u1EEF", new Integer(2005), "Kinh doanh", "12345", "Ti\u1EBFng Vi\u1EC7t", "C\u00F2n"},
-	  			{new Integer(3), "Sherlock Holmes: Cu\u1ED9c phi\u00EAu l\u01B0u c\u1EE7a huy\u1EC1n tho\u1EA1i Baskerville", "Arthur Conan Doyle", "NXB V\u0103n h\u1ECDc", new Integer(1902), "Trinh th\u00E1m", "99000", "Ti\u1EBFng Vi\u1EC7t", "C\u00F2n"},
-	  			{new Integer(4), "\u0110\u1EAFc nh\u00E2n t\u00E2m", "nguy\u1EC5n nh\u1EADt \u00E1nh", "NXB Tr\u1EBB", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123456", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "C\u00F2n"},
-	  			{new Integer(5), "S\u1EE9c m\u1EA1nh c\u1EE7a nh\u1EEFng suy ngh\u0129 t\u00EDch c\u1EF1c", "Norman Vincent Peale", "NXB Th\u1EBF gi\u1EDBi", new Integer(2006), "T\u00E2m l\u00FD h\u1ECDc", "89000", "Ti\u1EBFng Vi\u1EC7t", "H\u1EBFt"},
-	  			{new Integer(6), "D\u1EBF M\u00E8n phi\u00EAu l\u01B0u k\u00FD", "T\u00F4 Ho\u00E0i", "Kim \u0110\u1ED3ng", new Integer(1941), "Truy\u1EC7n thi\u1EBFu nhi", "56000", "Ti\u1EBFng Vi\u1EC7t", "H\u1EBFt"},
-	  			{new Integer(7), "Sherlock Holmes: Cu\u1ED9c phi\u00EAu l\u01B0u c\u1EE7a huy\u1EC1n tho\u1EA1i Baskerville", "Arthur Conan Doyle", "NXB V\u0103n h\u1ECDc", new Integer(1902), "Trinh th\u00E1m", "99000", "Ti\u1EBFng Vi\u1EC7t", "H\u1EBFt"},
-	  			{new Integer(8), "B\u00ED m\u1EADt c\u1EE7a t\u01B0 duy gi\u00E0u c\u00F3", "T. Harv Eker", "NXB Ph\u1EE5 N\u1EEF", new Integer(2005), "Kinh doanh", "12345", "Ti\u1EBFng Vi\u1EC7t", "H\u1EBFt"},
-	  			{new Integer(9), "KHOA H\u1ECCC", "aa23", "dsadadsadsad", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12345", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "C\u00F2n"},
-	  			{new Integer(10), "KHOA H\u1ECCC", "aa23", "dsadadsadsad", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12345", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "C\u00F2n"},
-	  			{new Integer(11), "test1 0", "dsaasdv", "sdsadas", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1245", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "H\u1EBFt"},
-	  			{new Integer(12), "test1 0", "dsaasdv", "sdsadas", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1245", "Ch\u1ECDn ng\u00F4n ng\u1EEF", "C\u00F2n"},
-	  			{new Integer(13), "conan", "asdve", "adfwdv", new Integer(2022), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "10000", "Ti\u1EBFng Anh", "H\u1EBFt"},
-	  			{new Integer(14), "conan", "asdve", "adfwdv", new Integer(2022), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "10000", "Ti\u1EBFng Anh", "H\u1EBFt"},
-	  			{new Integer(15), "sdvqef ", "asfd edf ", "sad adf ", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "120000", "Ti\u1EBFng Anh", "H\u1EBFt"},
-	  			{new Integer(16), "sdvqef ", "asfd edf ", "sad adf ", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "120000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(17), "update test ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "13123123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(18), "update test ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "13123123123", "Ti\u1EBFng Anh", "H\u1EBFt"},
-	  			{new Integer(19), "update test ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "13123123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(20), "TRuyen", "zfb", "zdxbzxfb", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "125000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(21), "TRuyen", "zfb", "zdxbzxfb", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "125000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(22), "trinh tham", "sdbasdb", "adsgsdb", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1254000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(23), "trinh tham", "sdbasdb", "adsgsdb", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1254000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(24), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(25), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(26), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(27), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(28), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(29), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(30), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(31), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(32), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(33), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(34), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(35), "sua lai ten sach ma 13 ", "123", "123", new Integer(2001), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(36), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(37), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(38), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(39), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(40), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(41), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(42), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(43), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(44), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(45), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(46), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(47), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(48), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(49), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(50), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(51), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(52), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(53), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(54), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(55), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(56), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(57), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(58), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(59), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(60), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(61), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(62), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(63), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(64), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(65), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(66), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(67), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(68), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(69), "pikachu", "345", "345", new Integer(2002), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "345345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(70), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(71), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(72), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(73), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(74), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(75), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(76), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(77), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(78), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(79), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(80), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(81), "123134", "1231234", "1234123", new Integer(2007), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1234123", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(82), "QUAAN SU", "AD", "SAD", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "110000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(83), "QUAAN SU", "AD", "SAD", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "110000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(84), "aaa", "www", "qqq", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123456", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(85), "aaa", "www", "qqq", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123456", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(86), "rrr", "uytttt", "qqq", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(87), "rrr", "uytttt", "qqq", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12345", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(88), "test", "test", "test", new Integer(2111), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(89), "tete", "tete", "tete", new Integer(2011), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(90), "estet", "estet", "estet", new Integer(2011), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(91), "testaa", "222testaa", "testaa", new Integer(2111), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(92), "an toan giao thong", "1111qqqq", "asf", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123400", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(93), "an toan giao thong", "1111qqqq", "asf", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "123400", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(94), "tete", "ette", "tet", new Integer(2111), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(95), "selectedValue", "selectedValue", "selectedValue", new Integer(2111), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "1", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(96), "aSXDFG", "\u00C1DF", "\u00C1DF", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(97), "aSXDFG", "\u00C1DF", "\u00C1DF", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "12000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(98), "truy\u1EC7n ", "gfds", "hgfdsa", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "23000", "Ti\u1EBFng Anh", "C\u00F2n"},
-	  			{new Integer(99), "truy\u1EC7n ", "gfds", "hgfdsa", new Integer(2023), "Ch\u00EDnh Tr\u1ECB- Khoa H\u1ECDc", "23000", "Ti\u1EBFng Anh", "C\u00F2n"},
 	  		},
 	  		new String[] {
 	  			"ID", "T\u00EAn S\u00E1ch", "T\u00E1c gi\u1EA3", "Nh\u00E0 XB", "N\u0103m XB", "Th\u1EC3 Lo\u1EA1i", "Gi\u00E1 S\u00E1ch", "Ng\u00F4n ng\u1EEF", "T\u00ECnh tr\u1EA1ng"
@@ -852,20 +753,7 @@ public class MainView extends JFrame {
 	  	JScrollPane scrollPane = new JScrollPane(table_QuanLySach);
 	  	scrollPane.setBounds(0, 0, 829, 415);
 	  	panel_2.add(scrollPane);
-	  	
-//	  	JButton btnThemQLNhapSach = new JButton("Thêm");
-//	  	btnThemQLNhapSach.setFont(new Font("Tahoma", Font.BOLD, 16));
-//	  	btnThemQLNhapSach.setBounds(200, 67, 120, 45);
-//	  	panelQuanLySach.add(btnThemQLNhapSach);
-//	  	
-////	  	JButton btnSuaQLNhapSach = new JButton("Sửa");
-////	  	btnSuaQLNhapSach.addActionListener(new ActionListener() {
-//	  		public void actionPerformed(ActionEvent e) {
-//	  		}
-//	  	});
-//	  	btnSuaQLNhapSach.setFont(new Font("Tahoma", Font.BOLD, 16));
-//	  	btnSuaQLNhapSach.setBounds(10, 67, 120, 45);
-//	  	panelQuanLySach.add(btnSuaQLNhapSach);
+
 	  	
 	  	textField_Search = new JTextField();
 	  	textField_Search.setForeground(Color.LIGHT_GRAY);
@@ -896,29 +784,7 @@ public class MainView extends JFrame {
 	 			}
 	 		});
 
-//		table_QuanLySach = new JTable();
-//		table_QuanLySach.setModel(
-//				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null, null }, },
-//						new String[] { "M\u00E3 s\u00E1ch", "T\u00EAn s\u00E1ch", "T\u00E1c gi\u1EA3", "Nh\u00E0 XB",
-//								"N\u0103m XB", "Th\u1EC3 lo\u1EA1i", "Gi\u00E1 s\u00E1ch", "Ng\u00F4n ng\u1EEF",
-//								"T\u00ECnh tr\u1EA1ng" }));
-//		table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(56);
-//		table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(59);
-//		table_QuanLySach.getColumnModel().getColumn(8).setPreferredWidth(51);
-//		panel_table_qls.setLayout(null);
-//
-//		JScrollPane scrollPane_qls = new JScrollPane(table_QuanLySach);
-//		scrollPane_qls.setBounds(0, 0, 829, 415);
-//		panel_table_qls.add(scrollPane_qls);
-//
-//		textField_TimKiem_qls = new JTextField();
-//		textField_TimKiem_qls.setText("  Search");
-//		textField_TimKiem_qls.setForeground(Color.LIGHT_GRAY);
-//		textField_TimKiem_qls.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//		textField_TimKiem_qls.setColumns(10);
-//		textField_TimKiem_qls.setBackground(new Color(226, 255, 153));
-//		textField_TimKiem_qls.setBounds(510, 10, 300, 45);
-//		panelQuanLySach.add(textField_TimKiem_qls);
+
 
 		JButton btn_TimKiem_qls = new JButton("");
 		btn_TimKiem_qls.setOpaque(true);
@@ -1536,7 +1402,7 @@ public class MainView extends JFrame {
 		btn_TimKiem_qlnl.setIcon(newIconTimKiem);
 
 		textField_TimKiem_qlnl = new JTextField();
-		textField_TimKiem_qlnl.setText("  Search");
+		textField_TimKiem_qlnl.setText("");
 		textField_TimKiem_qlnl.setForeground(Color.LIGHT_GRAY);
 		textField_TimKiem_qlnl.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_TimKiem_qlnl.setColumns(10);
@@ -1683,7 +1549,10 @@ public class MainView extends JFrame {
 			JOptionPane.showMessageDialog(frame, "Vui lòng chọn lô muốn xem!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 		}
+		else {
 		new Dialog_XemChiTiet_QLNL(this, idSelectedLoSach).setVisible(true);
+		
+		}
 		
 	}
 	
@@ -1857,4 +1726,13 @@ public class MainView extends JFrame {
 			});
 		}
 	
+		/// Hàm load lại danh sach sách
+
+		// load sách
+		public void LoadTableSach() {
+			((DefaultTableModel) table_QuanLySach.getModel()).setRowCount(0);
+			// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+  		table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
+		
+		}
 }

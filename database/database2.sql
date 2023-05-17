@@ -93,11 +93,11 @@ insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh) values (1,
 
 insert into Login (MaNV, MatKhau) VALUE(1, 123);
 
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (1, 'Công Ty TNHH Đăng Nguyên', '2023-11-10', '498-309-7948', '187 Giảng Võ, Q. Đống Đa, Hà Nội', 50);
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (2, 'Công Ty Cổ Phần Sách Mcbooks', '2023-12-10', '109-9238-316', '14/35, Đào Duy Anh, P.9, Q. Phú Nhuận, Tp. Hồ Chí Minh (TPHCM)', 42);
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChICC, TongTienNhap) values (3, 'Nhà Sách Trực Tuyến BOOKBUY.VN', '2022-6-23', '494-233-5837', '147 Pasteur, P. 6, Q. 3, Tp. Hồ Chí Minh (TPHCM)', 78);
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (4, 'Công Ty Cổ Phần Sách & Thiết Bị Trường Học Kiên Giang', '2022-7-1', '430-195-4725', '289A Khuất Duy Tiến, P. Trung Hòa, Q. Cầu Giấy, Hà Nội', 78);
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (5, 'TNHH Văn Hóa Việt Long', '2023-10-1', '2023-10-12', 'Lô 34E, Khu Đấu Giá 3ha, P. Phúc Diễm, Q. Bắc Từ Liêm, Hà Nội', 72);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (1, 'Công Ty TNHH Đăng Nguyên', '2023-04-05', '0987456123', '187 Giảng Võ, Q. Đống Đa, Hà Nội', 180000);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (2, 'Công Ty Cổ Phần Sách Mcbooks', '2023-04-05', '0963852741', '14/35, Đào Duy Anh, P.9, Q. Phú Nhuận, Tp. Hồ Chí Minh (TPHCM)', 120000);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChICC, TongTienNhap) values (3, 'Nhà Sách Trực Tuyến BOOKBUY.VN', '2022-04-06', '0321456987', '147 Pasteur, P. 6, Q. 3, Tp. Hồ Chí Minh (TPHCM)', 210000);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (4, 'Công Ty Cổ Phần Sách & Thiết Bị Trường Học Kiên Giang', '2023-04-06', '0354698127', '289A Khuất Duy Tiến, P. Trung Hòa, Q. Cầu Giấy, Hà Nội', 360000);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (5, 'TNHH Văn Hóa Việt Long', '2023-04-06', '0951847236', 'Lô 34E, Khu Đấu Giá 3ha, P. Phúc Diễm, Q. Bắc Từ Liêm, Hà Nội', 225000);
 
 insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (1, 'Atalanta Huddle', '175-752-1117', '2957 Ridge Oak Court', '2003-12-9');
 insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (2, 'Tedie Ellick', '958-883-4049', '51 Cody Road', '2001-03-20');
@@ -106,40 +106,51 @@ insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (4, 'Zebulen Cutf
 insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (5, 'Otis Bazoche', '765-570-6904', '74 Myrtle Point', '1998-01-12');
 insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (6, 'Trstram Leven', '665-546-0991', '158 Waubesa Plaza', '1976-02-03');
 
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (1, '2023-2-5', '2022-8-1',3,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (2, '2023-6-3', '2022-6-21',4,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (3, '2023-12-3', '2022-4-22',1,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (4, '2023-3-1', '2022-8-14',2,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (1, '2023-2-5', '2022-8-1',1,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (2, '2023-6-3', '2022-6-21',2,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (3, '2023-12-3', '2022-4-22',3,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (4, '2023-3-1', '2022-8-14',4,100000);
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (5, '2023-3-4', '2022-5-20',5,100000);
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (6, '2023-3-4', '2022-5-20',6,100000);
 
 -- *************** Sửa *****************
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (1, 4, '2023-1-31', '2023-2-5');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (2, 1, '2023-1-31', '2023-4-28');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (3, 3, '2023-1-31', '2023-3-7');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (4, 5, '2023-5-26', '2023-5-30');
-
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (1, 4, '2023-1-10', '2023-2-10');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (2, 1, '2023-1-10', '2023-2-10');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (3, 3, '2023-02-20', '2023-4-20');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (4, 5, '2023-04-05', '2023-5-30');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (5, 5, '2023-04-15', '2023-06-15');
 
 -- **************************************
 
-insert into ChiTietLo (MaDS,  MaLo,  SoLuong) values (1, 1,  50);
-insert into ChiTietLo (MaDS, MaLo,  SoLuong) values (2, 2, 50);
-insert into ChiTietLo (MaDS, MaLo,SoLuong) values (3, 5,  50);
-insert into ChiTietLo (MaDS, MaLo, SoLuong) values (4, 2,  50);
-insert into ChiTietLo (MaDS, MaLo,  SoLuong) values (5,  4,  50);
+insert into ChiTietLo (MaDS,  MaLo,  SoLuong) values (1, 1,  3);
+insert into ChiTietLo (MaDS, MaLo,  SoLuong) values (2, 1, 3);
+insert into ChiTietLo (MaDS, MaLo,SoLuong) values (3, 2,  3);
+insert into ChiTietLo (MaDS, MaLo, SoLuong) values (4, 3,  3);
+insert into ChiTietLo (MaDS, MaLo,  SoLuong) values (5,  4,  3);
+insert into ChiTietLo (MaDS, MaLo,  SoLuong) values (6,  5,  3);
 -- ********************************
-
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia, NgonNgu, TinhTrang, GiaSach, MaDS) values (1, 'Cơ hội của Chúa', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 70000,1);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (2, 'Tuổi 20 yêu dấu', 'Truyện', 2018, 'Trẻ', 'Nguyễn Huy Thiệp',  'Tiếng Việt', 'Còn', 28000,2);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (3, 'Tuổi thơ dữ dội ', 'Thơ', 1988, 'Kim Đồng', 'Phùng Quán',  'Tiếng Pháp', 'Còn', 18000,4);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (4, 'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Còn', 120000,1);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (5, 'Sức mạnh của những suy nghĩ tích cực', 'Tâm lý học', 2006, 'NXB Thế giới', 'Norman Vincent Peale',  'Tiếng Việt', 'Hết', 89000,5);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (6, 'Dế Mèn phiêu lưu ký', 'Truyện thiếu nhi', 1941, 'Kim Đồng', 'Tô Hoài', 'Tiếng Việt', 'Hết', 56000,3);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (7, 'Sherlock Holmes: Cuộc phiêu lưu của huyền thoại Baskerville', 'Trinh thám', 1902, 'NXB Văn học', 'Arthur Conan Doyle',  'Tiếng Việt', 'Hết', 99000,4);
-insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (8, 'Bí mật của tư duy giàu có', 'Kinh doanh', 2005, 'NXB Phụ Nữ', 'T. Harv Eker',  'Tiếng Việt', 'Hết', 75000,2);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia, NgonNgu, TinhTrang, GiaSach, MaDS) values (1, 'Tuổi 20 yêu dấu', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 20000,1);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (2, 'Tuổi 20 yêu dấu', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 20000,1);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia, NgonNgu, TinhTrang, GiaSach, MaDS) values (3, 'Tuổi 20 yêu dấu', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 20000,1);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (4, 'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Còn', 40000,2);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (5, 'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Hết', 40000,2);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (6, 'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Hết', 40000,2);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (7, 'Sức mạnh của những suy nghĩ tích cực', 'Tâm lý học', 2006, 'NXB Thế giới', 'Norman Vincent Peale',  'Tiếng Việt', 'Hết', 40000,3);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (8, 'Sức mạnh của những suy nghĩ tích cực', 'Tâm lý học', 2006, 'NXB Thế giới', 'Norman Vincent Peale',  'Tiếng Việt', 'Hết', 40000,3);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (9, 'Sức mạnh của những suy nghĩ tích cực', 'Tâm lý học', 2006, 'NXB Thế giới', 'Norman Vincent Peale',  'Tiếng Việt', 'Còn', 40000,3);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (10, 'Cơ hội của Chúa', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 70000,4);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia, NgonNgu, TinhTrang, GiaSach, MaDS) values (11, 'Cơ hội của Chúa', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 70000,4);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (12, 'Cơ hội của Chúa', 'Tiểu thuyết', 1999, 'Kim Đồng', 'Nguyễn Việt Hà',  'Tiếng Việt', 'Còn', 70000,4);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (13,  'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Còn', 120000,5);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (14, 'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Còn', 120000,5);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (15,'Đắc nhân tâm', 'Kinh doanh', 1936, 'NXB Trẻ', 'Dale Carnegie',  'Tiếng Việt', 'Còn', 120000,5);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (16, 'Sherlock Holmes: Cuộc phiêu lưu của huyền thoại Baskerville', 'Trinh thám', 1902, 'NXB Văn học', 'Arthur Conan Doyle',  'Tiếng Việt', 'Còn', 75000,6);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (17, 'Sherlock Holmes: Cuộc phiêu lưu của huyền thoại Baskerville', 'Trinh thám', 1902, 'NXB Văn học', 'Arthur Conan Doyle',  'Tiếng Việt', 'Còn', 75000,6);
+insert into Sach (MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,  NgonNgu, TinhTrang, GiaSach, MaDS) values (18, 'Sherlock Holmes: Cuộc phiêu lưu của huyền thoại Baskerville', 'Trinh thám', 1902, 'NXB Văn học', 'Arthur Conan Doyle',  'Tiếng Việt', 'Hết', 75000,6);
 -- **************************************
 
 insert into ChiTietPhieuMuon (MaPM, MaSach) values (1, 7);
 insert into ChiTietPhieuMuon (MaPM, MaSach) values (2, 5);
 insert into ChiTietPhieuMuon (MaPM, MaSach) values (3, 8);
 insert into ChiTietPhieuMuon (MaPM, MaSach) values (4, 6);
+insert into ChiTietPhieuMuon (MaPM, MaSach) values (5, 18);
