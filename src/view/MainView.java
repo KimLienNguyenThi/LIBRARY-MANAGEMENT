@@ -1425,7 +1425,7 @@ public class MainView extends JFrame {
 		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
 		table_QuanLyNhapLo = QuanLyNhapLo.getInstance().selectAll(table_QuanLyNhapLo);
 	}
-
+	
 	public class RowPopup extends JPopupMenu {
 		public RowPopup(JTable table) {
 

@@ -95,29 +95,29 @@ insert into Login (MaNV, MatKhau) VALUE(1, 123);
 
 insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (1, 'Công Ty TNHH Đăng Nguyên', '2023-04-05', '0987456123', '187 Giảng Võ, Q. Đống Đa, Hà Nội', 180000);
 insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (2, 'Công Ty Cổ Phần Sách Mcbooks', '2023-04-05', '0963852741', '14/35, Đào Duy Anh, P.9, Q. Phú Nhuận, Tp. Hồ Chí Minh (TPHCM)', 120000);
-insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChICC, TongTienNhap) values (3, 'Nhà Sách Trực Tuyến BOOKBUY.VN', '2022-04-06', '0321456987', '147 Pasteur, P. 6, Q. 3, Tp. Hồ Chí Minh (TPHCM)', 210000);
+insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChICC, TongTienNhap) values (3, 'Nhà Sách Trực Tuyến BOOKBUY.VN', '2022-12-10', '0321456987', '147 Pasteur, P. 6, Q. 3, Tp. Hồ Chí Minh (TPHCM)', 210000);
 insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (4, 'Công Ty Cổ Phần Sách & Thiết Bị Trường Học Kiên Giang', '2023-04-06', '0354698127', '289A Khuất Duy Tiến, P. Trung Hòa, Q. Cầu Giấy, Hà Nội', 360000);
 insert into LoSach (MaLo, TenNhacc, NgayNhap, SdtNCC, DiaChiCC, TongTienNhap) values (5, 'TNHH Văn Hóa Việt Long', '2023-04-06', '0951847236', 'Lô 34E, Khu Đấu Giá 3ha, P. Phúc Diễm, Q. Bắc Từ Liêm, Hà Nội', 225000);
 
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (1, 'Atalanta Huddle', '175-752-1117', '2957 Ridge Oak Court', '2003-12-9');
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (2, 'Tedie Ellick', '958-883-4049', '51 Cody Road', '2001-03-20');
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (3, 'Garry Baford', '330-640-2234', '7 Main Way', '1999-02-10');
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (4, 'Zebulen Cutford', '864-511-3252', '498 Ludington Park', '2004-11-9');
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (5, 'Otis Bazoche', '765-570-6904', '74 Myrtle Point', '1998-01-12');
-insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (6, 'Trstram Leven', '665-546-0991', '158 Waubesa Plaza', '1976-02-03');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (1, 'Atalanta Huddle', '0974152632', '2957 Ridge Oak Court', '2003-12-9');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (2, 'Tedie Ellick', '0385274196', '51 Cody Road', '2001-03-20');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (3, 'Garry Baford', '0325874691', '7 Main Way', '1999-02-10');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (4, 'Zebulen Cutford', '0332587419', '498 Ludington Park', '2004-11-9');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (5, 'Otis Bazoche', '0969327915', '74 Myrtle Point', '1998-01-12');
+insert into DocGia (MaDG, TenDG, SDT, DiaChi, NgaySinh) values (6, 'Trstram Leven', '0382597168', '158 Waubesa Plaza', '1976-02-03');
 
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (1, '2023-2-5', '2022-8-1',1,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (2, '2023-6-3', '2022-6-21',2,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (3, '2023-12-3', '2022-4-22',3,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (4, '2023-3-1', '2022-8-14',4,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (5, '2023-3-4', '2022-5-20',5,100000);
-insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (6, '2023-3-4', '2022-5-20',6,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (1, '2022-2-5', '2023-2-5',1,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (2, '2022-6-3', '2023-6-3',2,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (3, '2023-4-3', '2024-4-3',3,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (4, '2023-5-1', '2025-5-1',4,200000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (5, '2023-5-4', '2024-5-4',5,100000);
+insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (6, '2023-5-4', '2025-3-4',6,200000);
 
 -- *************** Sửa *****************
 insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (1, 4, '2023-1-10', '2023-2-10');
 insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (2, 1, '2023-1-10', '2023-2-10');
 insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (3, 3, '2023-02-20', '2023-4-20');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (4, 5, '2023-04-05', '2023-5-30');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (4, 5, '2023-04-05', '2023-5-05');
 insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (5, 5, '2023-04-15', '2023-06-15');
 
 -- **************************************

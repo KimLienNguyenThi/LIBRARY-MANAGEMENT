@@ -25,6 +25,7 @@ import javax.swing.ActionMap;
 import javax.swing.DefaultCellEditor;
 import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
@@ -47,6 +48,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
@@ -73,13 +75,14 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 	public int idSelectedDauSach = 0;
 	private DefaultTableModel model;
 	public int idMaLoParent;
-	public int thanhtoan=0;
+	public int thanhtoan = 0;
 	public int rowTruocEdit = 0;
 	public int columnTruocEdit = 0;
 	private JButton btn_Sua_XemChiTiet;
 	private JButton btn_Huy_XemChiTiet;
-	
+	private String TheLoai;
 	private static final String solve = "Solve";
+
 	public Dialog_XemChiTiet_QLNL(MainView parent, int idMaLo) {
 
 		super(parent, "XEM CHI TIẾT", true);
@@ -88,6 +91,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		this.setVisible(false);
 		frameParent = parent;
 		idMaLoParent = idMaLo;
+
 		// hiện thị trung tâm màn hình
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
@@ -102,30 +106,51 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		// NumberFormat nf = NumberFormat.getCurrencyInstance();
 		// init table sách
 		table_ChiTietSach = new JTable();
-		table_ChiTietSach.setModel(
-				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null, null } },
-						new String[] { "Mã DS", "Tên sách", "Nhà xuất bản", "Năm Xuất bản", "Tác giả", "Thể loại",
-								"Ngôn ngữ", "Giá sách", "Số lượng" }) {
+		table_ChiTietSach.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "M\u00E3 DS", "T\u00EAn s\u00E1ch", "Nh\u00E0 xu\u1EA5t b\u1EA3n",
+						"N\u0103m Xu\u1EA5t b\u1EA3n", "T\u00E1c gi\u1EA3", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF",
+						"Gi\u00E1 s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng"
 
-					// ngăn chặn chỉnh sửa giá trị
-					public boolean isCellEditable(int row, int column) {
-						if (column == 0 || column == 8) // chặn ma dau sach và soluong
-							return false;
-
-						return super.isCellEditable(row, column);
-					}
-
-				});
+				}));
 		// chỉ cho nhập số ở năm xb va gia sach
 		try {
 			MaskFormatter formatter = new MaskFormatter("####");
 			formatter.setAllowsInvalid(false);
-			table_ChiTietSach.getColumnModel().getColumn(3)
-					.setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatter)));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
+		/// our combobox thể loại
+		TableColumn colTheLoai = table_ChiTietSach.getColumnModel().getColumn(5);
+		JComboBox<String> TheLoai = new JComboBox<>();
+		TheLoai.addItem("Chính Trị- Khoa Học");
+		TheLoai.addItem("Tiểu Thuyết");
+		TheLoai.addItem("Truyện Ngôn Tình");
+		TheLoai.addItem("Thơ");
+		TheLoai.addItem("Kinh Doanh");
+		TheLoai.addItem("Tâm Lý Học");
+		TheLoai.addItem("Truyện Thiếu Nhi");
+		TheLoai.addItem("Trinh Thám");
+		TheLoai.addItem("Văn Học");
+		TheLoai.addItem("Ngoại Ngữ");
+		TheLoai.addItem("Kỹ Năng Sống");
+		
+		colTheLoai.setCellEditor(new DefaultCellEditor(TheLoai));
+
+		/// our combobox Ngôn ngữ
+		TableColumn colNgonNgu = table_ChiTietSach.getColumnModel().getColumn(6);
+		JComboBox<String> NgonNgu = new JComboBox<>();
+		NgonNgu.addItem("Tiếng Anh");
+		NgonNgu.addItem("Tiếng Việt");
+		NgonNgu.addItem("Tiếng Hàn");
+		NgonNgu.addItem("Tiếng Nhật");
+		NgonNgu.addItem("Tiếng Trung");
+		NgonNgu.addItem("Tiếng Mỹ");
+		
+		colNgonNgu.setCellEditor(new DefaultCellEditor(NgonNgu));
+		
+		////
+		
 		NumberFormat format = NumberFormat.getInstance();
 		NumberFormatter formatter2 = new NumberFormatter(format);
 //
@@ -133,10 +158,6 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		formatter2.setMaximum(999999);
 		formatter2.setAllowsInvalid(false);
 		formatter2.setValueClass(Integer.class);
-		
-		
-		table_ChiTietSach.getColumnModel().getColumn(7)
-			.setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatter2)));
 
 		table_ChiTietSach.getSelectionModel().addListSelectionListener(new ListSelectionListener() { // su kien chon 1
 			// o tren table
@@ -152,13 +173,10 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 // table thanh ddoi de tinh lai thanh toan 	
 		table_ChiTietSach.getModel().addTableModelListener(new TableModelListener() {
-		      public void tableChanged(TableModelEvent e) {
-		         load_ThanhToan();
-		      }
-		    });
-		
-
-			
+			public void tableChanged(TableModelEvent e) {
+				load_ThanhToan();
+			}
+		});
 
 		// Đưa dữ liệu từ biến table đưa lên giao diện cho ngta xem
 		// _jscrollPane.setViewportView(table_QuanLyNhapLo);
@@ -265,17 +283,13 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		JButton btn_Luu_XemChiTiet = new JButton("Lưu");
 		btn_Luu_XemChiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				SuaLo();
-				// getListSach(idMaLoTruyenTuParent);
-
 				SuaChiTietLo();
-
-				// getLoSach(idMaLoParent);
 				getListSach(idMaLoParent);
 				// frameParent.LoadDataUpdate();
-				frameParent.LoadDataList();
 
+				frameParent.LoadDataList();
+				frameParent.LoadTableSach();
 			}
 		});
 
@@ -293,7 +307,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		btn_Sua_XemChiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				set_Sua();
-				
+
 			}
 		});
 		btn_Sua_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -413,7 +427,10 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			int idLoNew = QuanLyNhapLo.getInstance().UpdateData(Update_Losach,
 					Integer.valueOf(textField_MaLo_XemChiTiet.getText()));
 			System.out.println(idLoNew);
+			JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
+			this.setVisible(false);
 			return idLoNew;
+
 		}
 		return -1;
 	}
@@ -433,7 +450,6 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			sach.setTenSach((String) table_ChiTietSach.getValueAt(i, 1));
 			sach.setTheLoai((String) table_ChiTietSach.getValueAt(i, 5));
 
-			// System.out.println( table_ChiTietSach.getValueAt(i, 3));
 			// vì gdien hieu là string nên integer.parseInt
 			// trim bỏ khoảng trắng 2 đuầ
 			sach.setNamXuatBan(Integer.parseInt(table_ChiTietSach.getValueAt(i, 3).toString().trim()));
@@ -443,38 +459,39 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			sach.setGiaSach(Integer.parseInt(table_ChiTietSach.getValueAt(i, 7).toString().trim().replace(",", "")));
 
 			QuanLyNhapLo.getInstance().UpdateSach(sach, maDauSach);
-
+			// QuanLyNhapLo.getInstance().select_sachchitiet( table_ChiTietSach, maDauSach);
 		}
-		JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
-		this.setVisible(false);
+
 	}
 
 	public void getListSach(int idMaLo) {
 		((DefaultTableModel) table_ChiTietSach.getModel()).setRowCount(0);
 		table_ChiTietSach = QuanLyNhapLo.getInstance().select_sachchitiet(table_ChiTietSach, idMaLo);
+
 	}
 
 	public void set_Luu() {
-		//btn_Sua_XemChiTiet.setEnabled(true);
+		// btn_Sua_XemChiTiet.setEnabled(true);
 		textField_ThanhToan_XemChiTiet.setEnabled(false);
 		textField_TenNCC_XemChiTiet.setEnabled(false);
 		textField_DiaChi_XemChiTiet.setEnabled(false);
 		textField_SDT_XemChiTiet.setEnabled(false);
 		table_ChiTietSach.setEnabled(false);
-		//btn_Huy_XemChiTiet.setEnabled(true);
-		
-		 System.out.println( "ddddddddddđ");
+		// btn_Huy_XemChiTiet.setEnabled(true);
+
+		System.out.println("ddddddddddđ");
 	}
 
 	public void set_Sua() {
-		//btn_Sua_XemChiTiet.setEnabled(false);
+		// btn_Sua_XemChiTiet.setEnabled(false);
 		textField_ThanhToan_XemChiTiet.setEnabled(true);
 		textField_TenNCC_XemChiTiet.setEnabled(true);
 		textField_DiaChi_XemChiTiet.setEnabled(true);
 		textField_SDT_XemChiTiet.setEnabled(true);
 		table_ChiTietSach.setEnabled(true);
-		//btn_Huy_XemChiTiet.setEnabled(true);
+		// btn_Huy_XemChiTiet.setEnabled(true);
 	}
+
 	public void load_ThanhToan() {
 		int soLuong = 0;
 		int giaSach = 0;
@@ -486,8 +503,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			giaSach = Integer.parseInt(table_ChiTietSach.getValueAt(i, 7).toString().trim().replace(",", ""));
 			thanhtoan = thanhtoan + (soLuong * giaSach);
 		}
-		textField_ThanhToan_XemChiTiet.setText(String.valueOf(thanhtoan) );
+		textField_ThanhToan_XemChiTiet.setText(String.valueOf(thanhtoan));
 	}
-	
-	
+
 }

@@ -204,7 +204,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		comboBox_NgonNgu_ThemSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		comboBox_NgonNgu_ThemSach_QLNL.setBounds(471, 62, 137, 21);
 		comboBox_NgonNgu_ThemSach_QLNL.setModel(new DefaultComboBoxModel(
-				new String[] { "Tiếng Anh", "Tiếng Việt", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung" }));
+				new String[] { "Tiếng Anh", "Tiếng Việt", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung","Tiếng Mỹ" }));
 		comboBox_NgonNgu_ThemSach_QLNL.setOpaque(true);
 		comboBox_NgonNgu_ThemSach_QLNL.setBackground(Color.BLUE);
 		contentPane.add(comboBox_NgonNgu_ThemSach_QLNL);
@@ -214,7 +214,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		comboBox_TheLoai_ThemSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		comboBox_TheLoai_ThemSach_QLNL.setModel(
 				new DefaultComboBoxModel(new String[] { "Chính Trị- Khoa Học", "Tiểu Thuyết", "Truyện Ngôn Tình", "Thơ",
-						"Kinh Doanh", "Tâm Lý Học", "Truyện Thiếu Nhi", "Trinh Thám", "Văn Học" }));
+						"Kinh Doanh", "Tâm Lý Học", "Truyện Thiếu Nhi", "Trinh Thám", "Văn Học", "Ngoại Ngữ" , "Kỹ Năng Sống"}));
 		comboBox_TheLoai_ThemSach_QLNL.setOpaque(true);
 		comboBox_TheLoai_ThemSach_QLNL.setBackground(Color.BLUE);
 		contentPane.add(comboBox_TheLoai_ThemSach_QLNL);

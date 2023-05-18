@@ -64,6 +64,8 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 		button_Luu_DialogSTTTV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kiemTraThongTin();
+				MainView.LoadTableDocGiaPM();
+				//MainView.LoadTableQLTheDocGia();
 			}
 		});
 		button_Luu_DialogSTTTV.setBounds(246, 280, 72, 31);
@@ -173,6 +175,7 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 			suaThongTin();
 			dispose();
 		}
+		
 	}
 
 	public void suaThongTin() {
@@ -204,4 +207,5 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+	
 }
