@@ -50,7 +50,7 @@ CREATE TABLE SACH(
 CREATE TABLE DocGia(
 	MaDG INT PRIMARY KEY AUTO_INCREMENT,
     TenDG VARCHAR(50),
-    SDT VARCHAR(50),
+    SDT VARCHAR(50) UNIQUE,
     DiaChi VARCHAR(100),
     NgaySinh DATE -- CHECK (NgaySinh <= sysdate())
 );
@@ -67,10 +67,12 @@ CREATE TABLE TheDocGia (
 CREATE TABLE PhieuMuon(
 	MaPM INT PRIMARY KEY AUTO_INCREMENT,
     MaThe INT ,
+    MaNV INT,
     NgayMuon DATE,
     NgayTra DATE,
     TinhTrang varchar (100) default "Chưa trả", 
-    FOREIGN KEY (MaThe) REFERENCES thedocgia (MaThe)
+    FOREIGN KEY (MaThe) REFERENCES thedocgia (MaThe),
+    FOREIGN KEY (MaNV) REFERENCES nhanvien (MaNV)
 );
 
 CREATE TABLE ChiTietPhieuMuon (
@@ -114,11 +116,11 @@ insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (5, '2023-5-4',
 insert into TheDocGia (MaThe, NgayDK, HanThe,MaDG, PhiDK) values (6, '2023-5-4', '2025-3-4',6,200000);
 
 -- *************** Sửa *****************
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (1, 4, '2023-1-10', '2023-2-10');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (2, 1, '2023-1-10', '2023-2-10');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (3, 3, '2023-02-20', '2023-4-20');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (4, 5, '2023-04-05', '2023-5-05');
-insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra) values (5, 5, '2023-04-15', '2023-06-15');
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra,MaNV ) values (1, 4, '2023-1-10', '2023-2-10', 1);
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra,MaNV) values (2, 1, '2023-1-10', '2023-2-10', 1);
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra,MaNV) values (3, 3, '2023-02-20', '2023-4-20', 1);
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra,MaNV) values (4, 5, '2023-04-05', '2023-5-05', 1);
+insert into PhieuMuon (MaPM, MaThe, NgayMuon, NgayTra,MaNV) values (5, 5, '2023-04-15', '2023-06-15', 1);
 
 -- **************************************
 
