@@ -1569,7 +1569,7 @@ public class MainView extends JFrame {
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 
-		} else if (chooser_NgaySinh_TTV.getDate() == null) {
+		} else if (chooser_NgaySinh_TTV.getDate().equals(null)) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
@@ -1583,6 +1583,11 @@ public class MainView extends JFrame {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng số điện thoại!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
+			
+		} else if (KtraSDT_TTV() == 1  ) {
+				JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+				JOptionPane.showMessageDialog(frame, "Số điện thoại đã được đăng ký. Vui lòng kiểm tra lại!!!", "THÔNG BÁO",
+						JOptionPane.ERROR_MESSAGE);
 
 		} else if (textField_Diachi_TTV.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
@@ -1593,7 +1598,7 @@ public class MainView extends JFrame {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng chọn hạn thẻ!!!", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
 
-		} else {
+		} else  {
 
 			// Lấy dữ liệu nhập
 			docGia.setTenDocGia(textField_TenDocGia_TTV.getText());
@@ -1644,6 +1649,19 @@ public class MainView extends JFrame {
 			// Xoá dữ liệu nhập trên màn hình
 			huyThemThanhVien();
 		}
+	}
+	
+	public int KtraSDT_TTV() {
+		String sdt;
+		int ktra=0;
+		for (int i = 0; i < table_QLTV.getRowCount(); i++) { // lấy từng row của table sách để thực thi
+
+			sdt = (String) table_QLTV.getValueAt(i, 2);
+			if(textField_SDT_TTV.getText().equals(sdt) == true ){
+				return ktra=1;
+			}
+		}
+		return ktra;
 	}
 
 	public void tinhToanPhiDangKy() {
