@@ -1650,6 +1650,7 @@ public class MainView extends JFrame {
 			huyThemThanhVien();
 		}
 	}
+	/// ktra sdt có trùng nhau k 
 	
 	public int KtraSDT_TTV() {
 		String sdt;

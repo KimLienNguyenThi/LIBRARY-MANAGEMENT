@@ -50,6 +50,37 @@ public class ThanhVien {
 		}
 	}
 	
+//	public int KtraSDT_TTV(String sdt) {
+//		int ketqua = 0;
+//		String ketqua_SDT;
+//		try {
+//			// B1: Tạo kết nối đến CSDL
+//			Connection connection = cnDatabase.getConnection();
+//			// B2: Tạo ra đối tượng Statement
+//			Statement st = connection.createStatement();
+//			// B3: Thực thi một câu lệnh SQL
+//			String sql = "SELECT SDT FROM docgia WHERE SDT = '" +sdt +"';";
+//
+//			System.out.println(sql);
+//			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra
+//			// B4: Xử lý kết quả
+//			while (rs.next()) {
+//				ketqua_SDT = rs.getString("SDT");
+//				if(ketqua_SDT.equals("") == true) {
+//					System.out.println("SDT BI TRUNG");
+//					ketqua = 1;
+//				}else {
+//					ketqua = 0;
+//				}
+//			}
+//
+//			// B5: Ngắt kết nối CSDL
+//			cnDatabase.disConnection(connection);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return ketqua;
+//	}
 
 	public int selectRowLast_DocGia() {
 		int ketqua_docGia = 0;
