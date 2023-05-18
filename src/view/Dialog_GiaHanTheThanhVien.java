@@ -77,6 +77,7 @@ public class Dialog_GiaHanTheThanhVien extends JDialog {
 		button_Luu_DialogGHT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				giaHanThe();
+				MainView.LoadTableDocGiaPM();
 			}
 		});
 		button_Luu_DialogGHT.setBounds(246, 280, 72, 31);

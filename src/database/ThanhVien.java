@@ -166,7 +166,7 @@ public class ThanhVien {
 				if (HanThe.before(date) == true) {
 					TinhTrang = "Hết hạn";
 				} else {
-					TinhTrang = "";
+					TinhTrang = "Còn";
 				}
 
 				Object[] obj = { MaDG, TenDG, SDT, NgaySinh, DiaChi, NgayDK, HanThe, PhiDK, TinhTrang };

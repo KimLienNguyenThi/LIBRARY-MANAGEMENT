@@ -18,8 +18,10 @@ public class Service23 {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		try {
 
-			String sql = "SELECT TheDocGia.MaThe, DocGia.TenDG, DocGia.SDT, DocGia.DiaChi " + "FROM TheDocGia "
-					+ "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG " + "ORDER BY TheDocGia.MaThe ASC";
+			String sql = "SELECT TheDocGia.MaThe, TheDocGia.HanThe, DocGia.TenDG, DocGia.SDT, DocGia.DiaChi " 
+					   + "FROM TheDocGia "
+					   + "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG "
+					   + "ORDER BY TheDocGia.MaThe ASC";
 
 			Connection conn = cnDatabase.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -27,14 +29,19 @@ public class Service23 {
 			ResultSet rs = pst.executeQuery(sql);
 
 			while (rs.next()) {
-				int mathe = rs.getInt("MaThe");
-				String tendg = rs.getString("TenDG");
-				String sdt = rs.getString("SDT");
-				String diachi = rs.getString("DiaChi");
+				long millis = System.currentTimeMillis();
+				java.sql.Date date = new java.sql.Date(millis);
+				Date HanThe = rs.getDate("HanThe");
+				if(HanThe.before(date) == false) {
+					int mathe = rs.getInt("MaThe");
+					String tendg = rs.getString("TenDG");
+					String sdt = rs.getString("SDT");
+					String diachi = rs.getString("DiaChi");
 
-				Object[] obj = { mathe, tendg, sdt, diachi };
+					Object[] obj = { mathe, tendg, sdt, diachi };
 
-				model.addRow(obj);
+					model.addRow(obj);
+				}
 			}
 			cnDatabase.disConnection(conn);
 		} catch (SQLException e) {
