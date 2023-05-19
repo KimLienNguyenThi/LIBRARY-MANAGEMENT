@@ -1584,7 +1584,8 @@ public class MainView extends JFrame {
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng số điện thoại!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 			
-		} else if (KtraSDT_TTV() == 1  ) {
+//		} else if (KtraSDT_TTV() == 1  ) {
+		} else if(KtraSDT_ThanhVien() == 1) {
 				JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 				JOptionPane.showMessageDialog(frame, "Số điện thoại đã được đăng ký. Vui lòng kiểm tra lại!!!", "THÔNG BÁO",
 						JOptionPane.ERROR_MESSAGE);
@@ -1652,17 +1653,18 @@ public class MainView extends JFrame {
 	}
 	/// ktra sdt có trùng nhau k 
 	
-	public int KtraSDT_TTV() {
-		String sdt;
-		int ktra=0;
-		for (int i = 0; i < table_QLTV.getRowCount(); i++) { // lấy từng row của table sách để thực thi
-
-			sdt = (String) table_QLTV.getValueAt(i, 2);
-			if(textField_SDT_TTV.getText().equals(sdt) == true ){
-				return ktra=1;
-			}
-		}
-		return ktra;
+public int KtraSDT_ThanhVien() {
+//		String sdt;
+//		int ktra=0;
+//		for (int i = 0; i < table_QLTV.getRowCount(); i++) { // lấy từng row của table sách để thực thi
+//
+//			sdt = (String) table_QLTV.getValueAt(i, 2);
+//			if(textField_SDT_TTV.getText().equals(sdt) == true ){
+//				return ktra=1;
+//			}
+//		}
+//		return ktra;
+	return ThanhVien.getInstance().KtraSDT_TTV(textField_SDT_TTV.getText());
 	}
 
 	public void tinhToanPhiDangKy() {

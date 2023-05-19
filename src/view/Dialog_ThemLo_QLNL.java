@@ -9,12 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -23,6 +28,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +39,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -79,7 +91,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		setBounds(100, 100, 673, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
-		
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -153,7 +165,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			}
 		});
-		
+
 		textField_SDT_ThemLo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -212,9 +224,9 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		JButton btn_ThemSach_ThemLo = new JButton("Thêm Sách");
 		btn_ThemSach_ThemLo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//cachs 1
+				// cachs 1
 				tinh_ThanhToan();
-				//casch 2
+				// casch 2
 //				DiaLog_ThemSach_QLNL jdiaLogThemSach = new DiaLog_ThemSach_QLNL(frame);
 //				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 //				jdiaLogThemSach.setLocation(dim.width / 2 - jdiaLogThemSach.getSize().width / 2,
@@ -238,7 +250,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		chooser_NgayNhap_QLNL.setBounds(467, 13, 124, 19);
 		chooser_NgayNhap_QLNL.getJCalendar().setMaxSelectableDate(new java.util.Date());
 		contentPane.add(chooser_NgayNhap_QLNL);
-		
+
 		JButton btn_Huy_ThemLo = new JButton("Hủy");
 		btn_Huy_ThemLo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -248,10 +260,32 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		btn_Huy_ThemLo.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btn_Huy_ThemLo.setBounds(227, 286, 69, 28);
 		contentPane.add(btn_Huy_ThemLo);
+
+		JButton btnNewButton = new JButton("Import File");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jf = new JFileChooser();
+				int returnValue = jf.showOpenDialog(null);
+				// int returnValue = jfc.showSaveDialog(null);
+
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = jf.getSelectedFile();
+					String excelPath = selectedFile.getAbsolutePath();
+					ReadFile(excelPath);
+					System.out.println("log");
+				}
+				// System.out.println("tt");
+				 ThanhToan();
+			}
+		});
+		btnNewButton.setBounds(394, 102, 85, 21);
+		contentPane.add(btnNewButton);
 	}
+
 	public void tinh_ThanhToan() {
 		new DiaLog_ThemSach_QLNL(this).setVisible(true);
 	}
+
 	public int themLo() {
 		// This method must return a result of type int/ bat buoc return
 		LoSach _Losach = new LoSach();
@@ -322,7 +356,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			// Xoá dữ liệu nhập trên màn hình
 			textField_TenNCC_ThemLo.setText("");
-			
+
 			textField_SDT_ThemLo.setText("");
 			textField_DiaChi_ThemLo.setText("");
 			textField_ThanhToan_ThemLo.setText("");
@@ -352,14 +386,16 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		int soLuong = 0;
 		int giaSach = 0;
 		thanhtoan = 0;
+		System.out.println("tt");
 		Object[] rowData = new Object[table.getRowCount()];
 		for (int i = 0; i < table.getRowCount(); i++) { // lấy từng row của table sách để thực thi
+
 
 			soLuong = (int) table.getValueAt(i, 5);
 			giaSach = (int) table.getValueAt(i, 7);
 			thanhtoan = thanhtoan + (soLuong * giaSach);
 		}
-		textField_ThanhToan_ThemLo.setText(String.valueOf(thanhtoan) );
+		textField_ThanhToan_ThemLo.setText(String.valueOf(thanhtoan));
 	}
 
 	public void Save() {
@@ -410,5 +446,83 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		this.setVisible(false);
 	}
 
+	// ***********************
+	//
+	// import file
+	//
 
+	public void ReadFile(String path) {
+		try {
+
+			if (getExtensionByStringHandling(path).get().equals("xlsx") == false) {
+				System.out.print(getExtensionByStringHandling(path).get() + "  dsadas");
+				JOptionPane.showMessageDialog(frame, "File không đúng định dạng!!!", "THÔNG BÁO",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			File file = new File(path); // creating a new file instance
+			FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
+			// creating Workbook instance that refers to .xlsx file
+			XSSFWorkbook wb = new XSSFWorkbook(fis);
+			XSSFSheet sheet = wb.getSheetAt(0); // creating a Sheet object to retrieve object
+			Iterator<Row> itr = sheet.iterator(); // iterating over excel file
+
+			int countRow = sheet.getLastRowNum();
+			if (countRow < 4) {
+				System.out.print("Template khong dung countRow: " + countRow);
+				JOptionPane.showMessageDialog(frame, "File không đúng định dạng!!!", "THÔNG BÁO",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			while (itr.hasNext()) {
+				Row row = itr.next();
+				// đọc dữ liêu lô
+				if (row.getRowNum() == 2) {
+					textField_TenNCC_ThemLo.setText(row.getCell(1).getStringCellValue());
+					chooser_NgayNhap_QLNL.setDate(row.getCell(2).getDateCellValue());
+					textField_DiaChi_ThemLo.setText(row.getCell(3).getStringCellValue());
+					textField_SDT_ThemLo.setText(row.getCell(4).getStringCellValue());
+				}
+				// đọc dữ liêu sách
+				if (row != null && row.getRowNum() >= 5 && row.getCell(1) != null && row.getCell(2) != null
+						&& row.getCell(3) != null && row.getCell(4) != null && row.getCell(5) != null
+						&& row.getCell(6) != null && row.getCell(7) != null) {
+
+//					String[] columnNames = { "Tên sách", "Thể loại", "Năm Xuất bản", "Nhà xuất bản", "Tác giả", "Số lượng",
+//							"Ngôn ngữ", "Giá sách" };
+
+					Object[] obj = { row.getCell(1).getStringCellValue(), // ten sách
+							row.getCell(2).getStringCellValue(), // thể loani
+							(int)(row.getCell(3).getNumericCellValue()), // NamXB
+							row.getCell(4).getStringCellValue(), // NHA XB
+							row.getCell(5).getStringCellValue(), // tác giả
+							(int)row.getCell(6).getNumericCellValue(), // so luong
+							row.getCell(7).getStringCellValue(), // ngon ngu
+							(int)row.getCell(8).getNumericCellValue() // Gia Sach
+					};
+//					NumberFormat format = NumberFormat.getInstance();
+//					NumberFormatter formatter2 = new NumberFormatter(format);
+//			//
+//					formatter2.setMinimum(-1);
+//					formatter2.setMaximum(999999);
+//					formatter2.setAllowsInvalid(false);
+//					formatter2.setValueClass(Integer.class);
+
+					table.setModel(model);
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+					table.setFillsViewportHeight(true);
+					model.addRow(obj);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Optional<String> getExtensionByStringHandling(String filename) {
+		return Optional.ofNullable(filename).filter(f -> f.contains("."))
+				.map(f -> f.substring(filename.lastIndexOf(".") + 1));
+	}
 }
