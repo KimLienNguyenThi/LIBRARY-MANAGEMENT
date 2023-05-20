@@ -1,5 +1,6 @@
 package view;
 import java.awt.Color;
+
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -31,7 +32,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.DocumentFilter.FilterBypass;
 
-import com.google.protobuf.Method;
+//import com.google.protobuf.Method;
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
 import model.LoSach;

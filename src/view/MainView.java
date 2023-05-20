@@ -673,9 +673,13 @@ public class MainView extends JFrame {
 		};
 		table_QuanLyPhieuMuon.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_QuanLyPhieuMuon.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		table_QuanLyPhieuMuon.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "M\u00E3 PM", "M\u00E3 th\u1EBB", "H\u1ECD t\u00EAn", "S\u0110T",
-						"Ng\u00E0y m\u01B0\u1EE3n", "Ng\u00E0y tr\u1EA3", "T\u00ECnh tr\u1EA1ng" }));
+		table_QuanLyPhieuMuon.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"M\u00E3 PM", "M\u00E3 th\u1EBB", "H\u1ECD t\u00EAn", "S\u0110T", "Ng\u00E0y m\u01B0\u1EE3n", "H\u1EA1n tr\u1EA3", "T\u00ECnh tr\u1EA1ng"
+			}
+		));
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(0).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(1).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(2).setPreferredWidth(64);
@@ -714,15 +718,22 @@ public class MainView extends JFrame {
 
 		// Tạo popupMenu khi click chuộc phải vào hàng table
 		setupPopupMenu(table_QuanLyPhieuMuon, frame);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_2.setBounds(0, 0, 849, 548);
+		panelQLPhieuMuon.add(lblNewLabel_2);
+		
+
 
 		JPanel panelQuanLySach = new JPanel();
 		panelQuanLySach.setBackground(new Color(255, 255, 255));
 		cardPanel.add(panelQuanLySach, "panelQuanLySach");
 		panelQuanLySach.setLayout(null);
 
-		panelTheDocGia = new JPanel();
-		cardPanel.add(panelTheDocGia, "panelTheDocGia");
-		panelTheDocGia.setLayout(null);
+//		panelTheDocGia = new JPanel();
+//		cardPanel.add(panelTheDocGia, "panelTheDocGia");
+//		panelTheDocGia.setLayout(null);
 
 		////////
 		// Quan Ly Sach
@@ -780,42 +791,47 @@ public class MainView extends JFrame {
 		btn_TimKiem_qls.setBounds(467, 10, 45, 45);
 		btn_TimKiem_qls.setIcon(newIconTimKiem);
 		panelQuanLySach.add(btn_TimKiem_qls);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_3.setBounds(0, 0, 849, 548);
+		panelQuanLySach.add(lblNewLabel_3);
 
-		JPanel panelQuanLyDocGia = new JPanel();
-		cardPanel.add(panelQuanLyDocGia, "panelQuanLyDocGia");
-		panelQuanLyDocGia.setLayout(null);
-
-		textField_TimKiem_qldg = new JTextField();
-		textField_TimKiem_qldg.setText("  Search");
-		textField_TimKiem_qldg.setForeground(Color.LIGHT_GRAY);
-		textField_TimKiem_qldg.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_TimKiem_qldg.setColumns(10);
-		textField_TimKiem_qldg.setBackground(new Color(226, 255, 153));
-		textField_TimKiem_qldg.setBounds(510, 10, 300, 45);
-		panelQuanLyDocGia.add(textField_TimKiem_qldg);
-
-		JButton btn_TimKiem_qldg = new JButton("");
-		btn_TimKiem_qldg.setOpaque(true);
-		btn_TimKiem_qldg.setBorderPainted(false);
-		btn_TimKiem_qldg.setBackground(new Color(226, 255, 153));
-		btn_TimKiem_qldg.setBounds(467, 10, 45, 45);
-		panelQuanLyDocGia.add(btn_TimKiem_qldg);
-
-		JPanel panel_qldg = new JPanel();
-		panel_qldg.setBounds(10, 122, 829, 415);
-		panelQuanLyDocGia.add(panel_qldg);
-		panel_qldg.setLayout(null);
-
-		table_QuanLyDocGia = new JTable();
-		table_QuanLyDocGia
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
-						new String[] { "M\u00E3 DG", "H\u1ECD t\u00EAn", "S\u0110T", "Ng\u00E0y Sinh",
-								"\u0110\u1ECBa ch\u1EC9", "Tgian \u0110\u0103ng k\u00FD", "H\u1EA1n th\u1EBB",
-								"Ph\u00ED \u0111\u0103ng k\u00FD" }));
-
-		JScrollPane scrollPane_qldg = new JScrollPane(table_QuanLyDocGia);
-		scrollPane_qldg.setBounds(0, 0, 829, 416);
-		panel_qldg.add(scrollPane_qldg);
+//		JPanel panelQuanLyDocGia = new JPanel();
+//		cardPanel.add(panelQuanLyDocGia, "panelQuanLyDocGia");
+//		panelQuanLyDocGia.setLayout(null);
+//
+//		textField_TimKiem_qldg = new JTextField();
+//		textField_TimKiem_qldg.setText("  Search");
+//		textField_TimKiem_qldg.setForeground(Color.LIGHT_GRAY);
+//		textField_TimKiem_qldg.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//		textField_TimKiem_qldg.setColumns(10);
+//		textField_TimKiem_qldg.setBackground(new Color(226, 255, 153));
+//		textField_TimKiem_qldg.setBounds(510, 10, 300, 45);
+//		panelQuanLyDocGia.add(textField_TimKiem_qldg);
+//
+//		JButton btn_TimKiem_qldg = new JButton("");
+//		btn_TimKiem_qldg.setOpaque(true);
+//		btn_TimKiem_qldg.setBorderPainted(false);
+//		btn_TimKiem_qldg.setBackground(new Color(226, 255, 153));
+//		btn_TimKiem_qldg.setBounds(467, 10, 45, 45);
+//		panelQuanLyDocGia.add(btn_TimKiem_qldg);
+//
+//		JPanel panel_qldg = new JPanel();
+//		panel_qldg.setBounds(10, 122, 829, 415);
+//		panelQuanLyDocGia.add(panel_qldg);
+//		panel_qldg.setLayout(null);
+//
+//		table_QuanLyDocGia = new JTable();
+//		table_QuanLyDocGia
+//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
+//						new String[] { "M\u00E3 DG", "H\u1ECD t\u00EAn", "S\u0110T", "Ng\u00E0y Sinh",
+//								"\u0110\u1ECBa ch\u1EC9", "Tgian \u0110\u0103ng k\u00FD", "H\u1EA1n th\u1EBB",
+//								"Ph\u00ED \u0111\u0103ng k\u00FD" }));
+//
+//		JScrollPane scrollPane_qldg = new JScrollPane(table_QuanLyDocGia);
+//		scrollPane_qldg.setBounds(0, 0, 829, 416);
+//		panel_qldg.add(scrollPane_qldg);
 
 		//// G. HUY //////
 		panelThemThanhVien = new JPanel();
@@ -824,66 +840,76 @@ public class MainView extends JFrame {
 
 		JPanel panel_TTV = new JPanel();
 		panel_TTV.setBackground(new Color(255, 255, 255));
-		panel_TTV.setBounds(102, 41, 635, 437);
+		panel_TTV.setBounds(10, 10, 829, 528);
 		panelThemThanhVien.add(panel_TTV);
 		panel_TTV.setLayout(null);
 
 		JLabel labelTitle_TTV = new JLabel("THẺ THÀNH VIÊN");
 		labelTitle_TTV.setForeground(new Color(0, 0, 0));
 		labelTitle_TTV.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitle_TTV.setFont(new Font("Times New Roman", Font.BOLD, 25));
-		labelTitle_TTV.setBounds(200, 26, 236, 50);
+		labelTitle_TTV.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		labelTitle_TTV.setBounds(10, 10, 809, 66);
 		panel_TTV.add(labelTitle_TTV);
 
 		JLabel label_TenThanhVien_TTV = new JLabel("Tên thành viên");
-		label_TenThanhVien_TTV.setBounds(55, 125, 72, 14);
+		label_TenThanhVien_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_TenThanhVien_TTV.setBounds(55, 123, 115, 35);
 		panel_TTV.add(label_TenThanhVien_TTV);
 
 		JLabel label_NgaySinh_TTV = new JLabel("Ngày sinh");
-		label_NgaySinh_TTV.setBounds(55, 180, 72, 14);
+		label_NgaySinh_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_NgaySinh_TTV.setBounds(55, 203, 83, 35);
 		panel_TTV.add(label_NgaySinh_TTV);
 
 		JLabel label_SDT_TTV = new JLabel("Số điện thoại");
-		label_SDT_TTV.setBounds(58, 234, 69, 14);
+		label_SDT_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_SDT_TTV.setBounds(55, 281, 115, 35);
 		panel_TTV.add(label_SDT_TTV);
 
 		JLabel label_PhiDangKy_TTV = new JLabel("Phí đăng ký");
-		label_PhiDangKy_TTV.setBounds(340, 234, 69, 14);
+		label_PhiDangKy_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_PhiDangKy_TTV.setBounds(457, 281, 88, 35);
 		panel_TTV.add(label_PhiDangKy_TTV);
 
 		JLabel label_HanThe_TTV = new JLabel("Hạn thẻ");
-		label_HanThe_TTV.setBounds(340, 180, 69, 14);
+		label_HanThe_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_HanThe_TTV.setBounds(457, 203, 69, 35);
 		panel_TTV.add(label_HanThe_TTV);
 
 		JLabel label_DiaChi_TTV = new JLabel("Địa chỉ");
-		label_DiaChi_TTV.setBounds(340, 125, 69, 14);
+		label_DiaChi_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label_DiaChi_TTV.setBounds(457, 126, 69, 35);
 		panel_TTV.add(label_DiaChi_TTV);
 
 		textField_TenDocGia_TTV = new JTextField();
+		textField_TenDocGia_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
 		textField_TenDocGia_TTV.setColumns(10);
-		textField_TenDocGia_TTV.setBounds(137, 122, 130, 20);
+		textField_TenDocGia_TTV.setBounds(180, 126, 200, 35);
 		panel_TTV.add(textField_TenDocGia_TTV);
 
 		textField_SDT_TTV = new JTextField();
+		textField_SDT_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
 		textField_SDT_TTV.setColumns(10);
-		textField_SDT_TTV.setBounds(137, 231, 130, 20);
+		textField_SDT_TTV.setBounds(180, 284, 200, 35);
 		panel_TTV.add(textField_SDT_TTV);
 
 		textField_Diachi_TTV = new JTextField();
+		textField_Diachi_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
 		textField_Diachi_TTV.setColumns(10);
-		textField_Diachi_TTV.setBounds(430, 122, 130, 20);
+		textField_Diachi_TTV.setBounds(558, 126, 200, 35);
 		panel_TTV.add(textField_Diachi_TTV);
 
 		jLabel_PhiDangKy_TTV = new JLabel();
+		jLabel_PhiDangKy_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
 		jLabel_PhiDangKy_TTV.setBackground(new Color(230, 230, 250));
 		jLabel_PhiDangKy_TTV.setOpaque(true);
-		jLabel_PhiDangKy_TTV.setBounds(430, 231, 130, 20);
+		jLabel_PhiDangKy_TTV.setBounds(555, 281, 200, 35);
 		panel_TTV.add(jLabel_PhiDangKy_TTV);
 
 		chooser_NgaySinh_TTV = new JDateChooser();
 		chooser_NgaySinh_TTV.setDateFormatString("dd/MM/yyyy");
 		chooser_NgaySinh_TTV.getJCalendar().setMaxSelectableDate(new java.util.Date());
-		chooser_NgaySinh_TTV.setBounds(137, 178, 130, 20);
+		chooser_NgaySinh_TTV.setBounds(180, 203, 200, 35);
 		panel_TTV.add(chooser_NgaySinh_TTV);
 
 		JButton button_Luu_TTV = new JButton("Lưu");
@@ -892,8 +918,8 @@ public class MainView extends JFrame {
 				themThanhVien();
 			}
 		});
-		button_Luu_TTV.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		button_Luu_TTV.setBounds(175, 363, 109, 33);
+		button_Luu_TTV.setFont(new Font("Tahoma", Font.BOLD, 17));
+		button_Luu_TTV.setBounds(240, 437, 150, 35);
 		panel_TTV.add(button_Luu_TTV);
 
 		JButton button_HuyThaoTac_TTV = new JButton("Huỷ thao tác");
@@ -902,23 +928,24 @@ public class MainView extends JFrame {
 				huyThemThanhVien();
 			}
 		});
-		button_HuyThaoTac_TTV.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		button_HuyThaoTac_TTV.setBounds(340, 363, 115, 33);
+		button_HuyThaoTac_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
+		button_HuyThaoTac_TTV.setBounds(430, 437, 150, 35);
 		panel_TTV.add(button_HuyThaoTac_TTV);
 
 		JLabel label_GhiChu_TTV = new JLabel("* Vui lòng điền đầy đủ thông tin trước khi nhấn lưu");
+		label_GhiChu_TTV.setHorizontalAlignment(SwingConstants.CENTER);
 		label_GhiChu_TTV.setForeground(new Color(128, 128, 128));
 		label_GhiChu_TTV.setBackground(new Color(255, 255, 255));
-		label_GhiChu_TTV.setHorizontalAlignment(SwingConstants.CENTER);
 		label_GhiChu_TTV.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		label_GhiChu_TTV.setBounds(168, 319, 318, 14);
+		label_GhiChu_TTV.setBounds(237, 413, 321, 14);
 		panel_TTV.add(label_GhiChu_TTV);
 
 		comboBox_HanThe_TTV = new JComboBox();
+		comboBox_HanThe_TTV.setFont(new Font("Tahoma", Font.BOLD, 15));
 		comboBox_HanThe_TTV.setBackground(new Color(230, 230, 250));
 		comboBox_HanThe_TTV.setModel(new DefaultComboBoxModel(
 				new String[] { "Chọn hạn thẻ", "12 tháng", "24 tháng", "36 tháng", "48 tháng" }));
-		comboBox_HanThe_TTV.setBounds(430, 176, 130, 22);
+		comboBox_HanThe_TTV.setBounds(558, 206, 200, 35);
 		comboBox_HanThe_TTV.setOpaque(true);
 		comboBox_HanThe_TTV.setBackground(Color.BLUE);
 		comboBox_HanThe_TTV.addActionListener(new ActionListener() {
@@ -1010,6 +1037,11 @@ public class MainView extends JFrame {
 
 		// Đặt TableRowSorter cho bảng
 		table_QLTV.setRowSorter(sorter_QLTV);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_4.setBounds(0, 0, 849, 548);
+		panelQlyDocGia.add(lblNewLabel_4);
 
 		// Tạo sự kiện KeyReleased cho textField_TimKiem_QLTV
 		textField_TimKiem_QLTV.addKeyListener(new KeyAdapter() {
@@ -1417,6 +1449,11 @@ public class MainView extends JFrame {
 		btn_XemChiTiet_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		btn_XemChiTiet_QLNhapLo.setBounds(290, 68, 100, 29);
 		panelQuanLyNhapLo.add(btn_XemChiTiet_QLNhapLo);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_5.setBounds(0, 0, 849, 548);
+		panelQuanLyNhapLo.add(lblNewLabel_5);
 
 	}
 
@@ -1752,8 +1789,6 @@ public int KtraSDT_ThanhVien() {
 		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
 		table_QLTV = ThanhVien.getInstance().selectAll(table_QLTV);
 	}
-	
-	
 }
 
 

@@ -123,7 +123,7 @@ public class LoginView extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(LoginView.class.getResource("/images/background.png")));
-		lblNewLabel_2.setBounds(10, -7, 586, 374);
+		lblNewLabel_2.setBounds(10, -7, 588, 374);
 		contentPane.add(lblNewLabel_2);
 	}
 }
