@@ -1,7 +1,7 @@
 package model;
 
 public class Sach {
-	private String maSach;
+	private int IDSACH;
 	private String tenSach;
 	private String theLoai;
 	private int namXuatBan;
@@ -16,10 +16,10 @@ public class Sach {
 	public Sach() {
 	}
 	
-	public Sach(String maSach, String tenSach, String theLoai, int namXuatBan, String nXB, String tacGia,
+	public Sach(int IDSACH, String tenSach, String theLoai, int namXuatBan, String nXB, String tacGia,
 			int soLuong, String ngonNgu, String tinhTrang, int giaSach) {
 		super();
-		this.maSach = maSach;
+		this.IDSACH = IDSACH;
 		this.tenSach = tenSach;
 		this.theLoai = theLoai;
 		this.namXuatBan = namXuatBan;
@@ -31,12 +31,12 @@ public class Sach {
 		this.giaSach = giaSach;
 	}
 
-	public String getMaSach() {
-		return maSach;
+	public int getIDSACH() {
+		return IDSACH;
 	}
 
-	public void setMaSach(String maSach) {
-		this.maSach = maSach;
+	public void setIDSACH(int IDSACH) {
+		this.IDSACH = IDSACH;
 	}
 
 	public String getTenSach() {

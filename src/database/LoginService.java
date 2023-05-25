@@ -11,9 +11,10 @@ public class LoginService {
          Connection conn = database.cnDatabase.getConnection();
          try {
           //Class.forName("com.mysql.jdbc.Driver");
+        	 
         	 Statement stmt = conn.createStatement();  
         	 ResultSet rs= stmt.executeQuery("select hotennv from login join nhanvien "
-        	 		+ "        		 on login.manv = nhanvien.manv where login.MANV='" + userName 
+        	 		+ "        		 on login.manv = nhanvien.manv where login.MaTaiKhoan='" + userName 
         			 + "' and login.MatKhau='" + password + "'");  
         	 while(rs.next()) 
         	 {
@@ -32,5 +33,7 @@ public class LoginService {
              ex.printStackTrace();
          }
         return "";
+        
+        
      }
 }

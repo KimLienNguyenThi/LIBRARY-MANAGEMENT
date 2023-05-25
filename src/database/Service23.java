@@ -87,8 +87,8 @@ public class Service23 {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		try {
 
-			String sql = "SELECT Sach.MaSach, Sach.TenSach, Sach.TacGia " + "FROM ChiTietPhieuMuon "
-					+ "JOIN Sach ON ChiTietPhieuMuon.MaSach = Sach.MaSach " + "WHERE MaPM = ?";
+			String sql = "SELECT Sach.IDSACH, Sach.TenSach, Sach.TacGia " + "FROM ChiTietPhieuMuon "
+					+ "JOIN Sach ON ChiTietPhieuMuon.IDSACH = Sach.IDSACH " + "WHERE MaPM = ?";
 
 			Connection conn = cnDatabase.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -98,11 +98,11 @@ public class Service23 {
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				int masach = rs.getInt("MaSach");
+				int IDSACH = rs.getInt("IDSACH");
 				String tensach = rs.getString("TenSach");
 				String tacgia = rs.getString("TacGia");
 
-				Object[] obj = { masach, tensach, tacgia };
+				Object[] obj = { IDSACH, tensach, tacgia };
 
 				model.addRow(obj);
 			}
@@ -117,8 +117,8 @@ public class Service23 {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		try {
 
-			String sql = "SELECT MaSach, TenSach, TacGia, NXB, NamXB, TheLoai, NgonNgu " + "FROM Sach "
-					+ "WHERE TinhTrang LIKE \"Còn\"";
+			String sql = "SELECT IDSACH, TenSach, TacGia, NXB, NamXB, TheLoai, NgonNgu " + "FROM Sach "
+					+ "WHERE TinhTrang = \"Chưa Mượn\"";
 
 			Connection conn = cnDatabase.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class Service23 {
 			ResultSet rs = pst.executeQuery(sql);
 
 			while (rs.next()) {
-				int masach = rs.getInt("MaSach");
+				int IDSACH = rs.getInt("IDSACH");
 				String tensach = rs.getString("TenSach");
 				String tacgia = rs.getString("TacGia");
 				String nhaxb = rs.getString("NXB");
@@ -134,7 +134,7 @@ public class Service23 {
 				String theloai = rs.getString("TheLoai");
 				String ngonngu = rs.getString("NgonNgu");
 
-				Object[] obj = { masach, tensach, tacgia, nhaxb, sdt, theloai, ngonngu };
+				Object[] obj = { IDSACH, tensach, tacgia, nhaxb, sdt, theloai, ngonngu };
 
 				model.addRow(obj);
 			}
@@ -191,7 +191,7 @@ public class Service23 {
 		int ketqua = 0;
 		try {
 
-			String sql = "UPDATE SACH " + "SET TinhTrang = 'Còn' " + "WHERE MaSach " + "IN " + "(SELECT MaSach "
+			String sql = "UPDATE SACH " + "SET TinhTrang = 'Chưa Mượn' " + "WHERE IDSACH " + "IN " + "(SELECT IDSACH "
 					+ " FROM ChiTietPhieuMuon " + " WHERE MaPM = ?); ";
 
 			Connection conn = cnDatabase.getConnection();
@@ -213,7 +213,7 @@ public class Service23 {
 		int ketqua = 0;
 		try {
 
-			String sql = "UPDATE SACH " + "SET TinhTrang = 'Hết' " + "WHERE MaSach " + "IN " + "(SELECT MaSach "
+			String sql = "UPDATE SACH " + "SET TinhTrang = 'Đã Mượn' " + "WHERE IDSACH " + "IN " + "(SELECT IDSACH "
 					+ " FROM ChiTietPhieuMuon " + " WHERE MaPM = ?); ";
 
 			Connection conn = cnDatabase.getConnection();
@@ -250,15 +250,15 @@ public class Service23 {
 		return ketqua;
 	}
 
-	public int InsertChiTietPhieuMuon(int MaPM, int MaSach) {
+	public int InsertChiTietPhieuMuon(int MaPM, int IDSACH) {
 		int ketqua = 0;
 		try {
 			Connection conn = cnDatabase.getConnection();
-			String sql = "INSERT INTO ChiTietPhieuMuon (MaPM, MaSach) " + "VALUES (?, ?); ";
+			String sql = "INSERT INTO ChiTietPhieuMuon (MaPM, IDSACH) " + "VALUES (?, ?); ";
 
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setInt(1, MaPM);
-			pst.setInt(2, MaSach);
+			pst.setInt(2, IDSACH);
 
 			ketqua = pst.executeUpdate();
 			cnDatabase.disConnection(conn);

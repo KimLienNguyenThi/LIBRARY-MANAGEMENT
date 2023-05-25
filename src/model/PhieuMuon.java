@@ -2,10 +2,10 @@ package model;
 import java.sql.Date;
 
 public class PhieuMuon {
-	private String maPM;
-	private String maNV;
-	private String maDocGia;
-	private String maSach;
+	private int maPM;
+	private int maNV;
+	private int maDocGia;
+	private int IDSACH;
 	private Date ngayMuon;
 	private Date ngayTra;
 	
@@ -13,46 +13,46 @@ public class PhieuMuon {
 	public PhieuMuon() {
 	}
 
-	public PhieuMuon(String maPM, String maNV, String maDocGia, String maSach, Date ngayMuon, Date ngayTra) {
+	public PhieuMuon(int maPM, int maNV, int maDocGia, int IDSACH, Date ngayMuon, Date ngayTra) {
 		super();
 		this.maPM = maPM;
 		this.maNV = maNV;
 		this.maDocGia = maDocGia;
-		this.maSach = maSach;
+		this.IDSACH = IDSACH;
 		this.ngayMuon = ngayMuon;
 		this.ngayTra = ngayTra;
 	}
 
-	public String getMaPM() {
+	public int getMaPM() {
 		return maPM;
 	}
 
-	public void setMaPM(String maPM) {
+	public void setMaPM(int maPM) {
 		this.maPM = maPM;
 	}
 
-	public String getMaNV() {
+	public int getMaNV() {
 		return maNV;
 	}
 
-	public void setMaNV(String maNV) {
+	public void setMaNV(int maNV) {
 		this.maNV = maNV;
 	}
 
-	public String getMaDocGia() {
+	public int getMaDocGia() {
 		return maDocGia;
 	}
 
-	public void setMaDocGia(String maDocGia) {
+	public void setMaDocGia(int maDocGia) {
 		this.maDocGia = maDocGia;
 	}
 
-	public String getMaSach() {
-		return maSach;
+	public int getIDSACH() {
+		return IDSACH;
 	}
 
-	public void setMaSach(String maSach) {
-		this.maSach = maSach;
+	public void setIDSACH(int IDSACH) {
+		this.IDSACH = IDSACH;
 	}
 
 	public Date getNgayMuon() {

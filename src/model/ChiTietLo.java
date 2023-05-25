@@ -2,19 +2,15 @@ package model;
 
 public class ChiTietLo {
 	private int maDS;
-	//private String tenSach;
-	//private String theLoai;
-	//private String NXB;
-	//private String tacGia;
 	private int soLuong;
-	private int maLo;
-	//private String maSach;
+	private int MaPN;
+
 	
 	
 	public ChiTietLo() {
 	}
 
-	public ChiTietLo(int maDS, int soLuong, int maLo) {
+	public ChiTietLo(int maDS, int soLuong, int MaPN) {
 		super();
 		this.maDS = maDS;
 		//this.tenSach = tenSach;
@@ -22,13 +18,13 @@ public class ChiTietLo {
 		//this.NXB = nXB;
 		//this.tacGia = tacGia;
 		this.soLuong = soLuong;
-		this.maLo = maLo;
+		this.MaPN = MaPN;
 		//this.maSach = maSach;
 	}
-	public ChiTietLo( int soLuong, int maLo) {
+	public ChiTietLo( int soLuong, int MaPN) {
 		super();
 		this.soLuong = soLuong;
-		this.maLo = maLo;
+		this.MaPN = MaPN;
 	}
 
 	public int getMaDS() {
@@ -79,12 +75,12 @@ public class ChiTietLo {
 		this.soLuong = soLuong;
 	}
 
-	public int getMaLo() {
-		return maLo;
+	public int getMaPN() {
+		return MaPN;
 	}
 
-	public void setMaLo(int maLo) {
-		this.maLo = maLo;
+	public void setMaPN(int MaPN) {
+		this.MaPN = MaPN;
 	}
 
 //	public String getMaSach() {

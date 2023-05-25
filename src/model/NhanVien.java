@@ -2,7 +2,7 @@ package model;
 import java.sql.Date;
 
 public class NhanVien {
-	private String maNV;
+	private int maNV;
 	private String hoTenNV;
 	private String diaChi;
 	private String SDT;
@@ -13,7 +13,7 @@ public class NhanVien {
 	public NhanVien() {
 	}
 
-	public NhanVien(String maNV, String hoTenNV, String diaChi, String sDT, String gioiTinh, Date ngaySinh) {
+	public NhanVien(int maNV, String hoTenNV, String diaChi, String sDT, String gioiTinh, Date ngaySinh) {
 		super();
 		this.maNV = maNV;
 		this.hoTenNV = hoTenNV;
@@ -23,11 +23,11 @@ public class NhanVien {
 		this.ngaySinh = ngaySinh;
 	}
 
-	public String getMaNV() {
+	public int getMaNV() {
 		return maNV;
 	}
 
-	public void setMaNV(String maNV) {
+	public void setMaNV(int maNV) {
 		this.maNV = maNV;
 	}
 

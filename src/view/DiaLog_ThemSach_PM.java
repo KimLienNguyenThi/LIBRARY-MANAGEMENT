@@ -78,7 +78,7 @@ public class DiaLog_ThemSach_PM extends JDialog {
 		};
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "M\u00E3 s\u00E1ch", "T\u00EAn s\u00E1ch", " T\u00E1c gi\u1EA3", "Nh\u00E0 XB",
+				new String[] { "ID SACH", "T\u00EAn s\u00E1ch", " T\u00E1c gi\u1EA3", "Nh\u00E0 XB",
 						"N\u0103m XB", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF" }));
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -127,12 +127,12 @@ public class DiaLog_ThemSach_PM extends JDialog {
 				if (row == -1) {
 					JOptionPane.showMessageDialog(null, "Hãy chọn sách muốn thêm!");
 				} else {
-					int maSach = (int) table.getValueAt(row, 0);
+					int IDSACH = (int) table.getValueAt(row, 0);
 					boolean check = false;
 
 					// Kiểm tra xem mã sách đã được thêm vào bảng hay chưa.
-					for (int element : MainView.arrMaSach) {
-						if (element == maSach) {
+					for (int element : MainView.arrIDSACH) {
+						if (element == IDSACH) {
 							check = true;
 						}
 					}
@@ -144,9 +144,9 @@ public class DiaLog_ThemSach_PM extends JDialog {
 						String tacGia = (String) table.getValueAt(row, 2);
 
 						DefaultTableModel model = (DefaultTableModel) MainView.table_pm.getModel();
-						model.addRow(new Object[] { maSach, tenSach, tacGia });
+						model.addRow(new Object[] { IDSACH, tenSach, tacGia });
 
-						MainView.arrMaSach.add(maSach);
+						MainView.arrIDSACH.add(IDSACH);
 						dispose();
 					}
 				}

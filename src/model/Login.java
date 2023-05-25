@@ -1,27 +1,36 @@
 package model;
 
 public class Login {
-	private String maNV;
+	private int MaTaiKhoan;
+	private int maNV;
 	private String matKhau;
 	
 	
 	public Login() {
 	}
 	
-	public Login(String maNV, String matKhau) {
+	public Login(int MaTaiKhoan,int maNV, String matKhau) {
 		super();
+		this.MaTaiKhoan = MaTaiKhoan;
 		this.maNV = maNV;
 		this.matKhau = matKhau;
 	}
 
-	public String getMaNV() {
+	
+	public int getMaTaiKhoan() {
+		return MaTaiKhoan;
+	}
+
+	public void setMaTaiKhoan(int MaTaiKhoan) {
+		this.MaTaiKhoan = MaTaiKhoan;
+	}
+	public int getMaNV() {
 		return maNV;
 	}
 
-	public void setMaNV(String maNV) {
+	public void setMaNV(int maNV) {
 		this.maNV = maNV;
 	}
-
 	public String getMatKhau() {
 		return matKhau;
 	}

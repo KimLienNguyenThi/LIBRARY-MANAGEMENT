@@ -35,7 +35,7 @@ import javax.swing.text.DocumentFilter.FilterBypass;
 //import com.google.protobuf.Method;
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
-import model.LoSach;
+import model.PhieuNhapLo;
 import model.Sach;
 import javax.swing.JComboBox;
 import java.awt.event.KeyAdapter;

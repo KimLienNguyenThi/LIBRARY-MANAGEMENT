@@ -38,7 +38,7 @@ public class QuanLySach {
 			
 			// B4: Xử lý kết quả 
 			while(rs.next()) {				// dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
-				int MaSach = rs.getInt("MaSach");
+				int IDSACH = rs.getInt("IDSACH");
 				String TenSach = rs.getString("TenSach");
 				String TacGia = rs.getString("TacGia");
 				String NXB = rs.getString("NXB");
@@ -48,7 +48,7 @@ public class QuanLySach {
 				String NgonNgu = rs.getString("NgonNgu");
 				String TinhTrang = rs.getString("TinhTrang");
 				
-				Object obj[]  = {MaSach, TenSach, TacGia,NXB, NamXB,TheLoai ,GiaSach,NgonNgu,TinhTrang};
+				Object obj[]  = {IDSACH, TenSach, TacGia,NXB, NamXB,TheLoai ,GiaSach,NgonNgu,TinhTrang};
 				model.addRow(obj);		// thêm từng bộ dữ liệu lấy ra được vào danh sách kết quả
 			}
 			
@@ -83,7 +83,7 @@ public class QuanLySach {
 			
 			// B4: Xử lý kết quả 
 			while(rs.next()) {				// dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
-				int MaSach = rs.getInt("MaSach");
+				int IDSACH = rs.getInt("IDSACH");
 				String TenSach = rs.getString("TenSach");
 				String TheLoai = rs.getString("TheLoai");
 				int NamXB = rs.getInt("NamXB");
@@ -93,7 +93,7 @@ public class QuanLySach {
 				String TinhTrang = rs.getString("TinhTrang");
 				String GiaSach = rs.getString("GiaSach");
 				
-				Object obj[]  = {MaSach, TenSach, TheLoai, NamXB, NXB, TacGia,NgonNgu,TinhTrang,GiaSach};
+				Object obj[]  = {IDSACH, TenSach, TheLoai, NamXB, NXB, TacGia,NgonNgu,TinhTrang,GiaSach};
 				model.addRow(obj);		// thêm từng bộ dữ liệu lấy ra được vào danh sách kết quả
 			}
 			

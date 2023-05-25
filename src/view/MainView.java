@@ -76,7 +76,7 @@ public class MainView extends JFrame {
 	JFrame frame = new JFrame();
 	private CardLayout cardLayout;
 
-	public static ArrayList<Integer> arrMaSach = new ArrayList<>();
+	public static ArrayList<Integer> arrIDSACH = new ArrayList<>();
 	public static JTable table_QuanLyPhieuMuon;
 
 	public static JTable table_QLTV;
@@ -139,7 +139,7 @@ public class MainView extends JFrame {
 	private SimpleDateFormat formatter;
 
 	private ImageIcon newIconTimKiem = getScaledIcon("/images/search.png", 25, 25);;
-	private int idSelectedLoSach = 0;
+	private int idSelectedPhieuNhapLo = 0;
 	private JPanel panelThemThanhVien;
 	private JTable tableMuonSach;
 	private JTextField textField;
@@ -1075,7 +1075,7 @@ public class MainView extends JFrame {
 			comboBox_NgayTra_pm.setSelectedIndex(0);
 			// table_pm.setModel(null);
 			((DefaultTableModel) table_pm.getModel()).setRowCount(0);
-			arrMaSach.clear();
+			arrIDSACH.clear();
 		} else {
 			// Xử lý khi người dùng chọn No
 		}
@@ -1091,8 +1091,8 @@ public class MainView extends JFrame {
 					JOptionPane.YES_NO_OPTION);
 			if (dialogResult == JOptionPane.YES_OPTION) {
 				// Xử lý khi người dùng chọn Yes
-				int maSach = (int) table_pm.getValueAt(row, 0);
-				arrMaSach.remove(Integer.valueOf(maSach));
+				int IDSACH = (int) table_pm.getValueAt(row, 0);
+				arrIDSACH.remove(Integer.valueOf(IDSACH));
 
 				DefaultTableModel model = (DefaultTableModel) table_pm.getModel();
 				model.removeRow(row);
@@ -1163,8 +1163,8 @@ public class MainView extends JFrame {
 						if (arr.isEmpty()) {
 							// Xử lý trường hợp khi ArrayList là rỗng
 						} else {
-							for (int i = 0; i < arrMaSach.size(); i++) {
-								Service23.getInstance().InsertChiTietPhieuMuon(maPmLonNhat, arrMaSach.get(i));
+							for (int i = 0; i < arrIDSACH.size(); i++) {
+								Service23.getInstance().InsertChiTietPhieuMuon(maPmLonNhat, arrIDSACH.get(i));
 								Service23.getInstance().UpdateTinhTrangSachHet(maPmLonNhat);
 							}
 							// Cập nhật bảng Quản lý phiếu mượn
@@ -1195,7 +1195,7 @@ public class MainView extends JFrame {
 							PhieuMuonView.rowCount = SlHangTablePm;
 
 							// Đổ dữ liệu từ table table_pm vào PhieuMuonView.textArea
-							SetDataTextarea(table_pm, 0, PhieuMuonView.textArea_MaSach);
+							SetDataTextarea(table_pm, 0, PhieuMuonView.textArea_IDSACH);
 							SetDataTextarea(table_pm, 1, PhieuMuonView.textArea_TenSach);
 							SetDataTextarea(table_pm, 2, PhieuMuonView.textArea_TacGia);
 
@@ -1207,7 +1207,7 @@ public class MainView extends JFrame {
 							comboBox_NgayTra_pm.setSelectedIndex(0);
 							// table_pm.setModel(null);
 							((DefaultTableModel) table_pm.getModel()).setRowCount(0);
-							arrMaSach.clear();
+							arrIDSACH.clear();
 
 							new PhieuMuonView().setVisible(false);
 
@@ -1355,16 +1355,22 @@ public class MainView extends JFrame {
 		// khoi tao lần đầu
 		table_QuanLyNhapLo = new JTable();
 
-		table_QuanLyNhapLo.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null } },
-				new String[] { "Mã lô", "Tên NCC", "SĐT NCC", "Địa chỉ", "Ngày nhập", "Tổng tiền" }) {
-
-			// ngăn chặn chỉnh sửa giá trị
-			public boolean isCellEditable(int row, int column) {
-				if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5)
-					return false;
-				return super.isCellEditable(row, column);
-			}
-		});
+		table_QuanLyNhapLo.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Mã Nhập Lô", "T\u00EAn NCC", "S\u0110T NCC", "\u0110\u1ECBa ch\u1EC9", "Ng\u00E0y nh\u1EADp", "T\u1ED5ng ti\u1EC1n"
+			}) {
+			
+				// ngăn chặn chỉnh sửa giá trị
+				public boolean isCellEditable(int row, int column) {
+					if (column == 0 || column == 1 || column == 2|| column == 3 || column == 4 || column ==5 )
+						return false;
+					return super.isCellEditable(row, column);
+				}
+			});
+		
+	
 		table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(37);
 		table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(63);
 		table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(74);
@@ -1376,9 +1382,9 @@ public class MainView extends JFrame {
 			public void valueChanged(ListSelectionEvent event) {
 				int row = table_QuanLyNhapLo.getSelectedRow(); // lấy chỉ số của hàng được chọn trong table.
 				if (row >= 0) { // Đảm bảo là có hàng được chọn
-					idSelectedLoSach = Integer
+					idSelectedPhieuNhapLo = Integer
 							.valueOf(table_QuanLyNhapLo.getValueAt(table_QuanLyNhapLo.getSelectedRow(), 0).toString());
-					System.out.println(idSelectedLoSach);
+					System.out.println(idSelectedPhieuNhapLo);
 				}
 
 			}
@@ -1436,7 +1442,7 @@ public class MainView extends JFrame {
 				// dispose();
 			}
 		});
-		btn_Them_QlNhapLo.setBounds(74, 68, 100, 29);
+		btn_Them_QlNhapLo.setBounds(74, 75, 100, 29);
 		panelQuanLyNhapLo.add(btn_Them_QlNhapLo);
 
 		JButton btn_XemChiTiet_QLNhapLo = new JButton("Xem Chi Tiết");
@@ -1447,8 +1453,21 @@ public class MainView extends JFrame {
 			}
 		});
 		btn_XemChiTiet_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		btn_XemChiTiet_QLNhapLo.setBounds(290, 68, 100, 29);
+		btn_XemChiTiet_QLNhapLo.setBounds(290, 75, 100, 29);
 		panelQuanLyNhapLo.add(btn_XemChiTiet_QLNhapLo);
+		
+		JButton btn_QLNCC_QLNhapLo = new JButton("Quản lý NCC");
+		btn_QLNCC_QLNhapLo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuanLy_NCC();
+				
+			}
+		});
+		btn_QLNCC_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btn_QLNCC_QLNhapLo.setBounds(490, 75, 100, 29);
+		btn_QLNCC_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		panelQuanLyNhapLo.add(btn_QLNCC_QLNhapLo);
+		
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
 		lblNewLabel_5.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
@@ -1564,14 +1583,16 @@ public class MainView extends JFrame {
 	public void them_lo() {
 		new Dialog_ThemLo_QLNL(this).setVisible(true);
 	}
-
+	public void QuanLy_NCC() {
+		new Dialog_QuanLyNCC_QLNL(this).setVisible(true);
+	}
 	public void xemchitiet() {
-		if (idSelectedLoSach == 0) {
+		if (idSelectedPhieuNhapLo == 0) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng chọn lô muốn xem!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			new Dialog_XemChiTiet_QLNL(this, idSelectedLoSach).setVisible(true);
+			new Dialog_XemChiTiet_QLNL(this, idSelectedPhieuNhapLo).setVisible(true);
 
 		}
 

@@ -55,26 +55,26 @@ import javax.swing.text.NumberFormatter;
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
 import model.DocGia;
-import model.LoSach;
+import model.PhieuNhapLo;
 import model.Sach;
 
 public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 	JFrame frame = new JFrame();
 	public MainView frameParent;
-	public int idMaLoTruyenTuParent = 0;
+	public int idMaPNTruyenTuParent = 0;
 	private JPanel contentPane;
 	private JTextField textField_TenNCC_XemChiTiet;
 	private JTextField textField_DiaChi_XemChiTiet;
 	private JTextField textField_ThanhToan_XemChiTiet;
 	private JTextField textField_NgayNhap_XemChiTiet;
 	private JTextField textField_SDT_XemChiTiet;
-	private JTextField textField_MaLo_XemChiTiet;
+	private JTextField textField_MaPN_XemChiTiet;
 	private JTable table_ChiTietSach;
 	private JScrollPane _jscrollPane;
 	public int idSelectedDauSach = 0;
 	private DefaultTableModel model;
-	public int idMaLoParent;
+	public int idMaPNParent;
 	public int thanhtoan = 0;
 	public int rowTruocEdit = 0;
 	public int columnTruocEdit = 0;
@@ -83,21 +83,22 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 	private String TheLoai;
 	private static final String solve = "Solve";
 
-	public Dialog_XemChiTiet_QLNL(MainView parent, int idMaLo) {
+	public Dialog_XemChiTiet_QLNL(MainView parent, int idMaPN) {
 
 		super(parent, "XEM CHI TIẾT", true);
 		this.setLocationRelativeTo(null);
 		this.init();
 		this.setVisible(false);
+		
 		frameParent = parent;
-		idMaLoParent = idMaLo;
+		idMaPNParent = idMaPN;
 
 		// hiện thị trung tâm màn hình
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		initTableSach();
-		getLoSach(idMaLo);
-		getListSach(idMaLo);
+		getPhieuNhapLo(idMaPN);
+		getListSach(idMaPN);
 		set_Luu();
 		// DefaultTableModel model;
 	}
@@ -285,7 +286,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				SuaLo();
 				SuaChiTietLo();
-				getListSach(idMaLoParent);
+				getListSach(idMaPNParent);
 				// frameParent.LoadDataUpdate();
 
 				frameParent.LoadDataList();
@@ -323,18 +324,18 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		lbl_Malo_XemChiTiet.setBounds(10, 42, 56, 20);
 		contentPane.add(lbl_Malo_XemChiTiet);
 
-		textField_MaLo_XemChiTiet = new JTextField();
-		textField_MaLo_XemChiTiet.setEnabled(false);
-		textField_MaLo_XemChiTiet.setColumns(10);
-		textField_MaLo_XemChiTiet.setBounds(115, 45, 107, 19);
-		contentPane.add(textField_MaLo_XemChiTiet);
+		textField_MaPN_XemChiTiet = new JTextField();
+		textField_MaPN_XemChiTiet.setEnabled(false);
+		textField_MaPN_XemChiTiet.setColumns(10);
+		textField_MaPN_XemChiTiet.setBounds(115, 45, 107, 19);
+		contentPane.add(textField_MaPN_XemChiTiet);
 
 	}
 
-	public void getLoSach(int MaLo) {
-		LoSach losachtest = QuanLyNhapLo.getInstance().select_ThongTinLo(MaLo);
+	public void getPhieuNhapLo(int MaPN) {
+		PhieuNhapLo losachtest = QuanLyNhapLo.getInstance().select_ThongTinLo(MaPN);
 		// System.out.println(losachtest.getDiaChiNhaCungCap());
-		textField_MaLo_XemChiTiet.setText(String.valueOf(losachtest.getMaLo()));
+		textField_MaPN_XemChiTiet.setText(String.valueOf(losachtest.getMaPN()));
 		textField_TenNCC_XemChiTiet.setText(losachtest.getTenNhaCungCap());
 		textField_DiaChi_XemChiTiet.setText(losachtest.getDiaChiNhaCungCap());
 		textField_SDT_XemChiTiet.setText(losachtest.getSdtNhaCungCap());
@@ -364,7 +365,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 	public int SuaLo() {
 
-		LoSach Update_Losach = new LoSach();
+		PhieuNhapLo Update_Losach = new PhieuNhapLo();
 
 		Pattern patternDate = Pattern.compile("^\\d{4}[-]\\d{2}[-]\\d{2}$");
 		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
@@ -407,7 +408,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		} else {
 
 			// Lấy dữ liệu nhập
-			Update_Losach.setMaLo(Integer.valueOf(textField_MaLo_XemChiTiet.getText()));
+			Update_Losach.setMaPN(Integer.valueOf(textField_MaPN_XemChiTiet.getText()));
 			Update_Losach.setTenNhaCungCap(textField_TenNCC_XemChiTiet.getText());
 			Update_Losach.setDiaChiNhaCungCap(textField_DiaChi_XemChiTiet.getText());
 
@@ -425,7 +426,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			Update_Losach.setTongTienNhap(Integer.valueOf(textField_ThanhToan_XemChiTiet.getText()));
 
 			int idLoNew = QuanLyNhapLo.getInstance().UpdateData(Update_Losach,
-					Integer.valueOf(textField_MaLo_XemChiTiet.getText()));
+					Integer.valueOf(textField_MaPN_XemChiTiet.getText()));
 			System.out.println(idLoNew);
 			JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
 			this.setVisible(false);
@@ -464,9 +465,9 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 	}
 
-	public void getListSach(int idMaLo) {
+	public void getListSach(int idMaPN) {
 		((DefaultTableModel) table_ChiTietSach.getModel()).setRowCount(0);
-		table_ChiTietSach = QuanLyNhapLo.getInstance().select_sachchitiet(table_ChiTietSach, idMaLo);
+		table_ChiTietSach = QuanLyNhapLo.getInstance().select_sachchitiet(table_ChiTietSach, idMaPN);
 
 	}
 

@@ -17,7 +17,7 @@ public class PhieuMuonView extends JFrame {
 	public static int rowCount = 0;
 
 	public static JTextArea textArea_TenSach = new JTextArea();
-	public static JTextArea textArea_MaSach = new JTextArea();
+	public static JTextArea textArea_IDSACH = new JTextArea();
 	public static JTextArea textArea_TacGia = new JTextArea();
 
 	public static JLabel lbl_TenNhanVien = new JLabel();
@@ -162,10 +162,10 @@ public class PhieuMuonView extends JFrame {
 		lbl_NgayTra.setBounds(340, 254, 110, 20);
 		panel.add(lbl_NgayTra);
 
-		textArea_MaSach.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		textArea_MaSach.setEditable(false);
-		textArea_MaSach.setBounds(10, 316, 48, rowCount * 15);
-		panel.add(textArea_MaSach);
+		textArea_IDSACH.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		textArea_IDSACH.setEditable(false);
+		textArea_IDSACH.setBounds(10, 316, 48, rowCount * 15);
+		panel.add(textArea_IDSACH);
 
 		textArea_TenSach.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		textArea_TenSach.setEditable(false);

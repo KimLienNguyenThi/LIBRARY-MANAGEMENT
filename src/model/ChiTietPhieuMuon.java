@@ -2,15 +2,15 @@ package model;
 
 public class ChiTietPhieuMuon {
 	private int maPM;
-	private int maSach;
+	private int IDSACH;
 	
 	public ChiTietPhieuMuon() {
 	}
 
-	public ChiTietPhieuMuon(int maPM, int maSach) {
+	public ChiTietPhieuMuon(int maPM, int IDSACH) {
 		super();
 		this.maPM = maPM;
-		this.maSach = maSach;
+		this.IDSACH = IDSACH;
 	}
 
 	public int getMaPM() {
@@ -21,11 +21,11 @@ public class ChiTietPhieuMuon {
 		this.maPM = maPM;
 	}
 
-	public int getMaSach() {
-		return maSach;
+	public int getIDSACH() {
+		return IDSACH;
 	}
 
-	public void setMaSach(int maSach) {
-		this.maSach = maSach;
+	public void setIDSACH(int IDSACH) {
+		this.IDSACH = IDSACH;
 	}
 }

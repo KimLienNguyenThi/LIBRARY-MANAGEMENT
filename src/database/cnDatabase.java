@@ -11,13 +11,14 @@ public class cnDatabase {
 			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 			String url = "jdbc:mySQL://localhost:3306/quanlythuvien";
 			String user = "root";
-			String password = "";
+			String password = "123456";
 			c = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return c;
 	}
+	
 	
 	public static void disConnection(Connection c) {
 		if(c !=null) {

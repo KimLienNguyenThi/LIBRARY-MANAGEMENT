@@ -51,7 +51,7 @@ import com.toedter.calendar.JDateChooser;
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
 import model.DocGia;
-import model.LoSach;
+import model.PhieuNhapLo;
 import model.Sach;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -200,7 +200,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		table = new JTable();
 		// DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-		String maSach = null;
+		String IDSACH = null;
 		String tenSach = null;
 		String theLoai = null;
 		int namXuatBan = 0;
@@ -212,11 +212,19 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		String tinhTrang = null;
 
 		// Đặt lại tên cho biến Table'
-		String[] columnNames = { "Tên sách", "Thể loại", "Năm Xuất bản", "Nhà xuất bản", "Tác giả", "Số lượng",
-				"Ngôn ngữ", "Giá sách" };
+//		String[] columnNames = { "Tên sách", "Thể loại", "Năm Xuất bản", "Nhà xuất bản", "Tác giả", "Số lượng",
+//				"Ngôn ngữ", "Giá sách" };
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"T\u00EAn s\u00E1ch", "Th\u1EC3 lo\u1EA1i", "N\u0103m Xu\u1EA5t b\u1EA3n", "Nh\u00E0 xu\u1EA5t b\u1EA3n", "T\u00E1c gi\u1EA3", "S\u1ED1 l\u01B0\u1EE3ng", "Ng\u00F4n ng\u1EEF", "Gi\u00E1 s\u00E1ch"
+			}
+		));
 		model = (DefaultTableModel) table.getModel();
-		model.setColumnIdentifiers(columnNames);
+	//	model.setColumnIdentifiers(columnNames);
 
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 629, 138);
 		panel_ThemLo_QLNL.add(scrollPane);
@@ -288,7 +296,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 	public int themLo() {
 		// This method must return a result of type int/ bat buoc return
-		LoSach _Losach = new LoSach();
+		PhieuNhapLo PhieuNhapLo = new PhieuNhapLo();
 
 		Pattern patternDate = Pattern.compile("^\\d{2}[-|/]\\d{2}[-|/]\\d{4}$");
 		// Pattern patternDate = Pattern.compile("^\\d{4}[-]\\d{2}[-]\\d{2}$");
@@ -338,19 +346,19 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 
 			// Lấy dữ liệu nhập
 
-			_Losach.setTenNhaCungCap(textField_TenNCC_ThemLo.getText());
-			_Losach.setDiaChiNhaCungCap(textField_DiaChi_ThemLo.getText());
+			PhieuNhapLo.setTenNhaCungCap(textField_TenNCC_ThemLo.getText());
+			PhieuNhapLo.setDiaChiNhaCungCap(textField_DiaChi_ThemLo.getText());
 
 			// đoạn này lấy ngày selected trên giao diện, kiểm tra vs ngày hiện tại đi
 			// thì check them
 			// java.util.Date selectedValue = (java.util.Date)
 			// date_NgayNhap_ThemLo.getModel().getValue();
 			// _Losach.setNgayNhap(selectedValue);
-			_Losach.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
-			_Losach.setSdtNhaCungCap(textField_SDT_ThemLo.getText());
-			_Losach.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
+			PhieuNhapLo.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
+			PhieuNhapLo.setSdtNhaCungCap(textField_SDT_ThemLo.getText());
+			PhieuNhapLo.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
 
-			int idLoNew = QuanLyNhapLo.getInstance().InsertData(_Losach);
+			int idLoNew = QuanLyNhapLo.getInstance().InsertData(PhieuNhapLo);
 			System.out.println(idLoNew);
 			// new Dialog_ThemLo_QLNL(frame); // hien thi dialog
 
