@@ -90,7 +90,9 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 				LoadDataNCC();
 				if(imainview == 1) {
 			    themLo_parent.LoadNCC();
+			    
 			}
+				JOptionPane.showMessageDialog(frame, "Bạn đã Thêm Thông tin NCC thành công.");
 			}
 		});
 
@@ -176,6 +178,7 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 				if(imainview == 1) {
 				    themLo_parent.LoadNCC();
 				}
+				JOptionPane.showMessageDialog(frame, "Bạn đã sửa thành công.");
 			}
 		});
 		btn_suaNCC_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));

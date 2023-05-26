@@ -310,7 +310,7 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		JButton btn_Themncc_ThemLo = new JButton("Thêm");
 		btn_Themncc_ThemLo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				New_Dialog_ncc();
 			}
 		});
@@ -355,12 +355,14 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		});
 		LoadNCC();
 
-		//AddPopUp();
+		// AddPopUp();
 		// set_Them();
 	}
+
 	public void New_Dialog_ncc() {
 		new Dialog_QuanLyNCC_QLNL(frameParent, this, 1).setVisible(true);
 	}
+
 	public void LoadNCC() {
 		((DefaultTableModel) table_ncc.getModel()).setRowCount(0);
 		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
@@ -376,111 +378,80 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		PhieuNhapLo PhieuNhapLo = new PhieuNhapLo();
 		NhaCungCap NhaCungCap = new NhaCungCap();
 
-//		Pattern patternDate = Pattern.compile("^\\d{2}[-|/]\\d{2}[-|/]\\d{4}$");
-//		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
-//		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
-//		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
-//		String formattedD = d.format(chooser_NgayNhap_QLNL.getDate());
-//		System.out.println(formattedD);
-//
-//		if (textField_TenNCC_ThemLo.getText().equals("")) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//			return -6;
-//
-//		} else if (textField_SDT_ThemLo.getText().equals("")) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//			return -6;
-//
-//		} else if (patternSDT.matcher(textField_SDT_ThemLo.getText()).matches() == false) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng số điện thoại!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//			return -6;
-//
-//		} else if (textField_DiaChi_ThemLo.getText().equals("")) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//			return -6;
-//
-//		} else if (textField_ThanhToan_ThemLo.getText().equals("")) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//			return -6;
-//		} else if (patternDate.matcher(formattedD).matches() == false) {
-//			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
-//					JOptionPane.ERROR_MESSAGE);
-//
-//			return -6;
-//		
-//		} else {
-//			// Lấy dữ liệu nhập
-//
-//			// NhaCungCap.setTenNhaCungCap(textField_TenNCC_ThemLo.getText());
-//			// NhaCungCap.setDiaChiNhaCungCap(textField_DiaChi_ThemLo.getText());
-//
-//			// đoạn này lấy ngày selected trên giao diện, kiểm tra vs ngày hiện tại đi
-//			// thì check them
-//
-//			PhieuNhapLo.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
-//			PhieuNhapLo.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
-//			PhieuNhapLo.setMaNCC(idSelectedNCC);
-//			int idLoNew = QuanLyNhapLo.getInstance().InsertData(PhieuNhapLo);
-//			
-//			// Xoá dữ liệu nhập trên màn hình
-//			textField_TenNCC_ThemLo.setText("");
-//			textField_SDT_ThemLo.setText("");
-//			textField_DiaChi_ThemLo.setText("");
-//			textField_ThanhToan_ThemLo.setText("");
-//
-//			// trả về id Lô sách vừa mới thêm, để thực thi insert data chitietlo
-//			return idLoNew;
-//		}
 		Pattern patternDate = Pattern.compile("^\\d{2}[-|/]\\d{2}[-|/]\\d{4}$");
 		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
+		
+		// kieerm tra xem ngay nhap co null k 
+		if (chooser_NgayNhap_QLNL.getDate() == null) {
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			return -6;
+		}
 		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
 		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
 		String formattedD = d.format(chooser_NgayNhap_QLNL.getDate());
 		System.out.println(formattedD);
 
-		if (textField_TenNCC_ThemLo.getText().equals("")
-			&& textField_SDT_ThemLo.getText().equals("")
-			&& textField_DiaChi_ThemLo.getText().equals("")
-			) {
+		if (textField_TenNCC_ThemLo.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 			return -6;
+
+		} else if (textField_SDT_ThemLo.getText().equals("")) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			return -6;
+
+		} else if (patternSDT.matcher(textField_SDT_ThemLo.getText()).matches() == false) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng số điện thoại!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			return -6;
+
+		} else if (textField_DiaChi_ThemLo.getText().equals("")) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			return -6;
+
+		} else if (textField_ThanhToan_ThemLo.getText().equals("")) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			return -6;
+		} else if (patternDate.matcher(formattedD).matches() == false) {
+			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+
+			return -6;
 		}else {
-			if (patternDate.matcher(formattedD).matches() == false) {
-				JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-				JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
-						JOptionPane.ERROR_MESSAGE);
+			
+			// Lấy dữ liệu nhập
 
-				return -6;
-			} else {
-				PhieuNhapLo.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
-				PhieuNhapLo.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
-				PhieuNhapLo.setMaNCC(idSelectedNCC);
-				int idLoNew = QuanLyNhapLo.getInstance().InsertData(PhieuNhapLo);
-				
-				// Xoá dữ liệu nhập trên màn hình
-				textField_TenNCC_ThemLo.setText("");
-				textField_SDT_ThemLo.setText("");
-				textField_DiaChi_ThemLo.setText("");
-				textField_ThanhToan_ThemLo.setText("");
+			// NhaCungCap.setTenNhaCungCap(textField_TenNCC_ThemLo.getText());
+			// NhaCungCap.setDiaChiNhaCungCap(textField_DiaChi_ThemLo.getText());
 
-				// trả về id Lô sách vừa mới thêm, để thực thi insert data chitietlo
-				return idLoNew;
-			}
+			// đoạn này lấy ngày selected trên giao diện, kiểm tra vs ngày hiện tại đi
+			// thì check them
+
+			PhieuNhapLo.setNgayNhap(chooser_NgayNhap_QLNL.getDate());
+			PhieuNhapLo.setTongTienNhap(Integer.valueOf(textField_ThanhToan_ThemLo.getText()));
+			PhieuNhapLo.setMaNCC(idSelectedNCC);
+			int idLoNew = QuanLyNhapLo.getInstance().InsertData(PhieuNhapLo);
+
+			// Xoá dữ liệu nhập trên màn hình
+			textField_TenNCC_ThemLo.setText("");
+			textField_SDT_ThemLo.setText("");
+			textField_DiaChi_ThemLo.setText("");
+			textField_ThanhToan_ThemLo.setText("");
+
+			// trả về id Lô sách vừa mới thêm, để thực thi insert data chitietlo
+			return idLoNew;
 		}
-		// return 0;
+
 	}
 
 	public void them_sach_Table(Sach sach) {
@@ -525,9 +496,11 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 		}
 		if (idLoNew <= 0) // nếu <= 0 => thêm ko thành công
 		{
-			JOptionPane.showMessageDialog(frame, "Thêm Lô Sách không thành công!!!", "THÔNG BÁO",
+			JOptionPane.showMessageDialog(frame, "Nhập Lô mới không thành công!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 			return;
+		} else {
+			JOptionPane.showMessageDialog(this, "Bạn đã Thêm Lô mới thành công.");
 		}
 
 		int soLuong = 0;
@@ -597,8 +570,8 @@ public class Dialog_ThemLo_QLNL extends JDialog {
 				// đọc dữ liêu lô
 				if (row.getRowNum() == 2) {
 //					 tt_NCC((int) row.getCell(1).getNumericCellValue());
-					 idSelectedNCC = (int) row.getCell(1).getNumericCellValue();
-					 tt_NCC(idSelectedNCC);
+					idSelectedNCC = (int) row.getCell(1).getNumericCellValue();
+					tt_NCC(idSelectedNCC);
 //					
 					chooser_NgayNhap_QLNL.setDate(row.getCell(2).getDateCellValue());
 				}

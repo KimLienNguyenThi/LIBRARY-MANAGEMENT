@@ -1639,7 +1639,10 @@ public class MainView extends JFrame {
 		// Date now
 		long millis = System.currentTimeMillis();
 		java.sql.Date dateNow = new java.sql.Date(millis);
-
+		if (chooser_NgaySinh_TTV.getDate() == null  ) {
+			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
+					JOptionPane.ERROR_MESSAGE);
+			}
 		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
 		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
 		String formattedD = d.format(chooser_NgaySinh_TTV.getDate());
