@@ -4,35 +4,37 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import database.cnDatabase;
+import model.login_trave;
 
 
 public class LoginService {
-	 public static String Login(String userName, String password) {
+	
+	 public static login_trave Login(String userName, String password) {
+		
          Connection conn = database.cnDatabase.getConnection();
          try {
           //Class.forName("com.mysql.jdbc.Driver");
         	 
         	 Statement stmt = conn.createStatement();  
-        	 ResultSet rs= stmt.executeQuery("select hotennv from login join nhanvien "
+        	 ResultSet rs= stmt.executeQuery("select hotennv, chucvu from login join nhanvien "
         	 		+ "        		 on login.manv = nhanvien.manv where login.MaTaiKhoan='" + userName 
         			 + "' and login.MatKhau='" + password + "'");  
         	 while(rs.next()) 
         	 {
         		 String hoten = rs.getString(1);
-//        		 SELECT hotennv
-//        		 FROM login join nhanvien
-//        		 on login.manv = nhanvien.manv;
-//        		 System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  ");  
+        		 String chucvu = rs.getString(2);
+        		  System.out.println(hoten );
+        		  System.out.println(chucvu );
         		
         	 database.cnDatabase.disConnection(conn);
-        		 return hoten;
+        		 return  new login_trave(hoten, chucvu);
         				 }
         	 
          } catch (Exception ex) {
              System.out.println("connect failure!");
              ex.printStackTrace();
          }
-        return "";
+        return null;
         
         
      }

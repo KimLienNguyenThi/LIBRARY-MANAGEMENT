@@ -55,6 +55,7 @@ import javax.swing.text.NumberFormatter;
 import database.QuanLyNhapLo;
 import model.ChiTietLo;
 import model.DocGia;
+import model.NhaCungCap;
 import model.PhieuNhapLo;
 import model.Sach;
 
@@ -183,7 +184,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		// _jscrollPane.setViewportView(table_QuanLyNhapLo);
 		_jscrollPane = new JScrollPane(table_ChiTietSach);
 
-		_jscrollPane.setBounds(9, 148, 640, 138);
+		_jscrollPane.setBounds(9, 148, 652, 138);
 		contentPane.add(_jscrollPane);
 
 	}
@@ -193,7 +194,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 	 */
 	public void init() {
 
-		setBounds(100, 100, 673, 380);
+		setBounds(100, 100, 682, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 
@@ -201,17 +202,17 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		contentPane.setLayout(null);
 
 		JLabel lbl_TenNCC_XemChiTiet = new JLabel("Tên nhà cung cấp: ");
-		lbl_TenNCC_XemChiTiet.setBounds(236, 42, 143, 20);
+		lbl_TenNCC_XemChiTiet.setBounds(234, 42, 143, 20);
 		lbl_TenNCC_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_TenNCC_XemChiTiet);
 
 		JLabel lbl_SDT_XemChiTiet = new JLabel("Số điện thoại:");
-		lbl_SDT_XemChiTiet.setBounds(236, 79, 102, 20);
+		lbl_SDT_XemChiTiet.setBounds(244, 80, 102, 20);
 		lbl_SDT_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_SDT_XemChiTiet);
 
 		JLabel lbl_Diachi_XemChiTiet = new JLabel("Địa chỉ:");
-		lbl_Diachi_XemChiTiet.setBounds(236, 110, 56, 20);
+		lbl_Diachi_XemChiTiet.setBounds(244, 109, 56, 20);
 		lbl_Diachi_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_Diachi_XemChiTiet);
 
@@ -234,28 +235,28 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		contentPane.add(lblNewLabel_7);
 
 		textField_TenNCC_XemChiTiet = new JTextField();
-		textField_TenNCC_XemChiTiet.setBounds(375, 45, 274, 19);
+		textField_TenNCC_XemChiTiet.setBounds(387, 45, 274, 19);
 		textField_TenNCC_XemChiTiet.setColumns(10);
 		contentPane.add(textField_TenNCC_XemChiTiet);
 
 		textField_DiaChi_XemChiTiet = new JTextField();
-		textField_DiaChi_XemChiTiet.setBounds(375, 113, 274, 19);
+		textField_DiaChi_XemChiTiet.setBounds(387, 112, 274, 19);
 		textField_DiaChi_XemChiTiet.setColumns(10);
 		contentPane.add(textField_DiaChi_XemChiTiet);
 
 		textField_ThanhToan_XemChiTiet = new JTextField();
-		textField_ThanhToan_XemChiTiet.setBounds(115, 79, 107, 19);
+		textField_ThanhToan_XemChiTiet.setBounds(127, 83, 107, 19);
 		textField_ThanhToan_XemChiTiet.setColumns(10);
 		contentPane.add(textField_ThanhToan_XemChiTiet);
 
 		textField_NgayNhap_XemChiTiet = new JTextField();
 		textField_NgayNhap_XemChiTiet.setEnabled(false);
-		textField_NgayNhap_XemChiTiet.setBounds(115, 113, 107, 19);
+		textField_NgayNhap_XemChiTiet.setBounds(127, 112, 107, 19);
 		textField_NgayNhap_XemChiTiet.setColumns(10);
 		contentPane.add(textField_NgayNhap_XemChiTiet);
 
 		textField_SDT_XemChiTiet = new JTextField();
-		textField_SDT_XemChiTiet.setBounds(375, 79, 274, 19);
+		textField_SDT_XemChiTiet.setBounds(387, 83, 274, 19);
 		textField_SDT_XemChiTiet.setColumns(10);
 		contentPane.add(textField_SDT_XemChiTiet);
 
@@ -285,6 +286,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		btn_Luu_XemChiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SuaLo();
+				
 				SuaChiTietLo();
 				getListSach(idMaPNParent);
 				// frameParent.LoadDataUpdate();
@@ -308,7 +310,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		btn_Sua_XemChiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				set_Sua();
-
+				
 			}
 		});
 		btn_Sua_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -319,26 +321,27 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		btn_Luu_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		contentPane.add(btn_Luu_XemChiTiet);
 
-		JLabel lbl_Malo_XemChiTiet = new JLabel("Mã Lô:");
+		JLabel lbl_Malo_XemChiTiet = new JLabel("Mã Phiếu Nhập:");
 		lbl_Malo_XemChiTiet.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbl_Malo_XemChiTiet.setBounds(10, 42, 56, 20);
+		lbl_Malo_XemChiTiet.setBounds(10, 42, 117, 20);
 		contentPane.add(lbl_Malo_XemChiTiet);
 
 		textField_MaPN_XemChiTiet = new JTextField();
 		textField_MaPN_XemChiTiet.setEnabled(false);
 		textField_MaPN_XemChiTiet.setColumns(10);
-		textField_MaPN_XemChiTiet.setBounds(115, 45, 107, 19);
+		textField_MaPN_XemChiTiet.setBounds(127, 45, 107, 19);
 		contentPane.add(textField_MaPN_XemChiTiet);
 
 	}
 
 	public void getPhieuNhapLo(int MaPN) {
 		PhieuNhapLo losachtest = QuanLyNhapLo.getInstance().select_ThongTinLo(MaPN);
+		NhaCungCap NhaCungCap = QuanLyNhapLo.getInstance().select_ThongTinCC(MaPN);
 		// System.out.println(losachtest.getDiaChiNhaCungCap());
 		textField_MaPN_XemChiTiet.setText(String.valueOf(losachtest.getMaPN()));
-		textField_TenNCC_XemChiTiet.setText(losachtest.getTenNhaCungCap());
-		textField_DiaChi_XemChiTiet.setText(losachtest.getDiaChiNhaCungCap());
-		textField_SDT_XemChiTiet.setText(losachtest.getSdtNhaCungCap());
+		textField_TenNCC_XemChiTiet.setText(NhaCungCap.getTenNhaCungCap());
+		textField_DiaChi_XemChiTiet.setText(NhaCungCap.getDiaChiNhaCungCap());
+		textField_SDT_XemChiTiet.setText(NhaCungCap.getSdtNhaCungCap());
 		textField_ThanhToan_XemChiTiet.setText(String.valueOf(losachtest.getTongTienNhap()));
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -370,12 +373,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		Pattern patternDate = Pattern.compile("^\\d{4}[-]\\d{2}[-]\\d{2}$");
 		Pattern patternSDT = Pattern.compile("^0[3798]{1}\\d{8}$");
 
-		if (textField_TenNCC_XemChiTiet.getText().equals("")) {
-			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-					JOptionPane.ERROR_MESSAGE);
-
-		} else if (textField_NgayNhap_XemChiTiet.getText().equals("")) {
+		if (textField_NgayNhap_XemChiTiet.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
@@ -385,20 +383,6 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng ngày nhập!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
 
-		} else if (textField_SDT_XemChiTiet.getText().equals("")) {
-			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-					JOptionPane.ERROR_MESSAGE);
-
-		} else if (patternSDT.matcher(textField_SDT_XemChiTiet.getText()).matches() == false) {
-			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-			JOptionPane.showMessageDialog(frame, "Vui lòng điền đúng định dạng số điện thoại!!!", "THÔNG BÁO",
-					JOptionPane.ERROR_MESSAGE);
-
-		} else if (textField_DiaChi_XemChiTiet.getText().equals("")) {
-			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
-					JOptionPane.ERROR_MESSAGE);
 
 		} else if (textField_ThanhToan_XemChiTiet.getText().equals("")) {
 			JFrame frame = new JFrame("JOptionPane showMessageDialog example");
@@ -409,8 +393,8 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 
 			// Lấy dữ liệu nhập
 			Update_Losach.setMaPN(Integer.valueOf(textField_MaPN_XemChiTiet.getText()));
-			Update_Losach.setTenNhaCungCap(textField_TenNCC_XemChiTiet.getText());
-			Update_Losach.setDiaChiNhaCungCap(textField_DiaChi_XemChiTiet.getText());
+			//Update_Losach.setTenNhaCungCap(textField_TenNCC_XemChiTiet.getText());
+			//Update_Losach.setDiaChiNhaCungCap(textField_DiaChi_XemChiTiet.getText());
 
 			String ngayNhap = textField_NgayNhap_XemChiTiet.getText();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -422,12 +406,13 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 				e.printStackTrace();
 			}
 
-			Update_Losach.setSdtNhaCungCap(textField_SDT_XemChiTiet.getText());
+			//Update_Losach.setSdtNhaCungCap(textField_SDT_XemChiTiet.getText());
 			Update_Losach.setTongTienNhap(Integer.valueOf(textField_ThanhToan_XemChiTiet.getText()));
-
+			
 			int idLoNew = QuanLyNhapLo.getInstance().UpdateData(Update_Losach,
 					Integer.valueOf(textField_MaPN_XemChiTiet.getText()));
-			System.out.println(idLoNew);
+			System.out.println("ssssssssss" + textField_MaPN_XemChiTiet.getText());
+			frameParent.LoadDataList();
 			JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
 			this.setVisible(false);
 			return idLoNew;
@@ -486,9 +471,9 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 	public void set_Sua() {
 		// btn_Sua_XemChiTiet.setEnabled(false);
 		textField_ThanhToan_XemChiTiet.setEnabled(true);
-		textField_TenNCC_XemChiTiet.setEnabled(true);
-		textField_DiaChi_XemChiTiet.setEnabled(true);
-		textField_SDT_XemChiTiet.setEnabled(true);
+		textField_TenNCC_XemChiTiet.setEnabled(false);
+		textField_DiaChi_XemChiTiet.setEnabled(false);
+		textField_SDT_XemChiTiet.setEnabled(false);
 		table_ChiTietSach.setEnabled(true);
 		// btn_Huy_XemChiTiet.setEnabled(true);
 	}

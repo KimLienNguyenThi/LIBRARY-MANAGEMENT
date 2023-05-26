@@ -28,7 +28,7 @@ public class QuanLyNhapLo {
 	public static QuanLyNhapLo getInstance() {
 		return new QuanLyNhapLo();
 	}
-
+// đã sửa
 	public JTable selectAll(JTable table) {
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -38,7 +38,7 @@ public class QuanLyNhapLo {
 		
 		try {
 			// B1: Tạo kết nối đến CSDL
-			
+		
 			Connection connection = cnDatabase.getConnection();
 
 			// B2: Tạo ra đối tượng Statement
@@ -73,8 +73,8 @@ public class QuanLyNhapLo {
 		}
 		return table;
 	}
-
-	public int InsertData(PhieuNhapLo PhieuNhapLo,NhaCungCap NhaCungCap) {
+// đã sửa
+	public int InsertData(PhieuNhapLo PhieuNhapLo) {
 		// có dữ liệu từ người nhập
 		// insert data
 		// Date lúc này đang có dạng này: 'Sat Dec 15 16:37:57 MST 2012' biến đổi lại
@@ -88,10 +88,10 @@ public class QuanLyNhapLo {
 			// B1: Tạo kết nối đến CSDL
 			Connection connection = cnDatabase.getConnection();
 			// B2: Thực thi một câu lệnh SQL
-			String sql = "INSERT INTO quanlythuvien.PhieuNhapLo (TenNhaCC, NgayNhap, SDTNCC, DiaChiCC, TongTienNhap)"
-					+ " VALUES ('" + NhaCungCap.getTenNhaCungCap() + "' , '" + formatedDate + "' , '"
-					+ NhaCungCap.getSdtNhaCungCap() + "' , '" + NhaCungCap.getDiaChiNhaCungCap() + "' , '"
-					+ PhieuNhapLo.getTongTienNhap() + "' )";
+			String sql = "INSERT INTO quanlythuvien.PhieuNhapLo ( NgayNhap, TongTienNhap, MaNCC)"
+					+ " VALUES ('" + formatedDate + "' , '"
+					+ PhieuNhapLo.getTongTienNhap() + "' , '" 
+					+ PhieuNhapLo.getMaNCC() + "' )";
 
 			// B3: Tạo ra đối tượng Statement, với trả về id tự tăng của lô (để dùng insert
 			// chitietlo)
@@ -110,7 +110,7 @@ public class QuanLyNhapLo {
 			return -1;
 		}
 	}
-
+// thêm lô lôix
 	public int InsertDataChiTietLo(ChiTietLo chitietLo) {
 		// có dữ liệu từ người nhập
 		// insert data
@@ -140,7 +140,8 @@ public class QuanLyNhapLo {
 			return -1;
 		}
 	}
-
+	// thêm lô lỗi 
+	
 	public boolean InsertDataSach(Sach sach) {
 		// có dữ liệu từ người nhập
 		// insert data
@@ -168,7 +169,7 @@ public class QuanLyNhapLo {
 		}
 	}
 
-	public int UpdateData(NhaCungCap NhaCungCap, PhieuNhapLo PhieuNhapLo, int MaPN) {
+	public int UpdateData( PhieuNhapLo PhieuNhapLo, int MaPN) {
 		// có dữ liệu từ người nhập
 		// insert data
 		int ketqua = 0;
@@ -184,11 +185,11 @@ public class QuanLyNhapLo {
 			Statement st = connection.createStatement();
 
 			// B3: Thực thi một câu lệnh SQL
-
-			String sql = "UPDATE quanlythuvien.PhieuNhapLo " + "SET" + " TenNhaCC = N'" + NhaCungCap.getTenNhaCungCap() + "',"
-					+ " NgayNhap = '" + formatedDate + "'," + " SDTNCC = '" + NhaCungCap.getSdtNhaCungCap() + "',"
-					+ " DiaChiCC = N'" + NhaCungCap.getDiaChiNhaCungCap() + "'," + " TongTienNhap = '"
-					+ PhieuNhapLo.getTongTienNhap() + "'" + " WHERE MaPN = '" + MaPN + "' ;";
+			
+			String sql = "UPDATE quanlythuvien.PhieuNhapLo " + "SET" + ""
+					+ " NgayNhap = '" + formatedDate  +  "',"
+					+ " TongTienNhap = " + PhieuNhapLo.getTongTienNhap() + ""
+					  + " WHERE MaPN = '" + MaPN + "' ;";
 
 			System.out.println(sql);
 			ketqua = st.executeUpdate(sql); // trả về số lượng dòng đã upadate
@@ -205,9 +206,10 @@ public class QuanLyNhapLo {
 		}
 		return ketqua;
 	}
-
+// đã sửa
 	public PhieuNhapLo select_ThongTinLo(int MaPN) {
 		PhieuNhapLo losachchitiet = new PhieuNhapLo();
+		NhaCungCap NhaCungCap = new NhaCungCap();
 		try {
 			// B1: Tạo kết nối đến CSDL
 			Connection connection = cnDatabase.getConnection();
@@ -216,7 +218,8 @@ public class QuanLyNhapLo {
 			Statement st = connection.createStatement();
 
 			// B3: Thực thi một câu lệnh SQL
-			String sql = "SELECT *  FROM quanlythuvien.PhieuNhapLo   WHERE MaPN = '" + MaPN + "' ;";
+			String sql = "SELECT *  FROM quanlythuvien.PhieuNhapLo "
+					+ "  WHERE MaPN = '" + MaPN + "' ;";
 
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
@@ -242,7 +245,44 @@ public class QuanLyNhapLo {
 		}
 		return losachchitiet;
 	}
+	// đã sửa
+	public NhaCungCap select_ThongTinCC(int MaPN) {
+		NhaCungCap NhaCungCap = new NhaCungCap();
+		try {
+			// B1: Tạo kết nối đến CSDL
+			Connection connection = cnDatabase.getConnection();
 
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+
+			// B3: Thực thi một câu lệnh SQL
+			String sql = "SELECT NhaCungCap.*  FROM quanlythuvien.NhaCungCap JOIN quanlythuvien.PhieuNhapLo on NhaCungCap.MaNCC = PhieuNhapLo.MaNCC "
+					+ "  WHERE MaPN = '" + MaPN + "' ;";
+
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+			
+				NhaCungCap.setSdtNhaCungCap(rs.getString("SDTNCC"));
+				NhaCungCap.setDiaChiNhaCungCap(rs.getString("DiaChiCC"));
+				NhaCungCap.setTenNhaCungCap(rs.getString("TenNhaCC"));
+				
+
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return NhaCungCap;
+	}
+// k lỗi
 	public JTable select_sachchitiet(JTable table, int MaPN) {
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -292,7 +332,7 @@ public class QuanLyNhapLo {
 		}
 		return table;
 	}
-
+// lỗi
 	public JTable TimKiemLo(JTable table, String noidung) {
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -338,7 +378,7 @@ public class QuanLyNhapLo {
 		return table;
 	}
 
-
+// k lỗi
 	public Sach select_sachSua( int MaDS) {
 		
 		Sach thongtinsach = new Sach();
@@ -385,6 +425,7 @@ public class QuanLyNhapLo {
 		return thongtinsach;
 
 	}
+	// k lỗi
 	public int UpdateSach(Sach sach, int maDS) {
 		// có dữ liệu từ người nhập
 		// insert data

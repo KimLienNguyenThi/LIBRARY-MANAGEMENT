@@ -59,17 +59,21 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 	private JTable table_ncc;
 	private JButton btn_suaNCC_QLNL;
 	private JButton btn_ThemNCC_QLNL;
+	public Dialog_ThemLo_QLNL themLo_parent;
+	public int imainview = 0; // từ mainview gọi qua
+							// 1 là từ màn hình thêm lô gọi qua để thêm ncc
 
-	public Dialog_QuanLyNCC_QLNL(MainView parent) {
+	public Dialog_QuanLyNCC_QLNL(MainView parent,Dialog_ThemLo_QLNL chanuoi, int showview) {
 		super(parent, "Thêm Nhà cung cấp", true);
 		this.setLocationRelativeTo(null);
+		themLo_parent = chanuoi;
+		imainview = showview;
 		this.init();
 		this.setVisible(false);
 		// hiện thị trung tâm màn hình
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		frameParent = parent;
-
 	}
 
 	public void init() {
@@ -79,11 +83,14 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		 btn_ThemNCC_QLNL = new JButton("Thêm");
+		btn_ThemNCC_QLNL = new JButton("Thêm");
 		btn_ThemNCC_QLNL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Insert_NCC();
 				LoadDataNCC();
+				if(imainview == 1) {
+			    themLo_parent.LoadNCC();
+			}
 			}
 		});
 
@@ -150,14 +157,25 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 		String SDTNCC = null;
 		String DiaChiNCC = null;
 		table_ncc.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "M\u00E3 NCC", "T\u00EAn NCC", "S\u0110T", "\u0110\u1ECBa ch\u1EC9" }));
+				new String[] { "M\u00E3 NCC", "T\u00EAn NCC", "S\u0110T", "\u0110\u1ECBa ch\u1EC9" }) {
 
-		 btn_suaNCC_QLNL = new JButton("Update");
+			// ngăn chặn chỉnh sửa giá trị
+			public boolean isCellEditable(int row, int column) {
+				if (column == 0 || column == 1 || column == 2 || column == 3)
+					return false;
+				return super.isCellEditable(row, column);
+			}
+		});
+
+		btn_suaNCC_QLNL = new JButton("Update");
 		btn_suaNCC_QLNL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				update_ncc();
 				LoadDataNCC();
 				set_Them();
+				if(imainview == 1) {
+				    themLo_parent.LoadNCC();
+				}
 			}
 		});
 		btn_suaNCC_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -367,8 +385,10 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 		btn_ThemNCC_QLNL.setEnabled(true);
 		btn_suaNCC_QLNL.setEnabled(false);
 	}
+
 	public void set_Sua() {
 		btn_ThemNCC_QLNL.setEnabled(false);
 		btn_suaNCC_QLNL.setEnabled(true);
 	}
+	
 }

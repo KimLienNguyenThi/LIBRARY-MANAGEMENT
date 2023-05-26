@@ -106,9 +106,9 @@ CREATE TABLE ChiTietPhieuMuon (
 
 
 -- -- **************************************
-insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (1, 'Nguyễn Văn An', 'Quận 9-Thành phố Hồ Chí Minh' , '0963852741', 'Nam', '2000-5-25', 'Quản lý');
-insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (2, 'Trần Khánh Ngọc', 'Thủ Đức -Thành phố Hồ Chí Minh', '0978456123', 'Nữ', '2003-12-25', 'Quản lý kho');
-insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (3, 'Định Văn Bảo', 'Quận 11- Thành phố Hồ Chí Minh', '0365412789', 'Nam', '2003-7-10', 'Thủ Thư');
+insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (1, 'Nguyễn Văn An', 'Quận 9-Thành phố Hồ Chí Minh' , '0963852741', 'Nam', '2000-5-25', 'admin');
+insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (2, 'Trần Khánh Ngọc', 'Thủ Đức -Thành phố Hồ Chí Minh', '0978456123', 'Nữ', '2003-12-25', 'manage_stock');
+insert into NhanVien (MaNV, HoTenNV, DiaChi, SDT, GioiTinh, NgaySinh, ChucVu) values (3, 'Định Văn Bảo', 'Quận 11- Thành phố Hồ Chí Minh', '0365412789', 'Nam', '2003-7-10', 'staff');
 -- -- **************************************
 insert into Login (MaTaiKhoan, MatKhau, MaNV) VALUE(1, 111, 1);
 insert into Login (MaTaiKhoan, MatKhau, MaNV) VALUE(2, 222, 2);

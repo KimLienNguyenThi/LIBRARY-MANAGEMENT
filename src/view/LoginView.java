@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import database.LoginService;
+import model.login_trave;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -93,16 +94,17 @@ public class LoginView extends JFrame {
 				String taikhoan = textField.getText();
 				
 				
+		
+				login_trave login = LoginService.Login(taikhoan, matkhau);
 				
-				String login = LoginService.Login(taikhoan, matkhau);
-				if(login != "") {
+				if(login != null) {
 					 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
 				        JOptionPane.showMessageDialog(frame,
 				                "Đăng nhập thành công",
 				                "THÔNG BÁO",
 				                JOptionPane.INFORMATION_MESSAGE);
-				        System.out.println("connect failure!");
-					new MainView(login).setVisible(true);
+//				        System.out.println("connect failure!");
+					new MainView(login.getHoten(), login.getChucVu()).setVisible(true);
 					dispose();
 				}
 				else {
