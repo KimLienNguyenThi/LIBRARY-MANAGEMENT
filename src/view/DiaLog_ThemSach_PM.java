@@ -79,7 +79,15 @@ public class DiaLog_ThemSach_PM extends JDialog {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "ID SACH", "T\u00EAn s\u00E1ch", " T\u00E1c gi\u1EA3", "Nh\u00E0 XB",
-						"N\u0103m XB", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF" }));
+						"N\u0103m XB", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF" }) {
+				// ngăn chặn chỉnh sửa giá trị
+				public boolean isCellEditable(int row, int column) {
+					if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+							|| column == 6 )
+						return false;
+					return super.isCellEditable(row, column);
+				}
+			});
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
@@ -102,6 +110,7 @@ public class DiaLog_ThemSach_PM extends JDialog {
 		scrollPane.setBounds(0, 0, 966, 250);
 		panel.add(scrollPane);
 
+		
 		JButton btn_TimKiem = new JButton("");
 		btn_TimKiem.setOpaque(true);
 		btn_TimKiem.setBorderPainted(false);

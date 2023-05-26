@@ -92,7 +92,7 @@ public class QuanLyNhapLo {
 					+ " VALUES ('" + formatedDate + "' , '"
 					+ PhieuNhapLo.getTongTienNhap() + "' , '" 
 					+ PhieuNhapLo.getMaNCC() + "' )";
-
+System.out.println(sql);
 			// B3: Tạo ra đối tượng Statement, với trả về id tự tăng của lô (để dùng insert
 			// chitietlo)
 			Statement st = connection.createStatement();

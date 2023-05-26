@@ -93,7 +93,15 @@ public class Dialog_XemChiTiet_QLPM extends JDialog {
 			new String[] {
 				"M\u00E3 s\u00E1ch", "T\u00EAn s\u00E1ch", "T\u00E1c gi\u1EA3"
 			}
-		));
+		) {// ngăn chặn chỉnh sửa giá trị
+			public boolean isCellEditable(int row, int column) {
+				if (column == 0 || column == 1 || column == 2 )
+					return false;
+				return super.isCellEditable(row, column);
+			}
+
+		});
+				
 		
 		Service23.getInstance().SelectChiTietPhieuMuon(table, MaPM);
 		

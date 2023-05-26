@@ -684,7 +684,18 @@ public class MainView extends JFrame {
 		table_QuanLyPhieuMuon.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table_QuanLyPhieuMuon.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 PM", "M\u00E3 th\u1EBB", "H\u1ECD t\u00EAn", "S\u0110T",
-						"Ng\u00E0y m\u01B0\u1EE3n", "H\u1EA1n tr\u1EA3", "T\u00ECnh tr\u1EA1ng" }));
+						"Ng\u00E0y m\u01B0\u1EE3n", "H\u1EA1n tr\u1EA3", "T\u00ECnh tr\u1EA1ng" })
+				// ngăn chặn chỉnh sửa giá trịƠ
+				{
+			
+				public boolean isCellEditable(int row, int column) {
+					if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+							|| column == 6 )
+						return false;
+					return super.isCellEditable(row, column);
+				}
+
+			});
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(0).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(1).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(2).setPreferredWidth(64);
@@ -747,7 +758,18 @@ public class MainView extends JFrame {
 		table_QuanLySach = new JTable();
 		table_QuanLySach.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "T\u00EAn S\u00E1ch", "T\u00E1c gi\u1EA3", "Nh\u00E0 XB", "N\u0103m XB",
-						"Th\u1EC3 Lo\u1EA1i", "Gi\u00E1 S\u00E1ch", "Ng\u00F4n ng\u1EEF", "T\u00ECnh tr\u1EA1ng" }));
+						"Th\u1EC3 Lo\u1EA1i", "Gi\u00E1 S\u00E1ch", "Ng\u00F4n ng\u1EEF", "T\u00ECnh tr\u1EA1ng" })
+				{
+			// ngăn chặn chỉnh sửa giá trị
+						public boolean isCellEditable(int row, int column) {
+							if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+									|| column == 6 || column == 7 || column == 8)
+								return false;
+							return super.isCellEditable(row, column);
+						}
+
+					});
+				
 		table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(40);
 		table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(40);
 		table_QuanLySach.getColumnModel().getColumn(8).setPreferredWidth(51);
@@ -1006,7 +1028,18 @@ public class MainView extends JFrame {
 		table_QLTV.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 TV", "H\u1ECD v\u00E0 t\u00EAn", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i",
 						"Ng\u00E0y sinh", "\u0110\u1ECBa ch\u1EC9", "TG \u0111\u0103ng k\u00FD", "H\u1EA1n th\u1EBB",
-						"Ph\u00ED \u0111\u0103ng k\u00FD", "T\u00ECnh Tr\u1EA1ng" }));
+						"Ph\u00ED \u0111\u0103ng k\u00FD", "T\u00ECnh Tr\u1EA1ng" })
+				{
+			// ngăn chặn chỉnh sửa giá trị
+						public boolean isCellEditable(int row, int column) {
+							if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+									|| column == 6 || column == 7 || column == 8)
+								return false;
+							return super.isCellEditable(row, column);
+						}
+
+					});
+				
 		table_QLTV.getColumnModel().getColumn(0).setPreferredWidth(39);
 		table_QLTV.getColumnModel().getColumn(1).setPreferredWidth(98);
 		table_QLTV.getColumnModel().getColumn(2).setPreferredWidth(74);

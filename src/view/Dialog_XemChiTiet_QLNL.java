@@ -113,7 +113,18 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 						"N\u0103m Xu\u1EA5t b\u1EA3n", "T\u00E1c gi\u1EA3", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF",
 						"Gi\u00E1 s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng"
 
-				}));
+				})
+				//		{
+//				// ngăn chặn chỉnh sửa giá trị
+//				public boolean isCellEditable(int row, int column) {
+//					if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+//							|| column == 6 || column == 7 || column == 8)
+//						return false;
+//					return super.isCellEditable(row, column);
+//				}
+//
+//			}
+						);
 		// chỉ cho nhập số ở năm xb va gia sach
 		try {
 			MaskFormatter formatter = new MaskFormatter("####");
