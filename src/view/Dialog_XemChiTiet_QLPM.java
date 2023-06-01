@@ -23,7 +23,7 @@ import javax.swing.ListSelectionModel;
 
 public class Dialog_XemChiTiet_QLPM extends JDialog {
 	JFrame frame = new JFrame();
-	
+	public MainView parentMainView ;
 	private JPanel contentPane;
 	private JTable table;
 	private int MaPM;
@@ -32,8 +32,9 @@ public class Dialog_XemChiTiet_QLPM extends JDialog {
 	 * Launch the application.
 	 */
 	
-	public Dialog_XemChiTiet_QLPM(JFrame parent, int MaPM){
+	public Dialog_XemChiTiet_QLPM(MainView parent, int MaPM){
 		super(parent, "Dialog Default", true);
+		parentMainView = parent;
 		this.MaPM = MaPM;
 		this.init();        
 		this.setLocationRelativeTo(null);
@@ -86,6 +87,7 @@ public class Dialog_XemChiTiet_QLPM extends JDialog {
 		  	       return false;
 		  	   }
 		  	};
+		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -126,7 +128,8 @@ public class Dialog_XemChiTiet_QLPM extends JDialog {
 	  				
 	  				// Cập nhật bảng Quản lý phiếu mượn
 	  				((DefaultTableModel) MainView.table_QuanLyPhieuMuon.getModel()).setRowCount(0);
-	  				Service23.getInstance().SelectAllPhieuMuon(MainView.table_QuanLyPhieuMuon);
+	  				//Service23.getInstance().SelectAllPhieuMuon(MainView.table_QuanLyPhieuMuon);
+	  				parentMainView.getPageDataTable_QLPM(1);
 	  				
 	  				JOptionPane.showMessageDialog(null, "Đã cập nhật!");	
 	

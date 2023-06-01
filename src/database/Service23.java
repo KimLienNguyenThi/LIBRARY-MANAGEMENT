@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,10 +19,9 @@ public class Service23 {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		try {
 
-			String sql = "SELECT TheDocGia.MaThe, TheDocGia.HanThe, DocGia.TenDG, DocGia.SDT, DocGia.DiaChi " 
-					   + "FROM TheDocGia "
-					   + "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG "
-					   + "ORDER BY TheDocGia.MaThe ASC";
+			String sql = "SELECT TheDocGia.MaThe, TheDocGia.HanThe, DocGia.TenDG, DocGia.SDT, DocGia.DiaChi "
+					+ "FROM TheDocGia " + "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG "
+					+ "ORDER BY TheDocGia.MaThe ASC";
 
 			Connection conn = cnDatabase.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -32,7 +32,7 @@ public class Service23 {
 				long millis = System.currentTimeMillis();
 				java.sql.Date date = new java.sql.Date(millis);
 				Date HanThe = rs.getDate("HanThe");
-				if(HanThe.before(date) == false) {
+				if (HanThe.before(date) == false) {
 					int mathe = rs.getInt("MaThe");
 					String tendg = rs.getString("TenDG");
 					String sdt = rs.getString("SDT");
@@ -50,7 +50,7 @@ public class Service23 {
 		return table;
 	}
 
-	public JTable SelectAllPhieuMuon(JTable table) {
+	public JTable SelectAllPhieuMuonx(JTable table) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		try {
 			String sql = "SELECT PhieuMuon.MaPM, TheDocGia.MaThe, DocGia.TenDG, "
@@ -81,6 +81,78 @@ public class Service23 {
 			e.printStackTrace();
 		}
 		return table;
+	}
+
+	public JTable SelectAllPhieuMuonlimit(JTable table, int limit, int offset, String noidung) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		try {
+			String sql = "SELECT PhieuMuon.MaPM, TheDocGia.MaThe, DocGia.TenDG, "
+					+ "DocGia.SDT, PhieuMuon.NgayMuon, PhieuMuon.NgayTra, PhieuMuon.TinhTrang " + "FROM PhieuMuon "
+					+ "JOIN TheDocGia ON PhieuMuon.MaThe = TheDocGia.MaThe "
+					+ "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG " 
+					+ " WHERE quanlythuvien.DocGia.TenDG LIKE '%" + noidung + "%' OR quanlythuvien.DocGia.SDT LIKE '%" + noidung + "%' "
+					+ "ORDER BY PhieuMuon.MaPM ASC limit " + limit
+					+ " offset " + offset + "";
+//			
+//			+		" ORDER BY PhieuNhapLo.MaPN DESC limit " + limit + " offset " + offset + "";
+			Connection conn = cnDatabase.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+
+			ResultSet rs = pst.executeQuery(sql);
+
+			while (rs.next()) {
+				int mapm = rs.getInt("MaPM");
+				int mathe = rs.getInt("MaThe");
+				String tendg = rs.getString("TenDG");
+				String sdt = rs.getString("SDT");
+				Date ngaymuon = rs.getDate("NgayMuon");
+				Date ngaytra = rs.getDate("NgayTra");
+				String tinhtrang = rs.getString("TinhTrang");
+
+				Object[] obj = { mapm, mathe, tendg, sdt, ngaymuon, ngaytra, tinhtrang };
+
+				model.addRow(obj);
+			}
+			cnDatabase.disConnection(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return table;
+	}
+
+	public int selectAllCount(String noidung) {
+		Integer count = 0;
+		// DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+		try {
+			// B1: Tạo kết nối đến CSDL
+
+			Connection connection = cnDatabase.getConnection();
+
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+			String sql = "SELECT count(*) as count " + "FROM PhieuMuon "
+					+ "JOIN TheDocGia ON PhieuMuon.MaThe = TheDocGia.MaThe "
+					+ "JOIN DocGia ON TheDocGia.MaDG = DocGia.MaDG "
+					+ " WHERE quanlythuvien.DocGia.TenDG LIKE '%" + noidung + "%' OR quanlythuvien.DocGia.SDT LIKE '%" + noidung + "%' ";
+//			+ " WHERE quanlythuvien.Nhacungcap.SDTNCC LIKE '%" + noidung + "%' OR quanlythuvien.Nhacungcap.TenNhaCC LIKE '%" + noidung + "%' "
+//			+		" ORDER BY PhieuNhapLo.MaPN DESC limit " + limit + " offset " + offset + "";
+			ResultSet rs = st.executeQuery(sql);
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				count = rs.getInt("count");
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("qqqqqqqqqqqq " + count);
+		return count;
 	}
 
 	public JTable SelectChiTietPhieuMuon(JTable table, int MaPM) {
@@ -231,17 +303,17 @@ public class Service23 {
 		return ketqua;
 	}
 
-	public int InsertPhieuMuon(int MaThe, Date NgayMuon, Date NgayTra) {
+	public int InsertPhieuMuon(int MaThe, Date NgayMuon, Date NgayTra, int MaNV) {
 		int ketqua = 0;
 		try {
 			Connection conn = cnDatabase.getConnection();
-			String sql = "INSERT INTO PhieuMuon (MaThe, NgayMuon, NgayTra) " + "VALUES (?, ?, ?); ";
+			String sql = "INSERT INTO PhieuMuon (MaThe, NgayMuon, NgayTra, MaNV) " + "VALUES (?, ?, ?,?); ";
 
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setInt(1, MaThe);
 			pst.setDate(2, NgayMuon);
 			pst.setDate(3, NgayTra);
-
+			pst.setInt(4, MaNV);
 			ketqua = pst.executeUpdate();
 			cnDatabase.disConnection(conn);
 		} catch (SQLException e) {

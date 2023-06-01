@@ -76,6 +76,7 @@ public class DiaLog_ThemSach_PM extends JDialog {
 				return false;
 			}
 		};
+		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "ID SACH", "T\u00EAn s\u00E1ch", " T\u00E1c gi\u1EA3", "Nh\u00E0 XB",

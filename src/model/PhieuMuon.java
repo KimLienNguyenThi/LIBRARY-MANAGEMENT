@@ -13,7 +13,7 @@ public class PhieuMuon {
 	public PhieuMuon() {
 	}
 
-	public PhieuMuon(int maPM, int maNV, int maDocGia, int IDSACH, Date ngayMuon, Date ngayTra) {
+	public PhieuMuon(int maPM, int maDocGia, int IDSACH, Date ngayMuon, Date ngayTra, int maNV) {
 		super();
 		this.maPM = maPM;
 		this.maNV = maNV;

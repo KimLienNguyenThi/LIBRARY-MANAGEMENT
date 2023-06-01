@@ -90,7 +90,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		contentPane.add(lbl_NamXB_ThemSach_QLNL);
 
 		JLabel lbl_TheLoai_ThemSach_QLNL = new JLabel("Thể loại:");
-		lbl_TheLoai_ThemSach_QLNL.setBounds(388, 17, 96, 20);
+		lbl_TheLoai_ThemSach_QLNL.setBounds(371, 17, 96, 20);
 		lbl_TheLoai_ThemSach_QLNL.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_TheLoai_ThemSach_QLNL);
 
@@ -100,22 +100,22 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		contentPane.add(lbl_NhaXB_ThemSach_QLNL);
 
 		textField_TenSach_ThemSach_QLNL = new JTextField();
-		textField_TenSach_ThemSach_QLNL.setBounds(133, 20, 200, 19);
+		textField_TenSach_ThemSach_QLNL.setBounds(133, 20, 214, 19);
 		textField_TenSach_ThemSach_QLNL.setColumns(10);
 		contentPane.add(textField_TenSach_ThemSach_QLNL);
 
 		textField_NamXB_ThemSach_QLNL = new JTextField();
-		textField_NamXB_ThemSach_QLNL.setBounds(133, 150, 200, 19);
+		textField_NamXB_ThemSach_QLNL.setBounds(133, 150, 214, 19);
 		textField_NamXB_ThemSach_QLNL.setColumns(10);
 		contentPane.add(textField_NamXB_ThemSach_QLNL);
 
 		textField_NhaXB_ThemSach_QLNL = new JTextField();
-		textField_NhaXB_ThemSach_QLNL.setBounds(133, 63, 200, 19);
+		textField_NhaXB_ThemSach_QLNL.setBounds(133, 63, 214, 19);
 		textField_NhaXB_ThemSach_QLNL.setColumns(10);
 		contentPane.add(textField_NhaXB_ThemSach_QLNL);
 
 		textField_TacGia_ThemSach_QLNL = new JTextField();
-		textField_TacGia_ThemSach_QLNL.setBounds(133, 107, 200, 19);
+		textField_TacGia_ThemSach_QLNL.setBounds(133, 107, 214, 19);
 		textField_TacGia_ThemSach_QLNL.setColumns(10);
 		contentPane.add(textField_TacGia_ThemSach_QLNL);
 
@@ -128,7 +128,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 			}
 		});
 		btn_ThemSach_QLNL.setBounds(355, 195, 84, 28);
-		btn_ThemSach_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_ThemSach_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_ThemSach_QLNL);
 
 		JButton btn_Huy_QLNL = new JButton("Hủy");
@@ -138,29 +138,29 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 			}
 		});
 		btn_Huy_QLNL.setBounds(477, 195, 84, 28);
-		btn_Huy_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Huy_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_Huy_QLNL);
 		
 		
 		JLabel lbl_NgonNgu_ThemSach_QLNL = new JLabel("Ngôn ngữ:");
 		lbl_NgonNgu_ThemSach_QLNL.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbl_NgonNgu_ThemSach_QLNL.setBounds(388, 60, 84, 20);
+		lbl_NgonNgu_ThemSach_QLNL.setBounds(371, 60, 84, 20);
 		contentPane.add(lbl_NgonNgu_ThemSach_QLNL);
 
 		JLabel lbl_GiaSach_ThemSach_QLNL = new JLabel("Giá sách:");
 		lbl_GiaSach_ThemSach_QLNL.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbl_GiaSach_ThemSach_QLNL.setBounds(388, 104, 84, 20);
+		lbl_GiaSach_ThemSach_QLNL.setBounds(371, 104, 84, 20);
 		contentPane.add(lbl_GiaSach_ThemSach_QLNL);
 
 		textField_GiaSach_ThemSach_QLNL = new JTextField();
 		textField_GiaSach_ThemSach_QLNL.setColumns(10);
-		textField_GiaSach_ThemSach_QLNL.setBounds(471, 107, 137, 19);
+		textField_GiaSach_ThemSach_QLNL.setBounds(456, 107, 173, 19);
 	
 		contentPane.add(textField_GiaSach_ThemSach_QLNL);
 
 		JLabel lbl_SoLuong_ThemSach_QLNL = new JLabel("Số lượng:");
 		lbl_SoLuong_ThemSach_QLNL.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbl_SoLuong_ThemSach_QLNL.setBounds(388, 147, 84, 20);
+		lbl_SoLuong_ThemSach_QLNL.setBounds(371, 147, 84, 20);
 		contentPane.add(lbl_SoLuong_ThemSach_QLNL);
 
 		textField_SoLuong_ThemSach_QLNL = new JTextField();
@@ -198,12 +198,12 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		});
 		
 		textField_SoLuong_ThemSach_QLNL.setColumns(10);
-		textField_SoLuong_ThemSach_QLNL.setBounds(471, 150, 137, 19);
+		textField_SoLuong_ThemSach_QLNL.setBounds(456, 150, 173, 19);
 		contentPane.add(textField_SoLuong_ThemSach_QLNL);
 
 		comboBox_NgonNgu_ThemSach_QLNL = new JComboBox();
-		comboBox_NgonNgu_ThemSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		comboBox_NgonNgu_ThemSach_QLNL.setBounds(471, 62, 137, 21);
+		comboBox_NgonNgu_ThemSach_QLNL.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox_NgonNgu_ThemSach_QLNL.setBounds(456, 62, 173, 21);
 		comboBox_NgonNgu_ThemSach_QLNL.setModel(new DefaultComboBoxModel(
 				new String[] { "Tiếng Anh", "Tiếng Việt", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung","Tiếng Mỹ" }));
 		comboBox_NgonNgu_ThemSach_QLNL.setOpaque(true);
@@ -211,8 +211,8 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 		contentPane.add(comboBox_NgonNgu_ThemSach_QLNL);
 
 		comboBox_TheLoai_ThemSach_QLNL = new JComboBox();
-		comboBox_TheLoai_ThemSach_QLNL.setBounds(471, 16, 137, 21);
-		comboBox_TheLoai_ThemSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		comboBox_TheLoai_ThemSach_QLNL.setBounds(456, 16, 173, 21);
+		comboBox_TheLoai_ThemSach_QLNL.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_TheLoai_ThemSach_QLNL.setModel(
 				new DefaultComboBoxModel(new String[] { "Chính Trị- Khoa Học", "Tiểu Thuyết", "Truyện Ngôn Tình", "Thơ",
 						"Kinh Doanh", "Tâm Lý Học", "Truyện Thiếu Nhi", "Trinh Thám", "Văn Học", "Ngoại Ngữ" , "Kỹ Năng Sống"}));

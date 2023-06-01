@@ -8,11 +8,11 @@ public class PhieuNhapLo {
 	private Date ngayNhap;
 	private int tongTienNhap;
 	private int MaNCC;
-	
+	private int MaNV;
 	public PhieuNhapLo() {
 	}
 
-	public PhieuNhapLo(int MaPN, Date ngayNhap, int tongTienNhap, int MaNCC) {
+	public PhieuNhapLo(int MaPN, Date ngayNhap, int tongTienNhap, int MaNCC, int MaNV) {
 		super();
 		this.MaPN = MaPN;
 		
@@ -20,6 +20,7 @@ public class PhieuNhapLo {
 		
 		this.tongTienNhap = tongTienNhap;
 		this.MaNCC = MaNCC;
+		this.MaNV=  MaNV;
 	}
 
 	public int getMaPN() {
@@ -53,6 +54,13 @@ public class PhieuNhapLo {
 
 	public void setMaNCC(int MaNCC) {
 		this.MaNCC = MaNCC;
+	}
+	public int getMaNV() {
+		return MaNV;
+	}
+
+	public void setMaNV(int MaNV) {
+		this.MaNV = MaNV;
 	}
 
 }

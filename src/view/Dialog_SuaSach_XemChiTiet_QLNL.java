@@ -136,7 +136,7 @@ public class Dialog_SuaSach_XemChiTiet_QLNL extends JDialog {
 			}
 		});
 		btn_Luu_SuaSach_QLNL.setBounds(203, 210, 84, 28);
-		btn_Luu_SuaSach_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Luu_SuaSach_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_Luu_SuaSach_QLNL);
 
 		JButton btn_Huy_Suasach_QLNL = new JButton("Hủy");
@@ -146,7 +146,7 @@ public class Dialog_SuaSach_XemChiTiet_QLNL extends JDialog {
 			}
 		});
 		btn_Huy_Suasach_QLNL.setBounds(369, 210, 84, 28);
-		btn_Huy_Suasach_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Huy_Suasach_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_Huy_Suasach_QLNL);
 
 		JLabel lbl_TheLoai_SuaSach_QLNL = new JLabel("Thể Loại:");
@@ -186,7 +186,7 @@ public class Dialog_SuaSach_XemChiTiet_QLNL extends JDialog {
 		contentPane.add(textField_SoLuong_SuaSach_QLNL);
 
 		comboBox_NgonNgu_SuaSach_QLNL = new JComboBox();
-		comboBox_NgonNgu_SuaSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboBox_NgonNgu_SuaSach_QLNL.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox_NgonNgu_SuaSach_QLNL.setBounds(495, 127, 154, 21);
 		comboBox_NgonNgu_SuaSach_QLNL.setModel(new DefaultComboBoxModel(
 				new String[] { "Chọn ngôn ngữ", "Tiếng Anh", "Tiếng Việt", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung" }));
@@ -196,7 +196,7 @@ public class Dialog_SuaSach_XemChiTiet_QLNL extends JDialog {
 
 		comboBox_TheLoai_SuaSach_QLNL = new JComboBox();
 		comboBox_TheLoai_SuaSach_QLNL.setBounds(495, 84, 154, 21);
-		comboBox_TheLoai_SuaSach_QLNL.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboBox_TheLoai_SuaSach_QLNL.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox_TheLoai_SuaSach_QLNL.setModel(
 				new DefaultComboBoxModel(new String[] { "Chính Trị- Khoa Học", "Tiểu Thuyết", "Truyện Ngôn Tình", "Thơ",
 						"Kinh Doanh", "Tâm Lý Học", "Truyện Thiếu Nhi", "Trinh Thám", "Văn Học" }));

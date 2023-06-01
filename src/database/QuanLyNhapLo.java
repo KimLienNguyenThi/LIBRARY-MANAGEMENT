@@ -21,6 +21,7 @@ import model.NhaCungCap;
 import model.PhieuNhapLo;
 import model.Sach;
 import model.TheThanhVien;
+import model.login_trave;
 import view.MainView;
 
 public class QuanLyNhapLo {
@@ -47,7 +48,7 @@ public class QuanLyNhapLo {
 			// B3: Thực thi một câu lệnh SQL
 			String sql = " SELECT PhieuNhapLo.*,Nhacungcap.TenNhaCC, Nhacungcap.SDTNCC, Nhacungcap.DiaChiCC "
 			+ "FROM quanlythuvien.PhieuNhapLo  JOIN quanlythuvien.Nhacungcap on PhieuNhapLo.mancc = nhacungcap.mancc" 
-			+		" ORDER BY PhieuNhapLo.ngaynhap DESC ";
+			+		" ORDER BY PhieuNhapLo.MaPN DESC ";
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
 													// thông tin)
@@ -73,6 +74,90 @@ public class QuanLyNhapLo {
 		}
 		return table;
 	}
+	
+	
+	public JTable selectAllLimit(JTable table, int limit, int offset, String noidung) {
+
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		String MaPN = null, SDTNCC = null, DiaChiCC = null, TenNhaCC = null;
+		Date NgayNhap = null;
+		Integer tongTien = 0;
+		
+		try {
+			// B1: Tạo kết nối đến CSDL
+		
+			Connection connection = cnDatabase.getConnection();
+
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+
+			// B3: Thực thi một câu lệnh SQL
+			String sql = " SELECT PhieuNhapLo.*,Nhacungcap.TenNhaCC, Nhacungcap.SDTNCC, Nhacungcap.DiaChiCC "
+			+ "FROM quanlythuvien.PhieuNhapLo  JOIN quanlythuvien.Nhacungcap on PhieuNhapLo.mancc = nhacungcap.mancc " 
+			+ " WHERE quanlythuvien.Nhacungcap.SDTNCC LIKE '%" + noidung + "%' OR quanlythuvien.Nhacungcap.TenNhaCC LIKE '%" + noidung + "%' "
+			+		" ORDER BY PhieuNhapLo.MaPN DESC limit " + limit + " offset " + offset + "";
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				MaPN = rs.getString("MaPN");
+				TenNhaCC = rs.getString("TenNhaCC");
+				SDTNCC = rs.getString("SDTNCC");
+				DiaChiCC = rs.getString("DiaChiCC");
+				NgayNhap = rs.getDate("NgayNhap");
+				tongTien = rs.getInt("TongTienNhap");
+				Object[] obj = { MaPN, TenNhaCC, SDTNCC, DiaChiCC, NgayNhap, tongTien };
+				model.addRow(obj);
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return table;
+	}
+	
+	public int selectAllCount(String noidung) {
+		Integer count = 0;
+		
+		try {
+			// B1: Tạo kết nối đến CSDL
+		
+			Connection connection = cnDatabase.getConnection();
+
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+
+			// B3: Thực thi một câu lệnh SQL
+			String sql = " SELECT count(*) as count "
+			+ "FROM quanlythuvien.PhieuNhapLo  JOIN quanlythuvien.Nhacungcap on PhieuNhapLo.mancc = nhacungcap.mancc " 
+			+ " WHERE quanlythuvien.Nhacungcap.SDTNCC LIKE '%" + noidung + "%' OR quanlythuvien.Nhacungcap.TenNhaCC LIKE '%" + noidung + "%' "
+			+		" ORDER BY PhieuNhapLo.ngaynhap DESC";
+			//System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				count = rs.getInt("count");				
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("qqqqqqqqqqqq " + count);
+		return count;
+	}
+	
 // đã sửa
 	public int InsertData(PhieuNhapLo PhieuNhapLo) {
 		// có dữ liệu từ người nhập
@@ -88,10 +173,11 @@ public class QuanLyNhapLo {
 			// B1: Tạo kết nối đến CSDL
 			Connection connection = cnDatabase.getConnection();
 			// B2: Thực thi một câu lệnh SQL
-			String sql = "INSERT INTO quanlythuvien.PhieuNhapLo ( NgayNhap, TongTienNhap, MaNCC)"
+			String sql = "INSERT INTO quanlythuvien.PhieuNhapLo ( NgayNhap, TongTienNhap, MaNCC, MaNV)"
 					+ " VALUES ('" + formatedDate + "' , '"
 					+ PhieuNhapLo.getTongTienNhap() + "' , '" 
-					+ PhieuNhapLo.getMaNCC() + "' )";
+					+ PhieuNhapLo.getMaNCC() + "' , '" 
+					+ PhieuNhapLo.getMaNV() + "' )";
 System.out.println(sql);
 			// B3: Tạo ra đối tượng Statement, với trả về id tự tăng của lô (để dùng insert
 			// chitietlo)

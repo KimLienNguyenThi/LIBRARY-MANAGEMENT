@@ -84,48 +84,48 @@ public class Dialog_GiaHanTheThanhVien extends JDialog {
 		contentPane_DialogGHT.add(button_Luu_DialogGHT);
 
 		JLabel label_HoTen_DialogGHT = new JLabel("New label");
-		label_HoTen_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_HoTen_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_HoTen_DialogGHT.setBounds(53, 75, 200, 18);
 		label_HoTen_DialogGHT.setText("Họ và tên: " + docGia.getTenDocGia());
 		contentPane_DialogGHT.add(label_HoTen_DialogGHT);
 
 		label_MaDocGia_DialogGHT = new JLabel("New label");
-		label_MaDocGia_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		label_MaDocGia_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_MaDocGia_DialogGHT.setBounds(53, 32, 200, 21);
 		label_MaDocGia_DialogGHT.setText("Mã thành viên: " + docGia.getMaDocGia());
 		contentPane_DialogGHT.add(label_MaDocGia_DialogGHT);
 
 		JLabel label_SDT_DialogGHT = new JLabel("New label");
-		label_SDT_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_SDT_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_SDT_DialogGHT.setBounds(53, 115, 200, 18);
 		label_SDT_DialogGHT.setText("Số điện thoại: " + docGia.getSDT());
 		contentPane_DialogGHT.add(label_SDT_DialogGHT);
 
 		JLabel label_DiaChi_DialogGHT = new JLabel("New label");
-		label_DiaChi_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_DiaChi_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_DiaChi_DialogGHT.setBounds(53, 155, 200, 18);
 		label_DiaChi_DialogGHT.setText("Địa chỉ: " + docGia.getDiaChi());
 		contentPane_DialogGHT.add(label_DiaChi_DialogGHT);
 
 		JLabel label_NgaySinh_DialogGHT = new JLabel("New label");
-		label_NgaySinh_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_NgaySinh_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_NgaySinh_DialogGHT.setBounds(53, 195, 200, 18);
 		label_NgaySinh_DialogGHT.setText("Ngày sinh: " + docGia.getNgaySinh());
 		contentPane_DialogGHT.add(label_NgaySinh_DialogGHT);
 
 		label_MaThe_DialogGHT = new JLabel("New label");
-		label_MaThe_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		label_MaThe_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_MaThe_DialogGHT.setBounds(319, 32, 190, 21);
 		label_MaThe_DialogGHT.setText("Mã thẻ: " + theThanhVien.getMaThe());
 		contentPane_DialogGHT.add(label_MaThe_DialogGHT);
 
 		label_PhiDangKy_DialogGHT = new JLabel("");
-		label_PhiDangKy_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_PhiDangKy_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_PhiDangKy_DialogGHT.setBounds(422, 115, 112, 21);
 		contentPane_DialogGHT.add(label_PhiDangKy_DialogGHT);
 
 		label_PhiDK_DialogGHT = new JLabel("New label");
-		label_PhiDK_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_PhiDK_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_PhiDK_DialogGHT.setBounds(319, 115, 82, 18);
 		label_PhiDK_DialogGHT.setText("Phí đăng ký: ");
 		contentPane_DialogGHT.add(label_PhiDK_DialogGHT);
@@ -145,7 +145,7 @@ public class Dialog_GiaHanTheThanhVien extends JDialog {
 		contentPane_DialogGHT.add(comboBox_HanThe_DialogGHT);
 
 		lable_GiaHanThem_DialogGHT = new JLabel("Gia hạn thêm: ");
-		lable_GiaHanThem_DialogGHT.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lable_GiaHanThem_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lable_GiaHanThem_DialogGHT.setBounds(319, 74, 93, 21);
 		contentPane_DialogGHT.add(lable_GiaHanThem_DialogGHT);
 	}

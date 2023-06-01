@@ -108,6 +108,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		// NumberFormat nf = NumberFormat.getCurrencyInstance();
 		// init table sách
 		table_ChiTietSach = new JTable();
+		table_ChiTietSach.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_ChiTietSach.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 DS", "T\u00EAn s\u00E1ch", "Nh\u00E0 xu\u1EA5t b\u1EA3n",
 						"N\u0103m Xu\u1EA5t b\u1EA3n", "T\u00E1c gi\u1EA3", "Th\u1EC3 lo\u1EA1i", "Ng\u00F4n ng\u1EEF",
@@ -213,7 +214,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 		contentPane.setLayout(null);
 
 		JLabel lbl_TenNCC_XemChiTiet = new JLabel("Tên nhà cung cấp: ");
-		lbl_TenNCC_XemChiTiet.setBounds(234, 42, 143, 20);
+		lbl_TenNCC_XemChiTiet.setBounds(244, 42, 143, 20);
 		lbl_TenNCC_XemChiTiet.setFont(new Font("Time New Roman", Font.BOLD, 15));
 		contentPane.add(lbl_TenNCC_XemChiTiet);
 
@@ -301,9 +302,16 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 				SuaChiTietLo();
 				getListSach(idMaPNParent);
 				// frameParent.LoadDataUpdate();
-
-				frameParent.LoadDataList();
-				frameParent.LoadTableSach();
+				
+				// Hàm này load tất cả => bỏ >> vì sài phân trang
+				// phân trang gọi nÀY
+				//frameParent.LoadDataList();
+				frameParent.getPageData(1); // truyền 1 là lấy trang đầu tiên
+				
+				// Hàm này load tất cả => bỏ >> vì sài phân trang
+				//frameParent.LoadTableSach();
+				
+				frameParent.getPageDataTable_QLSach(1);
 			}
 		});
 
@@ -313,7 +321,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 				setVisible(false);
 			}
 		});
-		btn_Huy_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Huy_XemChiTiet.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btn_Huy_XemChiTiet.setBounds(138, 296, 104, 28);
 		contentPane.add(btn_Huy_XemChiTiet);
 
@@ -324,12 +332,12 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 				
 			}
 		});
-		btn_Sua_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Sua_XemChiTiet.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btn_Sua_XemChiTiet.setBounds(472, 8, 104, 28);
 		contentPane.add(btn_Sua_XemChiTiet);
 
 		btn_Luu_XemChiTiet.setBounds(394, 296, 104, 28);
-		btn_Luu_XemChiTiet.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_Luu_XemChiTiet.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_Luu_XemChiTiet);
 
 		JLabel lbl_Malo_XemChiTiet = new JLabel("Mã Phiếu Nhập:");
@@ -423,7 +431,11 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 			int idLoNew = QuanLyNhapLo.getInstance().UpdateData(Update_Losach,
 					Integer.valueOf(textField_MaPN_XemChiTiet.getText()));
 			System.out.println("ssssssssss" + textField_MaPN_XemChiTiet.getText());
-			frameParent.LoadDataList();
+			
+			// Hàm này load tất cả => bỏ >> vì sài phân trang
+			//frameParent.LoadDataList();
+			// phân trang gọi nÀY
+			frameParent.getPageData(1); // truyền 1 là lấy trang đầu tiên			
 			JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công.");
 			this.setVisible(false);
 			return idLoNew;

@@ -97,7 +97,7 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 		});
 
 		btn_ThemNCC_QLNL.setBounds(250, 83, 111, 33);
-		btn_ThemNCC_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_ThemNCC_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_ThemNCC_QLNL);
 
 		JLabel lbl_TenNCC_ThemLo = new JLabel("Tên NCC: ");
@@ -147,6 +147,7 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 		panel_ThemNCC_QLNL.setLayout(null);
 
 		table_ncc = new JTable();
+		table_ncc.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		model = (DefaultTableModel) table_ncc.getModel();
 
 		JScrollPane scrollPane = new JScrollPane(table_ncc);
@@ -181,7 +182,7 @@ public class Dialog_QuanLyNCC_QLNL extends JDialog {
 				JOptionPane.showMessageDialog(frame, "Bạn đã sửa thành công.");
 			}
 		});
-		btn_suaNCC_QLNL.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btn_suaNCC_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btn_suaNCC_QLNL.setBounds(494, 83, 111, 33);
 		contentPane.add(btn_suaNCC_QLNL);
 		table_ncc.getColumnModel().getColumn(0).setPreferredWidth(37);

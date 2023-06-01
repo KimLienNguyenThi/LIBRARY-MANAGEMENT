@@ -62,11 +62,86 @@ public class QuanLySach {
 		return table;
 	}
 	
+	public JTable selectAllLimit(JTable table , int limit, int offset, String tenSach) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		try {
+		
+			// B1: Tạo kết nối đến CSDL
+			Connection connection = cnDatabase.getConnection();
+			
+			// B2: Tạo ra đối tượng Statement 
+			Statement st = connection.createStatement();
+			
+			// B3: Thực thi một câu lệnh SQL
+			String sql = "SELECT * FROM SACH " +
+					" WHERE TenSach like '%"+tenSach+"%'" +
+							" ORDER BY SACH.IDsach DESC limit " + limit + " offset " + offset + ";";
+					
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql);		// trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ thông tin)
+			
+			// B4: Xử lý kết quả 
+			while(rs.next()) {				// dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				int IDSACH = rs.getInt("IDSACH");
+				String TenSach = rs.getString("TenSach");
+				String TacGia = rs.getString("TacGia");
+				String NXB = rs.getString("NXB");
+				int NamXB = rs.getInt("NamXB");
+				String TheLoai = rs.getString("TheLoai");
+				String GiaSach = rs.getString("GiaSach");
+				String NgonNgu = rs.getString("NgonNgu");
+				String TinhTrang = rs.getString("TinhTrang");
+				
+				Object obj[]  = {IDSACH, TenSach, TacGia,NXB, NamXB,TheLoai ,GiaSach,NgonNgu,TinhTrang};
+				model.addRow(obj);		// thêm từng bộ dữ liệu lấy ra được vào danh sách kết quả
+			}
+			
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+			
+		} catch (SQLException e) { 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return table;
+	}
+	
+	public int selectAllCount(String tenSach) {
+		Integer count = 0;
+		
+		try {
+			// B1: Tạo kết nối đến CSDL
+		
+			Connection connection = cnDatabase.getConnection();
+
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+
+			// B3: Thực thi một câu lệnh SQL
+			String sql = " SELECT count(*) as count FROM SACH " +
+					" WHERE TenSach like '%"+tenSach+"%'";
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				count = rs.getInt("count");				
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 	public JTable selectbyTenSach(JTable table, String tenSach) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		
-		
+			
 		try {
 			
 			// B1: Tạo kết nối đến CSDL

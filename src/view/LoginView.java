@@ -104,7 +104,7 @@ public class LoginView extends JFrame {
 				                "THÔNG BÁO",
 				                JOptionPane.INFORMATION_MESSAGE);
 //				        System.out.println("connect failure!");
-					new MainView(login.getHoten(), login.getChucVu()).setVisible(true);
+					new MainView(login.getHoten(), login.getChucVu(), login.getMaNV()).setVisible(true);
 					dispose();
 				}
 				else {

@@ -72,55 +72,55 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 		contentPane_DialogSTTTV.add(button_Luu_DialogSTTTV);
 
 		JLabel label_Ten_DialogSTTTV = new JLabel("New label");
-		label_Ten_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_Ten_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_Ten_DialogSTTTV.setBounds(53, 75, 72, 18);
 		label_Ten_DialogSTTTV.setText("Họ và tên: ");
 		contentPane_DialogSTTTV.add(label_Ten_DialogSTTTV);
 
 		label_MaDocGia_DialogSTTTV = new JLabel("New label");
-		label_MaDocGia_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		label_MaDocGia_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_MaDocGia_DialogSTTTV.setBounds(53, 32, 200, 21);
 		label_MaDocGia_DialogSTTTV.setText("Mã thành viên: " + docGia.getMaDocGia());
 		contentPane_DialogSTTTV.add(label_MaDocGia_DialogSTTTV);
 
 		JLabel label_SDT_DialogSTTTV = new JLabel("New label");
-		label_SDT_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_SDT_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_SDT_DialogSTTTV.setBounds(53, 115, 89, 18);
 		label_SDT_DialogSTTTV.setText("Số điện thoại: ");
 		contentPane_DialogSTTTV.add(label_SDT_DialogSTTTV);
 
 		JLabel label_DiaChi_DialogSTTTV = new JLabel("New label");
-		label_DiaChi_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_DiaChi_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_DiaChi_DialogSTTTV.setBounds(53, 155, 52, 18);
 		label_DiaChi_DialogSTTTV.setText("Địa chỉ: ");
 		contentPane_DialogSTTTV.add(label_DiaChi_DialogSTTTV);
 
 		JLabel label_NgaySinh_DialogSTTTV = new JLabel("New label");
-		label_NgaySinh_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_NgaySinh_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_NgaySinh_DialogSTTTV.setBounds(53, 195, 78, 18);
 		label_NgaySinh_DialogSTTTV.setText("Ngày sinh: ");
 		contentPane_DialogSTTTV.add(label_NgaySinh_DialogSTTTV);
 
 		label_MaThe__DialogSTTTV = new JLabel("New label");
-		label_MaThe__DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		label_MaThe__DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_MaThe__DialogSTTTV.setBounds(319, 32, 190, 21);
 		label_MaThe__DialogSTTTV.setText("Mã thẻ: " + theThanhVien.getMaThe());
 		contentPane_DialogSTTTV.add(label_MaThe__DialogSTTTV);
 
 		label_NgayDK_DialogSTTTV = new JLabel("New label");
-		label_NgayDK_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_NgayDK_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_NgayDK_DialogSTTTV.setBounds(319, 75, 190, 18);
 		label_NgayDK_DialogSTTTV.setText("Ngày đăng ký: " + theThanhVien.getNgayDangKy() + "");
 		contentPane_DialogSTTTV.add(label_NgayDK_DialogSTTTV);
 
 		label_HanThe_DialogSTTTV = new JLabel("New label");
-		label_HanThe_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_HanThe_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_HanThe_DialogSTTTV.setBounds(319, 115, 190, 18);
 		label_HanThe_DialogSTTTV.setText("Hạn thẻ: " + theThanhVien.getHanThe() + "");
 		contentPane_DialogSTTTV.add(label_HanThe_DialogSTTTV);
 
 		label_PhiDK_DialogSTTTV = new JLabel("New label");
-		label_PhiDK_DialogSTTTV.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		label_PhiDK_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_PhiDK_DialogSTTTV.setBounds(319, 155, 190, 18);
 		label_PhiDK_DialogSTTTV.setText("Phí đăng ký: " + theThanhVien.getPhiDangKy() + "");
 		contentPane_DialogSTTTV.add(label_PhiDK_DialogSTTTV);

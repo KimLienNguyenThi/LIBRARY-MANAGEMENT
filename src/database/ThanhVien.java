@@ -50,6 +50,104 @@ public class ThanhVien {
 		}
 	}
 	
+	
+	
+	public JTable selectAllLimit_QLQG(JTable table, int limit, int offset, String noidung) {
+
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		String TenDG = null, SDT = null, DiaChi = null, TinhTrang = null;
+		Date NgaySinh = null, NgayDK = null, HanThe = null;
+		int MaDG = 0, PhiDK = 0;
+		
+		try {
+			// B1: Tạo kết nối đến CSDL
+			Connection connection = cnDatabase.getConnection();
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+			// B3: Thực thi một câu lệnh SQL
+			
+			String sql = " SELECT docgia.* , thedocgia.NgayDK,thedocgia.HanThe,thedocgia.PhiDK "
+			+ "FROM quanlythuvien.docgia  JOIN quanlythuvien.thedocgia on docgia.MaDG = thedocgia.MaDG " 
+			+ " WHERE quanlythuvien.docgia.SDT LIKE '%" + noidung + "%' OR quanlythuvien.docgia.TenDG LIKE '%" + noidung + "%' "
+			+		" ORDER BY docgia.MaDG DESC limit " + limit + " offset " + offset + "";
+			System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				MaDG = rs.getInt("MaDG");
+				TenDG = rs.getString("TenDG");
+				SDT = rs.getString("SDT");
+				DiaChi = rs.getString("DiaChi");
+				NgaySinh = rs.getDate("NgaySinh");
+				NgayDK = rs.getDate("NgayDK");
+				HanThe = rs.getDate("HanThe");
+				PhiDK = rs.getInt("PhiDK");
+
+				long millis = System.currentTimeMillis();
+				java.sql.Date date = new java.sql.Date(millis);
+				if (HanThe.before(date) == true) {
+					TinhTrang = "Hết hạn";
+				} else {
+					TinhTrang = "Còn";
+				}
+
+				Object[] obj = { MaDG, TenDG, SDT, NgaySinh, DiaChi, NgayDK, HanThe, PhiDK, TinhTrang };
+				model.addRow(obj);
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return table;
+	}
+	
+	
+	public int selectAllCount_QLQG(String noidung) {
+		Integer count = 0;
+		
+		try {
+			// B1: Tạo kết nối đến CSDL
+		
+			Connection connection = cnDatabase.getConnection();
+
+			// B2: Tạo ra đối tượng Statement
+			Statement st = connection.createStatement();
+
+			// B3: Thực thi một câu lệnh SQL
+			String sql = " SELECT count(*) as count "
+			+ "FROM quanlythuvien.docgia  JOIN quanlythuvien.thedocgia on docgia.MaDG = thedocgia.MaDG " 
+			+ " WHERE quanlythuvien.docgia.SDT LIKE '%" + noidung + "%' OR quanlythuvien.docgia.TenDG LIKE '%" + noidung + "%' ";
+				
+			//System.out.println(sql);
+			ResultSet rs = st.executeQuery(sql); // trả về kết quả đã lấy ra (Kết quả lấy ra là 1 bộ dữ liệu đầy đủ
+													// thông tin)
+
+			// B4: Xử lý kết quả
+			while (rs.next()) { // dữ liệu trả gồm nhiều bộ dữ liệu nên dùng ArrayList để lưu trữ
+				count = rs.getInt("count");				
+			}
+
+			// B5: Ngắt kết nối CSDL
+			cnDatabase.disConnection(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("qqqqqqqqqqqq " + count);
+		return count;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public int KtraSDT_TTV(String sdt) {
 		int ketqua = 0;
 		String ketqua_SDT;

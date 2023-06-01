@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.CardLayout;
 import java.awt.Image;
+import java.awt.Panel;
+
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Desktop;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
@@ -57,6 +60,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.toedter.calendar.JDateChooser;
+
+import Paging.Pagination;
 import database.QuanLyNhapLo;
 import database.Service23;
 import database.ThanhVien;
@@ -115,7 +120,8 @@ public class MainView extends JFrame {
 	private JLabel lbl_Time_pm;
 	private JLabel lbl_NgayMuon_pm;
 	private JLabel lbl_MaThe_pm;
-
+	private JLabel lbl_MaNV_1_ThemLo = new JLabel();
+	private JLabel lbl_MaNhanVien = new JLabel();
 	private JButton lastClicked;
 	public JButton btn_TheDocGia_left;
 	public JButton btn_Library_top;
@@ -143,26 +149,84 @@ public class MainView extends JFrame {
 	private JPanel panelThemThanhVien;
 	private JTable tableMuonSach;
 	private JTextField textField;
-	public String chucvu;
 
+	private JPanel panel_table_qlnl;
+	private JScrollPane scrollPane_qlnl;
+	JPanel panelQuanLyNhapLo;
+	JPanel panelQuanLySach;
+	public int MaNV;
+	public JPanel panelQLPhieuMuon;
+	// ******************************
+	// Paging cho table quản Lý SÁch
+	JButton[] buttonsTable_QLSach = new JButton[9]; // tạo 9 button
+	final int PAGE_SIZE_Table_QLSach = 28; // kích thước mỗi trang muốn hiện
+	double tableRowCountTable_QLSach;
+	int totalPagesTable_QLSach; // Total số row của table đang phân trang
+	int currentPageTable_QLSach; // trang hiện tại đang hiện
+	int startRowTable_QLSach; // dòng lấy bắt đầu
+	int numbersTable_QLSach[]; // lưu số trang
+	JPanel pagingPanelTable_QLSach;
+	JPanel	pagingPanel_QLDG;
+	// ******************************
+	// Paging cho table quản Lý SÁch
+
+	// ******************************
+	// Paging cho table quan ly nhap lo
+	JButton[] buttonsTable_QLNL = new JButton[9]; // tạo 9 button
+	final int PAGE_SIZE_Table_QLNL = 10; // kích thước mỗi trang muốn hiện
+	double tableRowCount;
+	int totalPagesTable_QLNL; // Total số row của table đang phân trang
+	int currentPageTable_QLNL; // trang hiện tại đang hiện
+	int startRowTable_QLNL; // dòng lấy bắt đầu
+	int numbersTable_QLNL[]; // lưu số trang
+	public JPanel pagingPanel = null;
+	// ******************************
+	
+	// Paging cho table quan ly phieu muon
+	
+		JButton[] buttonsTable_QLPM = new JButton[9]; // tạo 9 button
+		final int PAGE_SIZE_Table_QLPM = 10; // kích thước mỗi trang muốn hiện
+		double tableRowCountTable_QLPM;
+		int totalPagesTable_QLPM; // Total số row của table đang phân trang
+		int currentPageTable_QLPM; // trang hiện tại đang hiện
+		int startRowTable_QLPM; // dòng lấy bắt đầu
+		int numbersTable_QLPM[]; // lưu số trang
+		JPanel pagingPanelTable_QLPM = null;
+		// ******************************
+		
+		// Paging cho table quản Lý doc gia
+		JButton[] buttonsTable_QLDG = new JButton[9]; // tạo 9 button
+		final int PAGE_SIZE_Table_QLDG = 4; // kích thước mỗi trang muốn hiện
+		double tableRowCountTable_QLDG;
+		int totalPagesTable_QLDG; // Total số row của table đang phân trang
+		int currentPageTable_QLDG; // trang hiện tại đang hiện
+		int startRowTable_QLDG; // dòng lấy bắt đầu
+		int numbersTable_QLDG[]; // lưu số trang
+		JPanel pagingPanelTable_QLDG;
+		private Container panelQlyDocGia;
+		// ******************************
 	/**
 	 * Launch the application.
 	 */
 
-	public MainView(String hotendn, String chucVu) {
-		  System.out.println(chucVu);
+	public MainView(String hotendn, String chucVu, int manv) {
+		System.out.println(chucVu);
+		System.out.println(manv);
 		setResizable(false);
-		
+
 		this.KhoiTaoButtonLeft();
 		check_quyen(chucVu);
 		this.init();
-				
+
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
-		//chucvu = chucVu;
+		MaNV = manv;
+
 		lbl_TenNhanVien.setText(hotendn);
-		PhieuMuonView.lbl_TenNhanVien.setText(hotendn);
+		lbl_MaNhanVien.setText(""+MaNV);;
 		
+		PhieuMuonView.lbl_TenNhanVien.setText(hotendn);
+
 	}
 
 	/**
@@ -170,7 +234,7 @@ public class MainView extends JFrame {
 	 */
 
 	public void init() {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 650);
 		contentPane = new JPanel();
@@ -257,7 +321,7 @@ public class MainView extends JFrame {
 		lbl_ChucNang_left.setBounds(0, 0, 238, 25);
 		panel_Left.add(lbl_ChucNang_left);
 
-		//btn_PhieuMuon_left = new JButton("PHIẾU MƯỢN");
+		// btn_PhieuMuon_left = new JButton("PHIẾU MƯỢN");
 		btn_PhieuMuon_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_PhieuMuon_left);
@@ -270,11 +334,11 @@ public class MainView extends JFrame {
 		btn_PhieuMuon_left.setBorderPainted(false);
 		btn_PhieuMuon_left.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btn_PhieuMuon_left.setBounds(0, 35, 238, 75);
-		
+
 		panel_Left.add(btn_PhieuMuon_left);
 		btn_PhieuMuon_left.setIcon(newIconBill);
 
-		//btn_QLPhieuMuon_left = new JButton("QLý PHIẾU MƯỢN");
+		// btn_QLPhieuMuon_left = new JButton("QLý PHIẾU MƯỢN");
 		btn_QLPhieuMuon_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Lấy dữ liệu dưới sql lên table
@@ -282,7 +346,8 @@ public class MainView extends JFrame {
 
 				// Cập nhật bảng Quản lý phiếu mượn
 				((DefaultTableModel) MainView.table_QuanLyPhieuMuon.getModel()).setRowCount(0);
-				Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
+				//Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
+				getPageDataTable_QLPM(1);
 
 				changeButtonColor(btn_QLPhieuMuon_left);
 				cardLayout.show(cardPanel, "panelQuanLyPhieuMuon");
@@ -297,7 +362,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QLPhieuMuon_left);
 		btn_QLPhieuMuon_left.setIcon(newIconMnBooks);
 
-		//btn_QuanLySach_left = new JButton("QUẢN LÝ SÁCH");
+		// btn_QuanLySach_left = new JButton("QUẢN LÝ SÁCH");
 		btn_QuanLySach_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLySach_left);
@@ -313,7 +378,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QuanLySach_left);
 		btn_QuanLySach_left.setIcon(newIconExChange);
 
-		//btn_QuanLyNhapLo_left = new JButton("QLý NHẬP LÔ");
+		// btn_QuanLyNhapLo_left = new JButton("QLý NHẬP LÔ");
 		btn_QuanLyNhapLo_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLyNhapLo_left);
@@ -329,7 +394,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_QuanLyNhapLo_left);
 		btn_QuanLyNhapLo_left.setIcon(newIconTrend);
 
-		//btn_TheDocGia_left = new JButton(" THẺ ĐỘC GIẢ");
+		// btn_TheDocGia_left = new JButton(" THẺ ĐỘC GIẢ");
 		btn_TheDocGia_left.setHorizontalAlignment(SwingConstants.LEADING);
 		btn_TheDocGia_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -345,7 +410,7 @@ public class MainView extends JFrame {
 		panel_Left.add(btn_TheDocGia_left);
 		btn_TheDocGia_left.setIcon(newIconMember);
 
-		//btn_QuanLyDocGia_left = new JButton("QLý ĐỘC GIẢ");
+		// btn_QuanLyDocGia_left = new JButton("QLý ĐỘC GIẢ");
 		btn_QuanLyDocGia_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_QuanLyDocGia_left);
@@ -401,9 +466,15 @@ public class MainView extends JFrame {
 
 		lbl_TenNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbl_TenNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
-		lbl_TenNhanVien.setBounds(120, 54, 131, 20);
+		lbl_TenNhanVien.setBounds(131, 54, 131, 20);
 		panel_pm.add(lbl_TenNhanVien);
-
+		
+		lbl_MaNhanVien.setText("<dynamic>");
+		lbl_MaNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_MaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_MaNhanVien.setBounds(116, 54, 131, 20);
+		panel_pm.add(lbl_MaNhanVien);
+		
 		JLabel lbl7_pm = new JLabel("Nhân viên: ");
 		lbl7_pm.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbl7_pm.setBounds(50, 54, 60, 20);
@@ -529,7 +600,7 @@ public class MainView extends JFrame {
 			}
 		};
 		table_pm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_pm.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		table_pm.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_pm.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 s\u00E1ch", "T\u00EAn s\u00E1ch", "T\u00E1c gi\u1EA3" }));
 		table_pm.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -582,10 +653,15 @@ public class MainView extends JFrame {
 				return false;
 			}
 		};
+		table_DocGia_pm.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_DocGia_pm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_DocGia_pm.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 Th\u1EBB", "H\u1ECD t\u00EAn", "S\u0110T", "\u0110\u1ECBa ch\u1EC9" }));
-
+		table_DocGia_pm.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table_DocGia_pm.getColumnModel().getColumn(1).setPreferredWidth(440);
+		table_DocGia_pm.getColumnModel().getColumn(2).setPreferredWidth(360);
+		table_DocGia_pm.getColumnModel().getColumn(3).setPreferredWidth(250);
+	
 		JScrollPane scrollPane_pm2 = new JScrollPane(table_DocGia_pm);
 		scrollPane_pm2.setBounds(0, 0, 299, 238);
 		panel_3.add(scrollPane_pm2);
@@ -658,16 +734,24 @@ public class MainView extends JFrame {
 		lblNewLabel.setBounds(0, 0, 849, 548);
 		panelPhieuMuon.add(lblNewLabel);
 
-		JPanel panelQLPhieuMuon = new JPanel();
+		panelQLPhieuMuon = new JPanel();
 		panelQLPhieuMuon.setBackground(new Color(255, 255, 255));
 		cardPanel.add(panelQLPhieuMuon, "panelQuanLyPhieuMuon");
 		panelQLPhieuMuon.setLayout(null);
 
 		JScrollPane scrollPane_qlpm = new JScrollPane();
-		scrollPane_qlpm.setBounds(10, 122, 829, 415);
+		scrollPane_qlpm.setBounds(10, 81, 829, 441);
 		panelQLPhieuMuon.add(scrollPane_qlpm);
 
 		textField_TimKiem_qlpm = new JTextField();
+		textField_TimKiem_qlpm.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					getPageDataTable_QLPM(1);
+				}
+			}
+		});
 		textField_TimKiem_qlpm.setForeground(new Color(0, 0, 0));
 		textField_TimKiem_qlpm.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_TimKiem_qlpm.setColumns(10);
@@ -681,21 +765,21 @@ public class MainView extends JFrame {
 			}
 		};
 		table_QuanLyPhieuMuon.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_QuanLyPhieuMuon.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		table_QuanLyPhieuMuon.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_QuanLyPhieuMuon.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 PM", "M\u00E3 th\u1EBB", "H\u1ECD t\u00EAn", "S\u0110T",
 						"Ng\u00E0y m\u01B0\u1EE3n", "H\u1EA1n tr\u1EA3", "T\u00ECnh tr\u1EA1ng" })
-				// ngăn chặn chỉnh sửa giá trịƠ
-				{
-			
-				public boolean isCellEditable(int row, int column) {
-					if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
-							|| column == 6 )
-						return false;
-					return super.isCellEditable(row, column);
-				}
+		// ngăn chặn chỉnh sửa giá trịƠ
+		{
 
-			});
+			public boolean isCellEditable(int row, int column) {
+				if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+						|| column == 6)
+					return false;
+				return super.isCellEditable(row, column);
+			}
+
+		});
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(0).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(1).setPreferredWidth(86);
 		table_QuanLyPhieuMuon.getColumnModel().getColumn(2).setPreferredWidth(64);
@@ -715,14 +799,15 @@ public class MainView extends JFrame {
 		});
 
 		// Lấy dữ liệu Quảng lý phiếu mượn từ sql lên table
-		Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
+	//	Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
 
 		// Sự kiện Tìm kiếm trong bảng quản lý phiếu mượn
-		SearchTable(table_QuanLyPhieuMuon, textField_TimKiem_qlpm);
+		//SearchTable(table_QuanLyPhieuMuon, textField_TimKiem_qlpm);
 
 		JButton btn_TimKiem_qlpm = new JButton("");
 		btn_TimKiem_qlpm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getPageDataTable_QLPM(1);
 			}
 		});
 		btn_TimKiem_qlpm.setOpaque(true);
@@ -735,12 +820,20 @@ public class MainView extends JFrame {
 		// Tạo popupMenu khi click chuộc phải vào hàng table
 		setupPopupMenu(table_QuanLyPhieuMuon, frame);
 
+		
+		// init phân trang sách
+		currentPageTable_QLPM = 1;
+		getCountTable_QLPM();
+		getPageDataTable_QLPM(1);
+			
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 		lblNewLabel_2.setBounds(0, 0, 849, 548);
 		panelQLPhieuMuon.add(lblNewLabel_2);
-
-		JPanel panelQuanLySach = new JPanel();
+		
+		
+	
+		panelQuanLySach = new JPanel();
 		panelQuanLySach.setBackground(new Color(255, 255, 255));
 		cardPanel.add(panelQuanLySach, "panelQuanLySach");
 		panelQuanLySach.setLayout(null);
@@ -752,35 +845,45 @@ public class MainView extends JFrame {
 		////////
 		// Quan Ly Sach
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 123, 829, 415);
+		// panel_2.setBounds(10, 123, 829, 415);
+		panel_2.setBounds(10, 97, 829, 423);
+
 		panelQuanLySach.add(panel_2);
 
 		table_QuanLySach = new JTable();
+		table_QuanLySach.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_QuanLySach.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "T\u00EAn S\u00E1ch", "T\u00E1c gi\u1EA3", "Nh\u00E0 XB", "N\u0103m XB",
-						"Th\u1EC3 Lo\u1EA1i", "Gi\u00E1 S\u00E1ch", "Ng\u00F4n ng\u1EEF", "T\u00ECnh tr\u1EA1ng" })
-				{
+						"Th\u1EC3 Lo\u1EA1i", "Gi\u00E1 S\u00E1ch", "Ng\u00F4n ng\u1EEF", "T\u00ECnh tr\u1EA1ng" }) {
 			// ngăn chặn chỉnh sửa giá trị
-						public boolean isCellEditable(int row, int column) {
-							if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
-									|| column == 6 || column == 7 || column == 8)
-								return false;
-							return super.isCellEditable(row, column);
-						}
+			public boolean isCellEditable(int row, int column) {
+				if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+						|| column == 6 || column == 7 || column == 8)
+					return false;
+				return super.isCellEditable(row, column);
+			}
 
-					});
-				
+		});
+
 		table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(40);
 		table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(40);
 		table_QuanLySach.getColumnModel().getColumn(8).setPreferredWidth(51);
 		panel_2.setLayout(null);
-		table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
+		// table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
 //	  	table_QuanLySach = QuanLySach.getInstance().selectbyTenSach(table_QuanLySach);
 		JScrollPane scrollPane = new JScrollPane(table_QuanLySach);
-		scrollPane.setBounds(0, 0, 829, 415);
+		scrollPane.setBounds(0, 0, 829, 423);
 		panel_2.add(scrollPane);
 
 		textField_Search = new JTextField();
+		textField_Search.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					getPageDataTable_QLSach(1);
+				}
+			}
+		});
 		textField_Search.setForeground(Color.LIGHT_GRAY);
 		textField_Search.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_Search.setColumns(10);
@@ -790,26 +893,31 @@ public class MainView extends JFrame {
 		// ----------->Xử lý tìm kiếm cho table_QuanLySach<-----------
 
 		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
-		TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(table_QuanLySach.getModel());
-
-		// Đặt TableRowSorter cho bảng
-		table_QuanLySach.setRowSorter(sorter1);
-
-		// Tạo sự kiện KeyReleased cho JTextField
-		textField_Search.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				String input = textField_Search.getText().trim(); // Lấy dữ liệu từ JTextField
-				if (input.length() == 0) {
-					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
-					sorter1.setRowFilter(null);
-				} else {
-					// Lọc dữ liệu theo nội dung JTextField
-					sorter1.setRowFilter(RowFilter.regexFilter("(?i)" + input));
-				}
-			}
-		});
+//		TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(table_QuanLySach.getModel());
+//
+//		// Đặt TableRowSorter cho bảng
+//		table_QuanLySach.setRowSorter(sorter1);
+//
+//		// Tạo sự kiện KeyReleased cho JTextField
+//		textField_Search.addKeyListener(new KeyAdapter() {
+//			public void keyReleased(KeyEvent e) {
+//				String input = textField_Search.getText().trim(); // Lấy dữ liệu từ JTextField
+//				if (input.length() == 0) {
+//					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
+//					sorter1.setRowFilter(null);
+//				} else {
+//					// Lọc dữ liệu theo nội dung JTextField
+//					sorter1.setRowFilter(RowFilter.regexFilter("(?i)" + input));
+//				}
+//			}
+//		});
 
 		JButton btn_TimKiem_qls = new JButton("");
+		btn_TimKiem_qls.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getPageDataTable_QLSach(1);
+			}
+		});
 		btn_TimKiem_qls.setOpaque(true);
 		btn_TimKiem_qls.setBorderPainted(false);
 		btn_TimKiem_qls.setBackground(new Color(226, 255, 153));
@@ -819,7 +927,7 @@ public class MainView extends JFrame {
 
 		JLabel lblNewLabel_3 = new JLabel("New label");
 		lblNewLabel_3.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-		lblNewLabel_3.setBounds(0, 0, 849, 548);
+		lblNewLabel_3.setBounds(0, 0, 849, 520);
 		panelQuanLySach.add(lblNewLabel_3);
 
 //		JPanel panelQuanLyDocGia = new JPanel();
@@ -872,7 +980,7 @@ public class MainView extends JFrame {
 		JLabel labelTitle_TTV = new JLabel("THẺ THÀNH VIÊN");
 		labelTitle_TTV.setForeground(new Color(0, 0, 0));
 		labelTitle_TTV.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitle_TTV.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		labelTitle_TTV.setFont(new Font("Tahoma", Font.BOLD, 30));
 		labelTitle_TTV.setBounds(10, 10, 809, 66);
 		panel_TTV.add(labelTitle_TTV);
 
@@ -941,6 +1049,7 @@ public class MainView extends JFrame {
 		button_Luu_TTV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				themThanhVien();
+				getPageDataTABLE_QLDG(1);
 			}
 		});
 		button_Luu_TTV.setFont(new Font("Tahoma", Font.BOLD, 17));
@@ -985,7 +1094,7 @@ public class MainView extends JFrame {
 		label_TTV.setBounds(0, 0, 849, 548);
 		panelThemThanhVien.add(label_TTV);
 
-		JPanel panelQlyDocGia = new JPanel();
+		 panelQlyDocGia = new JPanel();
 		panelQlyDocGia.setBackground(new Color(255, 255, 255));
 		cardPanel.add(panelQlyDocGia, "panelQlyDocGia");
 
@@ -999,7 +1108,22 @@ public class MainView extends JFrame {
 		panelQlyDocGia.add(textField_TimKiem_QLTV);
 		textField_TimKiem_QLTV.setColumns(10);
 
+		
+		textField_TimKiem_QLTV.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					getPageDataTABLE_QLDG(1);
+				}
+			}
+		});
+		
 		JButton btnTimKiem_QLTV = new JButton("");
+		btnTimKiem_QLTV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getPageDataTABLE_QLDG(1);
+			}
+		});
 		btnTimKiem_QLTV.setBackground(new Color(0xE2FF99));
 		btnTimKiem_QLTV.setOpaque(true);
 		btnTimKiem_QLTV.setBorderPainted(false);
@@ -1008,12 +1132,12 @@ public class MainView extends JFrame {
 		btnTimKiem_QLTV.setIcon(newIconTimKiem);
 
 		JPanel panel_QLTV = new JPanel();
-		panel_QLTV.setBounds(10, 114, 829, 423);
+		panel_QLTV.setBounds(10, 114, 829, 399);
 		panelQlyDocGia.add(panel_QLTV);
 		panel_QLTV.setLayout(null);
 
 		JScrollPane scrollPane_QLTV = new JScrollPane();
-		scrollPane_QLTV.setBounds(0, 0, 829, 423);
+		scrollPane_QLTV.setBounds(0, 0, 829, 401);
 		panel_QLTV.add(scrollPane_QLTV);
 
 		table_QLTV = new JTable() {
@@ -1028,18 +1152,17 @@ public class MainView extends JFrame {
 		table_QLTV.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 TV", "H\u1ECD v\u00E0 t\u00EAn", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i",
 						"Ng\u00E0y sinh", "\u0110\u1ECBa ch\u1EC9", "TG \u0111\u0103ng k\u00FD", "H\u1EA1n th\u1EBB",
-						"Ph\u00ED \u0111\u0103ng k\u00FD", "T\u00ECnh Tr\u1EA1ng" })
-				{
+						"Ph\u00ED \u0111\u0103ng k\u00FD", "T\u00ECnh Tr\u1EA1ng" }) {
 			// ngăn chặn chỉnh sửa giá trị
-						public boolean isCellEditable(int row, int column) {
-							if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
-									|| column == 6 || column == 7 || column == 8)
-								return false;
-							return super.isCellEditable(row, column);
-						}
+			public boolean isCellEditable(int row, int column) {
+				if (column == 0 || column == 1 || column == 2 || column == 3 || column == 4 || column == 5
+						|| column == 6 || column == 7 || column == 8)
+					return false;
+				return super.isCellEditable(row, column);
+			}
 
-					});
-				
+		});
+
 		table_QLTV.getColumnModel().getColumn(0).setPreferredWidth(39);
 		table_QLTV.getColumnModel().getColumn(1).setPreferredWidth(98);
 		table_QLTV.getColumnModel().getColumn(2).setPreferredWidth(74);
@@ -1066,14 +1189,20 @@ public class MainView extends JFrame {
 		// Tạo popupMenu khi click chuộc phải vào hàng table
 		setupPopupMenu_QLTV(table_QLTV, frame);
 
-		ThanhVien.getInstance().selectAll(table_QLTV);
+		//ThanhVien.getInstance().selectAll(table_QLTV);
 
 		// Tạo đối tượng TableRowSorter để lọc dữ liệu trong bảng
-		TableRowSorter<TableModel> sorter_QLTV = new TableRowSorter<>(table_QLTV.getModel());
+		//TableRowSorter<TableModel> sorter_QLTV = new TableRowSorter<>(table_QLTV.getModel());
 
 		// Đặt TableRowSorter cho bảng
-		table_QLTV.setRowSorter(sorter_QLTV);
+		//table_QLTV.setRowSorter(sorter_QLTV);
 
+		// khoi tao tach trang
+		currentPageTable_QLDG = 1;
+		getCountTABLE_QLDG();
+		getPageDataTABLE_QLDG(1);
+		
+		
 		JLabel lblNewLabel_4 = new JLabel("New label");
 		lblNewLabel_4.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 		lblNewLabel_4.setBounds(0, 0, 849, 548);
@@ -1085,17 +1214,27 @@ public class MainView extends JFrame {
 				String input = textField_TimKiem_QLTV.getText().trim(); // Lấy dữ liệu từ JTextField
 				if (input.length() == 0) {
 					// Nếu JTextField rỗng, hiển thị tất cả dữ liệu
-					sorter_QLTV.setRowFilter(null);
+					//sorter_QLTV.setRowFilter(null);
 				} else {
 					// Lọc dữ liệu theo nội dung JTextField
-					sorter_QLTV.setRowFilter(RowFilter.regexFilter("(?i)" + input));
+				//	sorter_QLTV.setRowFilter(RowFilter.regexFilter("(?i)" + input));
 				}
 			}
 		});
 
+		// init phân trang sách
+		currentPageTable_QLSach = 1;
+		getCountTable_QLSach();
+		getPageDataTable_QLSach(1);
+		// getPaginationDetailsTable_QLSach();
+
 		// QuanLyNhapLo
 		initTableQuanLyNhapLo();
 
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
+		lblNewLabel_5.setBounds(10, 10, 849, 548);
+		panelQuanLyNhapLo.add(lblNewLabel_5);
 	}
 
 	// Sự kiện btn_Huy_pm
@@ -1192,7 +1331,7 @@ public class MainView extends JFrame {
 					int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn không?", "Thông báo",
 							JOptionPane.YES_NO_OPTION);
 					if (dialogResult == JOptionPane.YES_OPTION) {
-						Service23.getInstance().InsertPhieuMuon(maTheDocGia, ngayMuon, ngayTra);
+						Service23.getInstance().InsertPhieuMuon(maTheDocGia, ngayMuon, ngayTra, MaNV);
 						ArrayList<Integer> arr = Service23.getInstance().SelectAllMaPm(maTheDocGia);
 						maPmLonNhat = Collections.max(arr);
 
@@ -1205,8 +1344,9 @@ public class MainView extends JFrame {
 							}
 							// Cập nhật bảng Quản lý phiếu mượn
 							((DefaultTableModel) MainView.table_QuanLyPhieuMuon.getModel()).setRowCount(0);
-							Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
-
+							//Service23.getInstance().SelectAllPhieuMuon(table_QuanLyPhieuMuon);
+							getPageDataTable_QLPM(1);
+							
 							// Cập nhật bảng Thêm sách
 							((DefaultTableModel) DiaLog_ThemSach_PM.table.getModel()).setRowCount(0);
 							Service23.getInstance().SelectAllSachCon(DiaLog_ThemSach_PM.table);
@@ -1257,6 +1397,7 @@ public class MainView extends JFrame {
 
 			}
 		}
+		getPageDataTable_QLSach(1);
 	}
 
 	// Hàm Xử lý Tìm kiếm trong table
@@ -1350,7 +1491,7 @@ public class MainView extends JFrame {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							new Dialog_XemChiTiet_QLPM(jFrame, row + 1).setVisible(true);
+							showDialog_XemChiTiet_QLPM( MaPM );
 						}
 					});
 
@@ -1368,7 +1509,8 @@ public class MainView extends JFrame {
 
 								// Cập nhật bảng Quản lý phiếu mượn
 								((DefaultTableModel) table.getModel()).setRowCount(0);
-								Service23.getInstance().SelectAllPhieuMuon(table);
+								//Service23.getInstance().SelectAllPhieuMuon(table);
+								getPageDataTable_QLPM(1);
 
 								JOptionPane.showMessageDialog(null, "Đã cập nhật!");
 							} else {
@@ -1390,6 +1532,7 @@ public class MainView extends JFrame {
 
 		// khoi tao lần đầu
 		table_QuanLyNhapLo = new JTable();
+		table_QuanLyNhapLo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 		table_QuanLyNhapLo
 				.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Mã Nhập Lô", "T\u00EAn NCC",
@@ -1402,7 +1545,7 @@ public class MainView extends JFrame {
 						return super.isCellEditable(row, column);
 					}
 				});
-
+		
 		table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(37);
 		table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(63);
 		table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(74);
@@ -1418,33 +1561,34 @@ public class MainView extends JFrame {
 							.valueOf(table_QuanLyNhapLo.getValueAt(table_QuanLyNhapLo.getSelectedRow(), 0).toString());
 					System.out.println(idSelectedPhieuNhapLo);
 				}
-
 			}
 		});
 
 		table_QuanLyNhapLo.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table_QuanLyNhapLo.setFillsViewportHeight(true);
 
-		LoadDataList();
+		// LoadDataList();
 		AddPopUp();
 
-		JPanel panelQuanLyNhapLo = new JPanel();
+		panelQuanLyNhapLo = new JPanel();
 		panelQuanLyNhapLo.setBackground(new Color(255, 255, 255));
 		cardPanel.add(panelQuanLyNhapLo, "panelQuanLyNhapLo");
 		panelQuanLyNhapLo.setLayout(null);
 
-		JPanel panel_table_qlnl = new JPanel();
-		panel_table_qlnl.setBounds(10, 123, 829, 415);
+		panel_table_qlnl = new JPanel();
+		// panel_table_qlnl.setBounds(10, 123, 829, 415);ttt
+		panel_table_qlnl.setBounds(10, 120, 829, 400);
 		panelQuanLyNhapLo.add(panel_table_qlnl);
 		panel_table_qlnl.setLayout(null);
 
-		JScrollPane scrollPane_qlnl = new JScrollPane(table_QuanLyNhapLo);
+		scrollPane_qlnl = new JScrollPane(table_QuanLyNhapLo);
 		scrollPane_qlnl.setBounds(0, 0, 829, 415);
 		panel_table_qlnl.add(scrollPane_qlnl);
 
 		JButton btn_TimKiem_qlnl = new JButton("");
 		btn_TimKiem_qlnl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getPageData(1);
 			}
 		});
 		btn_TimKiem_qlnl.setOpaque(true);
@@ -1456,6 +1600,14 @@ public class MainView extends JFrame {
 		btn_TimKiem_qlnl.setIcon(newIconTimKiem);
 
 		textField_TimKiem_qlnl = new JTextField();
+		textField_TimKiem_qlnl.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					getPageData(1);
+				}
+			}
+		});
 		textField_TimKiem_qlnl.setText("");
 		textField_TimKiem_qlnl.setForeground(Color.LIGHT_GRAY);
 		textField_TimKiem_qlnl.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -1464,10 +1616,11 @@ public class MainView extends JFrame {
 		textField_TimKiem_qlnl.setBounds(510, 10, 300, 45);
 		panelQuanLyNhapLo.add(textField_TimKiem_qlnl);
 
-		SearchTable(table_QuanLyNhapLo, textField_TimKiem_qlnl);
+		// tìm từ db nên ko sài
+		// SearchTable(table_QuanLyNhapLo, textField_TimKiem_qlnl);
 
 		JButton btn_Them_QlNhapLo = new JButton("Thêm");
-		btn_Them_QlNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btn_Them_QlNhapLo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_Them_QlNhapLo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				them_lo();
@@ -1484,7 +1637,7 @@ public class MainView extends JFrame {
 				// dispose();
 			}
 		});
-		btn_XemChiTiet_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btn_XemChiTiet_QLNhapLo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_XemChiTiet_QLNhapLo.setBounds(290, 75, 100, 29);
 		panelQuanLyNhapLo.add(btn_XemChiTiet_QLNhapLo);
 
@@ -1495,23 +1648,23 @@ public class MainView extends JFrame {
 
 			}
 		});
-		btn_QLNCC_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btn_QLNCC_QLNhapLo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_QLNCC_QLNhapLo.setBounds(490, 75, 100, 29);
-		btn_QLNCC_QLNhapLo.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btn_QLNCC_QLNhapLo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelQuanLyNhapLo.add(btn_QLNCC_QLNhapLo);
 
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
-		lblNewLabel_5.setBounds(0, 0, 849, 548);
-		panelQuanLyNhapLo.add(lblNewLabel_5);
-
+		// khoi tao trang dau tien
+		currentPageTable_QLNL = 1;
+		getCount();
+		getPageData(1);
+		// getPaginationDetails();
 	}
 
-	public void LoadDataList() {
-		((DefaultTableModel) table_QuanLyNhapLo.getModel()).setRowCount(0);
-		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
-		table_QuanLyNhapLo = QuanLyNhapLo.getInstance().selectAll(table_QuanLyNhapLo);
-	}
+//	public void LoadDataList() {
+//		((DefaultTableModel) table_QuanLyNhapLo.getModel()).setRowCount(0);
+//		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+//		table_QuanLyNhapLo = QuanLyNhapLo.getInstance().selectAll(table_QuanLyNhapLo);
+//	}
 
 	public class RowPopup extends JPopupMenu {
 		public RowPopup(JTable table) {
@@ -1612,7 +1765,11 @@ public class MainView extends JFrame {
 	}
 
 	public void them_lo() {
-		new Dialog_ThemLo_QLNL(this).setVisible(true);
+		new Dialog_ThemLo_QLNL(this, MaNV).setVisible(true);
+	}
+	
+	public void showDialog_XemChiTiet_QLPM(int MaPM) {
+		new Dialog_XemChiTiet_QLPM(this, MaPM).setVisible(true);
 	}
 
 	public void QuanLy_NCC() {
@@ -1628,7 +1785,6 @@ public class MainView extends JFrame {
 			new Dialog_XemChiTiet_QLNL(this, idSelectedPhieuNhapLo).setVisible(true);
 
 		}
-
 	}
 
 	public void themThanhVien() {
@@ -1639,10 +1795,10 @@ public class MainView extends JFrame {
 		// Date now
 		long millis = System.currentTimeMillis();
 		java.sql.Date dateNow = new java.sql.Date(millis);
-		if (chooser_NgaySinh_TTV.getDate() == null  ) {
+		if (chooser_NgaySinh_TTV.getDate() == null) {
 			JOptionPane.showMessageDialog(frame, "Vui lòng điền đủ thông tin!!!", "THÔNG BÁO",
 					JOptionPane.ERROR_MESSAGE);
-			}
+		}
 		// Format Chosser về dd/MM/yyy để kiểm tra tính đúng đắn của dữ liệu
 		SimpleDateFormat d = new SimpleDateFormat("dd-MM-yyyy");
 		String formattedD = d.format(chooser_NgaySinh_TTV.getDate());
@@ -1804,7 +1960,7 @@ public class MainView extends JFrame {
 					menuItemSuaThongTin_QLTV.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							new Dialog_SuaThongTinThanhVien(jFrame, row + 1);
+							new Dialog_SuaThongTinThanhVien(jFrame, MaDocGia_QLTV);
 						}
 					});
 
@@ -1812,7 +1968,7 @@ public class MainView extends JFrame {
 					menuItemGiaHanThe_QLTV.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							new Dialog_GiaHanTheThanhVien(jFrame, row + 1);
+							new Dialog_GiaHanTheThanhVien(jFrame, MaDocGia_QLTV);
 						}
 					});
 
@@ -1827,11 +1983,11 @@ public class MainView extends JFrame {
 	/// Hàm load lại danh sach sách
 
 	// load table sách
-	public void LoadTableSach() {
-		((DefaultTableModel) table_QuanLySach.getModel()).setRowCount(0);
-		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
-		table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
-	}
+//	public void LoadTableSach() {
+//		((DefaultTableModel) table_QuanLySach.getModel()).setRowCount(0);
+//		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+//		table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
+//	}
 
 	// load table doc gia phieu muon
 	public static void LoadTableDocGiaPM() {
@@ -1846,16 +2002,18 @@ public class MainView extends JFrame {
 		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
 		table_QLTV = ThanhVien.getInstance().selectAll(table_QLTV);
 	}
+
 	public void chucvu_quanlykho() {
 		// ẩn đi những chức năng nhân viên đó không có quyền thực hiện
 		btn_PhieuMuon_left.setEnabled(false);
 		btn_QLPhieuMuon_left.setEnabled(false);
 		btn_QuanLyDocGia_left.setEnabled(false);
 		btn_TheDocGia_left.setEnabled(false);
-		System.out.println("adada!" + chucvu);
+
 //		btn_QuanLySach_left.setEnabled(true);
 //		btn_QuanLyNhapLo_left.setEnabled(true);
 	}
+
 	public void chucvu_nhanvien() {
 		// ẩn đi những chức năng nhân viên đó không có quyền thực hiện
 //		btn_PhieuMuon_left.setEnabled(true);
@@ -1864,9 +2022,10 @@ public class MainView extends JFrame {
 //		btn_TheDocGia_left.setEnabled(true);
 		btn_QuanLySach_left.setEnabled(false);
 		btn_QuanLyNhapLo_left.setEnabled(false);
-		
+
 	}
-	public void khongcoquyentruycap () {
+
+	public void khongcoquyentruycap() {
 		btn_PhieuMuon_left.setEnabled(false);
 		btn_QLPhieuMuon_left.setEnabled(false);
 		btn_QuanLyDocGia_left.setEnabled(false);
@@ -1874,21 +2033,20 @@ public class MainView extends JFrame {
 		btn_QuanLySach_left.setEnabled(false);
 		btn_QuanLyNhapLo_left.setEnabled(false);
 	}
+
 	public void check_quyen(String chucvu) {
-		 
-		if(chucvu == null) {
+
+		if (chucvu == null) {
 			khongcoquyentruycap();
-		}
-		else if(chucvu.equals("manage_stock")) {
+		} else if (chucvu.equals("manage_stock")) {
 			chucvu_quanlykho();
 			System.out.println("adada1!" + chucvu);
-		}
-		else if(chucvu.equals("staff") )
-		{
+		} else if (chucvu.equals("staff")) {
 			chucvu_nhanvien();
 		}
-		
+
 	}
+
 	public void KhoiTaoButtonLeft() {
 		btn_QLPhieuMuon_left = new JButton("QLý PHIẾU MƯỢN");
 		btn_PhieuMuon_left = new JButton("PHIẾU MƯỢN");
@@ -1897,4 +2055,574 @@ public class MainView extends JFrame {
 		btn_QuanLySach_left = new JButton("QUẢN LÝ SÁCH");
 		btn_QuanLyNhapLo_left = new JButton("QLý NHẬP LÔ");
 	}
+
+	// ******************************
+	// Paging cho table quan ly nhap lo
+
+	public void getPaginationDetails() {
+		if (pagingPanel != null && pagingPanel.countComponents() != 0) {
+			System.out.println("rrtetetetet  ");
+			pagingPanel.removeAll();
+			pagingPanel.revalidate();
+			pagingPanel.repaint();
+		} else {
+			pagingPanel = new JPanel();
+			pagingPanel.setBackground(new Color(255, 255, 255));
+			pagingPanel.setBounds(10, 518, 829, 29);
+			panelQuanLyNhapLo.add(pagingPanel);
+		}
+
+		numbersTable_QLNL = Pagination.getPageNos(currentPageTable_QLNL, totalPagesTable_QLNL);
+		buttonsTable_QLNL[0] = new JButton("Start");
+		buttonsTable_QLNL[0].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = "1";
+				getPageData(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanel.add(buttonsTable_QLNL[0]);
+		buttonsTable_QLNL[1] = new JButton("<<");
+		buttonsTable_QLNL[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLNL - 1) + "";
+				getPageData(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanel.add(buttonsTable_QLNL[1]);
+		for (int i = 0; i < numbersTable_QLNL.length; i++) {
+			if (numbersTable_QLNL[i] != 0) {
+				buttonsTable_QLNL[i + 2] = new JButton(numbersTable_QLNL[i] + "");
+				buttonsTable_QLNL[i + 2].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						var pageNumber = ((JButton) e.getSource()).getText();
+						getPageData(Integer.parseInt(pageNumber));
+					}
+				});
+				pagingPanel.add(buttonsTable_QLNL[i + 2]);
+			}
+			if (numbersTable_QLNL[i] == currentPageTable_QLNL && currentPageTable_QLNL != 0) {
+				buttonsTable_QLNL[i + 2].setBackground(Color.BLUE);
+			}
+		}
+		buttonsTable_QLNL[7] = new JButton(">>");
+		buttonsTable_QLNL[7].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLNL + 1) + "";
+				getPageData(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanel.add(buttonsTable_QLNL[7]);
+		buttonsTable_QLNL[8] = new JButton("End");
+		buttonsTable_QLNL[8].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (totalPagesTable_QLNL) + "";
+				getPageData(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanel.add(buttonsTable_QLNL[8]);
+		/* ẩn button khi trang hiện tại là 1 Start và << */
+		if (currentPageTable_QLNL == 1) {
+			buttonsTable_QLNL[0].setEnabled(false);
+			buttonsTable_QLNL[1].setEnabled(false);
+		}
+		/* ẩn button khi trang hiện tại là cúng cùi >> và End */
+		if (currentPageTable_QLNL == totalPagesTable_QLNL && currentPageTable_QLNL != 0) {
+			buttonsTable_QLNL[7].setEnabled(false);
+			buttonsTable_QLNL[8].setEnabled(false);
+		}
+		if (currentPageTable_QLNL == 0) {
+			buttonsTable_QLNL[7].setEnabled(false);
+			buttonsTable_QLNL[8].setEnabled(false);
+			buttonsTable_QLNL[0].setEnabled(false);
+			buttonsTable_QLNL[1].setEnabled(false);
+		}
+	}
+
+	/* Lấy tổng số row của table và tính toán số trang */
+	public void getCount() {
+		tableRowCount = QuanLyNhapLo.getInstance().selectAllCount(textField_TimKiem_qlnl.getText().trim());
+		if (tableRowCount > 0) {
+			totalPagesTable_QLNL = (int) Math.ceil(tableRowCount / PAGE_SIZE_Table_QLNL);
+
+			System.out.println("rrrow count is " + tableRowCount + "page Count" + totalPagesTable_QLNL);
+		} else {
+			totalPagesTable_QLNL = 0;
+			currentPageTable_QLNL = 0;
+			tableRowCount = 0;
+			JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu!");
+		}
+	}
+
+	/* Get data from table based on page no */
+	public void getPageData(int pageNo) {
+		currentPageTable_QLNL = pageNo;
+		getCount();
+		System.out.println("row count issss " + pageNo);
+		// tính toán row bắt đầu phân trang
+		startRowTable_QLNL = PAGE_SIZE_Table_QLNL * (pageNo - 1);
+		LoadDataListLimit(PAGE_SIZE_Table_QLNL, startRowTable_QLNL);
+		getPaginationDetails();
+	}
+
+	// Hàm load lại data với lấy số row và bỏ qua số row
+	public void LoadDataListLimit(int limit, int offset) {
+		((DefaultTableModel) table_QuanLyNhapLo.getModel()).setRowCount(0);
+		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+		table_QuanLyNhapLo = QuanLyNhapLo.getInstance().selectAllLimit(table_QuanLyNhapLo, limit, offset,
+				textField_TimKiem_qlnl.getText().trim());
+	}
+
+	// Kết phần phân trang cho table QL nhập lô
+	// ******************************
+
+	// ******************************
+	
+	// Paging cho table quản Lý SÁch
+
+	public void getPaginationDetailsTable_QLSach() {
+		if (pagingPanelTable_QLSach != null && pagingPanelTable_QLSach.countComponents() != 0) {
+			System.out.println("etPaginationDetailsTable_QLSachhh11");
+			pagingPanelTable_QLSach.removeAll();
+			pagingPanelTable_QLSach.revalidate();
+			pagingPanelTable_QLSach.repaint();
+		} else {
+			pagingPanelTable_QLSach = new JPanel();
+			pagingPanelTable_QLSach.setBackground(new Color(255, 255, 255));
+			pagingPanelTable_QLSach.setBounds(10, 518, 829, 29);
+			panelQuanLySach.add(pagingPanelTable_QLSach);
+		}
+
+		// tính toán số button sẽ hiện thị giữa start << ... >> end
+		numbersTable_QLSach = Pagination.getPageNos(currentPageTable_QLSach, totalPagesTable_QLSach);
+		System.out.println("aanumbersTable_QLSachrow count is " + numbersTable_QLSach.length + "page Count"
+				+ totalPagesTable_QLSach);
+
+		// button start khi click vào set page hiện tai =1
+		buttonsTable_QLSach[0] = new JButton("Start");
+		buttonsTable_QLSach[0].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = "1";
+				getPageDataTable_QLSach(Integer.parseInt(pageNumber));
+			}
+		});
+
+		// button << giảm 1 trang khi click
+		pagingPanelTable_QLSach.add(buttonsTable_QLSach[0]);
+		buttonsTable_QLSach[1] = new JButton("<<");
+		buttonsTable_QLSach[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLSach - 1) + "";
+				getPageDataTable_QLSach(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLSach.add(buttonsTable_QLSach[1]);
+
+		// for số button ở giữa và add hành đông click vào, khi click vào thì lấy số
+		// hiện thị truyền vào hàm để load lại data
+		for (int i = 0; i < numbersTable_QLSach.length; i++) {
+			if (numbersTable_QLSach[i] != 0) {
+				buttonsTable_QLSach[i + 2] = new JButton(numbersTable_QLSach[i] + "");
+				buttonsTable_QLSach[i + 2].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// get số hiện thi trên button và truyên va@o ham
+						var pageNumber = ((JButton) e.getSource()).getText();
+						getPageDataTable_QLSach(Integer.parseInt(pageNumber));
+					}
+				});
+				pagingPanelTable_QLSach.add(buttonsTable_QLSach[i + 2]);
+			}
+			if (numbersTable_QLSach[i] == currentPageTable_QLSach && currentPageTable_QLSach != 0) {
+				buttonsTable_QLSach[i + 2].setBackground(Color.BLUE);
+			}
+		}
+
+		// button >> +1 page khi click
+		buttonsTable_QLSach[7] = new JButton(">>");
+		buttonsTable_QLSach[7].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLSach + 1) + "";
+				getPageDataTable_QLSach(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLSach.add(buttonsTable_QLSach[7]);
+
+		// button end khi click thì đến trang cuối
+		buttonsTable_QLSach[8] = new JButton("End");
+		buttonsTable_QLSach[8].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (totalPagesTable_QLSach) + "";
+				getPageDataTable_QLSach(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLSach.add(buttonsTable_QLSach[8]);
+		/* ẩn button khi trang hiện tại là 1 Start và << */
+		if (currentPageTable_QLSach == 1) {
+			buttonsTable_QLSach[0].setEnabled(false);
+			buttonsTable_QLSach[1].setEnabled(false);
+		}
+		/* ẩn button khi trang hiện tại là cúng cùi >> và End */
+		if (currentPageTable_QLSach == totalPagesTable_QLSach && currentPageTable_QLSach != 0) {
+			buttonsTable_QLSach[7].setEnabled(false);
+			buttonsTable_QLSach[8].setEnabled(false);
+		}
+		// nêú ko có row nào thì ẩn 4 button
+		if (currentPageTable_QLSach == 0) {
+			buttonsTable_QLSach[7].setEnabled(false);
+			buttonsTable_QLSach[8].setEnabled(false);
+			buttonsTable_QLSach[0].setEnabled(false);
+			buttonsTable_QLSach[1].setEnabled(false);
+		}
+	}
+
+	/* Lấy tổng số row của table và tính toán số trang */
+	public void getCountTable_QLSach() {
+		// lấy search trên giao diện
+		String search = textField_Search.getText().trim();
+		// get tổng row của table
+		tableRowCountTable_QLSach = QuanLySach.getInstance().selectAllCount(search);
+		if (tableRowCountTable_QLSach > 0) {
+			// có số row của table thì tính toán số trang
+			totalPagesTable_QLSach = (int) Math.ceil(tableRowCountTable_QLSach / PAGE_SIZE_Table_QLSach);
+			System.out.println("getCountTable_QLSach row count is " + tableRowCountTable_QLSach + "page Count"
+					+ totalPagesTable_QLSach);
+		} else {
+			// nếu ko có row nào thì set = 0 để ẩn 4 button << >> end start
+			tableRowCountTable_QLSach = 0;
+			currentPageTable_QLSach = 0;
+			totalPagesTable_QLSach = 0;
+			JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu!");
+		}
+	}
+
+	/* Get data from table based on page no */
+	public void getPageDataTable_QLSach(int pageNo) {
+		currentPageTable_QLSach = pageNo;
+
+		// thực hiện get tổng row, tính toán số trang
+		getCountTable_QLSach();
+
+		System.out.println("row count getPageDataTable_QLSach " + pageNo);
+		// tính toán row bắt đầu phân trang
+		startRowTable_QLSach = PAGE_SIZE_Table_QLSach * (pageNo - 1);
+		// load lại data sau khi thực hiện thêm sửa xóa. thay đổi chọn trang
+		LoadDataListLimitTable_QLSach(PAGE_SIZE_Table_QLSach, startRowTable_QLSach);
+		// thực hiện load lại button chọn trang ben dưới
+		getPaginationDetailsTable_QLSach();
+	}
+
+	// Hàm load lại data với lấy số row và bỏ qua số row
+	public void LoadDataListLimitTable_QLSach(int limit, int offset) {
+		((DefaultTableModel) table_QuanLySach.getModel()).setRowCount(0);
+		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+		table_QuanLySach = QuanLySach.getInstance().selectAllLimit(table_QuanLySach, limit, offset,
+				textField_Search.getText().trim());
+	}
+
+	// Kết phần phân trang cho table QL Sách
+	// ******************************
+	
+	
+	
+	
+	// Paging cho table quản Lý phieu muon
+
+	public void getPaginationDetailsTable_QLPM() {
+		if (pagingPanelTable_QLPM != null && pagingPanelTable_QLPM.countComponents() != 0) {
+			System.out.println("etPaginationDetailsTable_QLSachhh11");
+			pagingPanelTable_QLPM.removeAll();
+			pagingPanelTable_QLPM.revalidate();
+			pagingPanelTable_QLPM.repaint();
+		} else {
+			pagingPanelTable_QLPM = new JPanel();
+			pagingPanelTable_QLPM.setBackground(new Color(255, 255, 255));
+			pagingPanelTable_QLPM.setBounds(10, 518, 829, 29);
+			panelQLPhieuMuon.add(pagingPanelTable_QLPM);
+		}
+
+		// tính toán số button sẽ hiện thị giữa start << ... >> end
+		numbersTable_QLPM = Pagination.getPageNos(currentPageTable_QLPM, totalPagesTable_QLPM);
+		System.out.println("currentPageTable_QLPM=? " + currentPageTable_QLPM + "page Count"+ totalPagesTable_QLPM);
+		System.out.println("aanumbersTable_QLPMrow count is " + numbersTable_QLPM.length + "page Count"+ totalPagesTable_QLPM);
+
+		// button start khi click vào set page hiện tai =1
+		buttonsTable_QLPM[0] = new JButton("Start");
+		buttonsTable_QLPM[0].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = "1";
+				getPageDataTable_QLPM(Integer.parseInt(pageNumber));
+			}
+		});
+
+		// button << giảm 1 trang khi click
+		pagingPanelTable_QLPM.add(buttonsTable_QLPM[0]);
+		buttonsTable_QLPM[1] = new JButton("<<");
+		buttonsTable_QLPM[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLPM - 1) + "";
+				getPageDataTable_QLPM(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLPM.add(buttonsTable_QLPM[1]);
+
+		// for số button ở giữa và add hành đông click vào, khi click vào thì lấy số
+		// hiện thị truyền vào hàm để load lại data
+		for (int i = 0; i < numbersTable_QLPM.length; i++) {
+			if (numbersTable_QLPM[i] != 0) {
+				buttonsTable_QLPM[i + 2] = new JButton(numbersTable_QLPM[i] + "");
+				buttonsTable_QLPM[i + 2].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// get số hiện thi trên button và truyên va@o ham
+						var pageNumber = ((JButton) e.getSource()).getText();
+						getPageDataTable_QLPM(Integer.parseInt(pageNumber));
+					}
+				});
+				pagingPanelTable_QLPM.add(buttonsTable_QLPM[i + 2]);
+			}
+			if (numbersTable_QLPM[i] == currentPageTable_QLPM && currentPageTable_QLPM != 0) {
+				buttonsTable_QLPM[i + 2].setBackground(Color.BLUE);
+			}
+		}
+
+		// button >> +1 page khi click
+		buttonsTable_QLPM[7] = new JButton(">>");
+		buttonsTable_QLPM[7].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (currentPageTable_QLPM + 1) + "";
+				getPageDataTable_QLPM(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLPM.add(buttonsTable_QLPM[7]);
+
+		// button end khi click thì đến trang cuối
+		buttonsTable_QLPM[8] = new JButton("End");
+		buttonsTable_QLPM[8].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var pageNumber = (totalPagesTable_QLPM) + "";
+				getPageDataTable_QLPM(Integer.parseInt(pageNumber));
+			}
+		});
+		pagingPanelTable_QLPM.add(buttonsTable_QLPM[8]);
+		/* ẩn button khi trang hiện tại là 1 Start và << */
+		if (currentPageTable_QLPM == 1) {
+			buttonsTable_QLPM[0].setEnabled(false);
+			buttonsTable_QLPM[1].setEnabled(false);
+		}
+		/* ẩn button khi trang hiện tại là cúng cùi >> và End */
+		if (currentPageTable_QLPM == totalPagesTable_QLPM && currentPageTable_QLPM != 0) {
+			buttonsTable_QLPM[7].setEnabled(false);
+			buttonsTable_QLPM[8].setEnabled(false);
+		}
+		// nêú ko có row nào thì ẩn 4 button
+		if (currentPageTable_QLPM == 0) {
+			buttonsTable_QLPM[7].setEnabled(false);
+			buttonsTable_QLPM[8].setEnabled(false);
+			buttonsTable_QLPM[0].setEnabled(false);
+			buttonsTable_QLPM[1].setEnabled(false);
+		}
+	}
+
+	/* Lấy tổng số row của table và tính toán số trang */
+	public void getCountTable_QLPM() {
+		// lấy search trên giao diện
+		String search = textField_TimKiem_qlpm.getText().trim();
+		// get tổng row của table
+		tableRowCountTable_QLPM = Service23.getInstance().selectAllCount(search);
+		if (tableRowCountTable_QLPM > 0) {
+			// có số row của table thì tính toán số trang
+			totalPagesTable_QLPM = (int) Math.ceil(tableRowCountTable_QLPM / PAGE_SIZE_Table_QLPM);
+			
+			System.out.println("getCountTable_QLPM row count is " + tableRowCountTable_QLPM + "page Count"
+					+ totalPagesTable_QLPM);
+		} else {
+			// nếu ko có row nào thì set = 0 để ẩn 4 button << >> end start
+			tableRowCountTable_QLPM = 0;
+			currentPageTable_QLPM = 0;
+			totalPagesTable_QLPM = 0;
+			JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu!");
+		}
+	}
+
+	/* Get data from table based on page no */
+	public void getPageDataTable_QLPM(int pageNo) {
+		currentPageTable_QLPM = pageNo;
+
+		// thực hiện get tổng row, tính toán số trang
+		getCountTable_QLPM();
+
+		System.out.println("row count getPageDataTable_QLPM " + pageNo);
+		// tính toán row bắt đầu phân trang
+		startRowTable_QLPM = PAGE_SIZE_Table_QLPM * (pageNo - 1);
+		// load lại data sau khi thực hiện thêm sửa xóa. thay đổi chọn trang
+		LoadDataListLimitTable_QLPM(PAGE_SIZE_Table_QLPM, startRowTable_QLPM);
+		// thực hiện load lại button chọn trang ben dưới
+		getPaginationDetailsTable_QLPM();
+	}
+
+	// Hàm load lại data với lấy số row và bỏ qua số row
+	public void LoadDataListLimitTable_QLPM(int limit, int offset) {
+		((DefaultTableModel) table_QuanLyPhieuMuon.getModel()).setRowCount(0);
+		// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+		table_QuanLyPhieuMuon = Service23.getInstance().SelectAllPhieuMuonlimit(table_QuanLyPhieuMuon, limit, offset,
+				textField_TimKiem_qlpm.getText().trim());
+	}
+
+	// Kết phần phân trang cho table QL phieumuon
+	// ******************************
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Paging cho table quan ly DOC GIA
+
+		public void getPaginationDetailsTABLE_QLDG() {
+			if (pagingPanel_QLDG != null && pagingPanel_QLDG.countComponents() != 0) {
+				System.out.println("rrtetetetet  ");
+				pagingPanel_QLDG.removeAll();
+				pagingPanel_QLDG.revalidate();
+				pagingPanel_QLDG.repaint();
+			} else {
+				pagingPanel_QLDG = new JPanel();
+				pagingPanel_QLDG.setBackground(new Color(255, 255, 255));
+				pagingPanel_QLDG.setBounds(10, 518, 829, 29);
+				panelQlyDocGia.add(pagingPanel_QLDG);
+			}
+
+			numbersTable_QLDG = Pagination.getPageNos(currentPageTable_QLDG, totalPagesTable_QLDG);
+			System.out.println("numbersTable_QLDG count is " + numbersTable_QLDG.length 
+					+ "totalPagesTable_QLDGpage Count" + totalPagesTable_QLDG
+					+ "currentPageTable_QLDG: " + currentPageTable_QLDG);
+			
+			buttonsTable_QLDG[0] = new JButton("Start");
+			buttonsTable_QLDG[0].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					var pageNumber = "1";
+					getPageDataTABLE_QLDG(Integer.parseInt(pageNumber));
+				}
+			});
+			pagingPanel_QLDG.add(buttonsTable_QLDG[0]);
+			buttonsTable_QLDG[1] = new JButton("<<");
+			buttonsTable_QLDG[1].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					var pageNumber = (currentPageTable_QLDG - 1) + "";
+					getPageDataTABLE_QLDG(Integer.parseInt(pageNumber));
+				}
+			});
+			pagingPanel_QLDG.add(buttonsTable_QLDG[1]);
+			for (int i = 0; i < numbersTable_QLDG.length; i++) {
+				if (numbersTable_QLDG[i] != 0) {
+					buttonsTable_QLDG[i + 2] = new JButton(numbersTable_QLDG[i] + "");
+					buttonsTable_QLDG[i + 2].addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							var pageNumber = ((JButton) e.getSource()).getText();
+							getPageDataTABLE_QLDG(Integer.parseInt(pageNumber));
+						}
+					});
+					pagingPanel_QLDG.add(buttonsTable_QLDG[i + 2]);
+				}
+				if (numbersTable_QLDG[i] == currentPageTable_QLDG && currentPageTable_QLDG != 0) {
+					buttonsTable_QLDG[i + 2].setBackground(Color.BLUE);
+				}
+			}
+			buttonsTable_QLDG[7] = new JButton(">>");
+			buttonsTable_QLDG[7].addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					var pageNumber = (currentPageTable_QLDG + 1) + "";
+					getPageDataTABLE_QLDG(Integer.parseInt(pageNumber));
+				}
+			});
+			pagingPanel_QLDG.add(buttonsTable_QLDG[7]);
+			buttonsTable_QLDG[8] = new JButton("End");
+			buttonsTable_QLDG[8].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					var pageNumber = (totalPagesTable_QLDG) + "";
+					getPageDataTABLE_QLDG(Integer.parseInt(pageNumber));
+				}
+			});
+			pagingPanel_QLDG.add(buttonsTable_QLDG[8]);
+			/* ẩn button khi trang hiện tại là 1 Start và << */
+			if (currentPageTable_QLDG == 1) {
+				buttonsTable_QLDG[0].setEnabled(false);
+				buttonsTable_QLDG[1].setEnabled(false);
+			}
+			/* ẩn button khi trang hiện tại là cúng cùi >> và End */
+			if (currentPageTable_QLDG == totalPagesTable_QLDG && currentPageTable_QLDG != 0) {
+				buttonsTable_QLDG[7].setEnabled(false);
+				buttonsTable_QLDG[8].setEnabled(false);
+			}
+			if (currentPageTable_QLDG == 0) {
+				buttonsTable_QLDG[7].setEnabled(false);
+				buttonsTable_QLDG[8].setEnabled(false);
+				buttonsTable_QLDG[0].setEnabled(false);
+				buttonsTable_QLDG[1].setEnabled(false);
+			}
+		}
+
+		/* Lấy tổng số row của table và tính toán số trang */
+		public void getCountTABLE_QLDG() {
+			tableRowCountTable_QLDG = ThanhVien.getInstance().selectAllCount_QLQG(textField_TimKiem_QLTV.getText().trim());
+			if (tableRowCountTable_QLDG > 0) {
+				totalPagesTable_QLDG = (int) Math.ceil(tableRowCountTable_QLDG / PAGE_SIZE_Table_QLDG);
+
+				System.out.println("totalPagesTable_QLDGrrrow count is " + tableRowCountTable_QLDG + "totalPagesTable_QLDGpage Count" + totalPagesTable_QLDG);
+			} else {
+				totalPagesTable_QLDG = 0;
+				currentPageTable_QLDG = 0;
+				tableRowCountTable_QLDG = 0;
+				JOptionPane.showMessageDialog(null, "Không tìm thấy dữ liệu!");
+			}
+		}
+
+		/* Get data from table based on page no */
+		public void getPageDataTABLE_QLDG(int pageNo) {
+			currentPageTable_QLDG = pageNo;
+			getCountTABLE_QLDG();
+			
+			// tính toán row bắt đầu phân trang
+			startRowTable_QLDG = PAGE_SIZE_Table_QLDG * (pageNo - 1);
+			LoadDataListLimitTABLE_QLDG(PAGE_SIZE_Table_QLDG, startRowTable_QLDG);
+			getPaginationDetailsTABLE_QLDG();
+		}
+
+		// Hàm load lại data với lấy số row và bỏ qua số row
+		public void LoadDataListLimitTABLE_QLDG(int limit, int offset) {
+			((DefaultTableModel) table_QLTV.getModel()).setRowCount(0);
+			// Gọi sang hàm lấy dữ liệu để đổ vào dữ liệu lên table vừa khai báo
+			table_QLTV = ThanhVien.getInstance().selectAllLimit_QLQG(table_QLTV, limit, offset,
+					textField_TimKiem_QLTV.getText().trim());
+		}
+
+		// Kết phần phân trang cho table QL doc gia 
 }
