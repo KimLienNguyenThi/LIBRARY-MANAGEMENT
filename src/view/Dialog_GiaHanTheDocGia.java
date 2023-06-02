@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 import com.mysql.cj.xdevapi.XDevAPIError;
 import com.toedter.calendar.JDateChooser;
 
-public class Dialog_GiaHanTheThanhVien extends JDialog {
+public class Dialog_GiaHanTheDocGia extends JDialog {
 	JFrame frame = new JFrame();
 	private JPanel contentPane_DialogGHT;
 	private DocGia docGia = new DocGia();
@@ -44,8 +44,9 @@ public class Dialog_GiaHanTheThanhVien extends JDialog {
 	private JComboBox comboBox_HanThe_DialogGHT;
 	private JLabel lable_GiaHanThem_DialogGHT;
 
-	public Dialog_GiaHanTheThanhVien(JFrame parent, int MaDG) {
+	public Dialog_GiaHanTheDocGia(JFrame parent, int MaDG) {
 		super(parent, "Gia hạn thẻ thành viên", true);
+		setTitle("Gia hạn thẻ độc giả");
 		maDG = MaDG;
 		docGia = ThanhVien.getInstance().selectDocGiaBySDT(maDG);
 		theThanhVien = ThanhVien.getInstance().selectTheThanhVienBySDT(maDG);

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
-public class Dialog_ThemThanhVien extends JDialog {
+public class Dialog_ThemDocGia extends JDialog {
 	JFrame frame = new JFrame();
 	private JPanel contentPane;
 	private DocGia docGia = new DocGia();
@@ -25,7 +25,7 @@ public class Dialog_ThemThanhVien extends JDialog {
 	 * Launch the application.
 	 */
 
-	public Dialog_ThemThanhVien(JFrame parent, DocGia dg, TheThanhVien ttv) {
+	public Dialog_ThemDocGia(JFrame parent, DocGia dg, TheThanhVien ttv) {
 		super(parent, "Kiểm tra thông tin", true);
 		docGia = dg;
 		theThanhVien = ttv;
@@ -65,11 +65,11 @@ public class Dialog_ThemThanhVien extends JDialog {
 		label_Ten_DialogTTV.setText("Họ và tên: " + docGia.getTenDocGia());
 		contentPane.add(label_Ten_DialogTTV);
 
-		JLabel label_MaDocGia_DialogTTV = new JLabel("New label");
-		label_MaDocGia_DialogTTV.setFont(new Font("Tahoma", Font.BOLD, 19));
-		label_MaDocGia_DialogTTV.setBounds(53, 32, 200, 21);
-		label_MaDocGia_DialogTTV.setText("Mã thành viên: " + (ThanhVien.getInstance().selectRowLast_DocGia() + 1));
-		contentPane.add(label_MaDocGia_DialogTTV);
+		JLabel lblMcGi = new JLabel("New label");
+		lblMcGi.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblMcGi.setBounds(53, 32, 200, 21);
+		lblMcGi.setText("Mã độc giả: 14");
+		contentPane.add(lblMcGi);
 		theThanhVien.setMaDocGia(ThanhVien.getInstance().selectRowLast_DocGia() + 1);
 
 		JLabel label_SDT_DialogTTV = new JLabel("New label");

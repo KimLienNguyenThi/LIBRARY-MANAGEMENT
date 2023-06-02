@@ -127,7 +127,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 				frameParent.ThanhToan();
 			}
 		});
-		btn_ThemSach_QLNL.setBounds(355, 195, 84, 28);
+		btn_ThemSach_QLNL.setBounds(202, 195, 100, 28);
 		btn_ThemSach_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_ThemSach_QLNL);
 
@@ -137,7 +137,7 @@ public class DiaLog_ThemSach_QLNL extends JDialog {
 				setVisible(false);
 			}
 		});
-		btn_Huy_QLNL.setBounds(477, 195, 84, 28);
+		btn_Huy_QLNL.setBounds(396, 195, 84, 28);
 		btn_Huy_QLNL.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(btn_Huy_QLNL);
 		

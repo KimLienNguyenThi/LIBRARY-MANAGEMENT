@@ -146,7 +146,7 @@ public class MainView extends JFrame {
 
 	private ImageIcon newIconTimKiem = getScaledIcon("/images/search.png", 25, 25);;
 	private int idSelectedPhieuNhapLo = 0;
-	private JPanel panelThemThanhVien;
+	private JPanel panelThemDocGia;
 	private JTable tableMuonSach;
 	private JTextField textField;
 
@@ -159,9 +159,9 @@ public class MainView extends JFrame {
 	// ******************************
 	// Paging cho table quản Lý SÁch
 	JButton[] buttonsTable_QLSach = new JButton[9]; // tạo 9 button
-	final int PAGE_SIZE_Table_QLSach = 28; // kích thước mỗi trang muốn hiện
+	final int PAGE_SIZE_Table_QLSach = 25; // kích thước mỗi trang muốn hiện
 	double tableRowCountTable_QLSach;
-	int totalPagesTable_QLSach; // Total số row của table đang phân trang
+	int totalPagesTable_QLSach; // Total có tổng số bao nhiêu trang 
 	int currentPageTable_QLSach; // trang hiện tại đang hiện
 	int startRowTable_QLSach; // dòng lấy bắt đầu
 	int numbersTable_QLSach[]; // lưu số trang
@@ -173,9 +173,9 @@ public class MainView extends JFrame {
 	// ******************************
 	// Paging cho table quan ly nhap lo
 	JButton[] buttonsTable_QLNL = new JButton[9]; // tạo 9 button
-	final int PAGE_SIZE_Table_QLNL = 10; // kích thước mỗi trang muốn hiện
+	final int PAGE_SIZE_Table_QLNL = 7; // kích thước mỗi trang muốn hiện
 	double tableRowCount;
-	int totalPagesTable_QLNL; // Total số row của table đang phân trang
+	int totalPagesTable_QLNL; //Total có tổng số bao nhiêu trang 
 	int currentPageTable_QLNL; // trang hiện tại đang hiện
 	int startRowTable_QLNL; // dòng lấy bắt đầu
 	int numbersTable_QLNL[]; // lưu số trang
@@ -187,7 +187,7 @@ public class MainView extends JFrame {
 		JButton[] buttonsTable_QLPM = new JButton[9]; // tạo 9 button
 		final int PAGE_SIZE_Table_QLPM = 10; // kích thước mỗi trang muốn hiện
 		double tableRowCountTable_QLPM;
-		int totalPagesTable_QLPM; // Total số row của table đang phân trang
+		int totalPagesTable_QLPM; // Total có tổng số bao nhiêu trang 
 		int currentPageTable_QLPM; // trang hiện tại đang hiện
 		int startRowTable_QLPM; // dòng lấy bắt đầu
 		int numbersTable_QLPM[]; // lưu số trang
@@ -198,7 +198,7 @@ public class MainView extends JFrame {
 		JButton[] buttonsTable_QLDG = new JButton[9]; // tạo 9 button
 		final int PAGE_SIZE_Table_QLDG = 4; // kích thước mỗi trang muốn hiện
 		double tableRowCountTable_QLDG;
-		int totalPagesTable_QLDG; // Total số row của table đang phân trang
+		int totalPagesTable_QLDG; // Total có tổng số bao nhiêu trang 
 		int currentPageTable_QLDG; // trang hiện tại đang hiện
 		int startRowTable_QLDG; // dòng lấy bắt đầu
 		int numbersTable_QLDG[]; // lưu số trang
@@ -399,7 +399,7 @@ public class MainView extends JFrame {
 		btn_TheDocGia_left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeButtonColor(btn_TheDocGia_left);
-				cardLayout.show(cardPanel, "panelThemThanhVien");
+				cardLayout.show(cardPanel, "panelThemDocGia");
 			}
 		});
 		btn_TheDocGia_left.setOpaque(true);
@@ -604,8 +604,8 @@ public class MainView extends JFrame {
 		table_pm.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "M\u00E3 s\u00E1ch", "T\u00EAn s\u00E1ch", "T\u00E1c gi\u1EA3" }));
 		table_pm.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table_pm.getColumnModel().getColumn(1).setPreferredWidth(208);
-		table_pm.getColumnModel().getColumn(2).setPreferredWidth(54);
+		table_pm.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table_pm.getColumnModel().getColumn(2).setPreferredWidth(200);
 
 		table_pm.getModel().addTableModelListener(new TableModelListener() {
 			public void tableChanged(TableModelEvent e) {
@@ -780,11 +780,11 @@ public class MainView extends JFrame {
 			}
 
 		});
-		table_QuanLyPhieuMuon.getColumnModel().getColumn(0).setPreferredWidth(86);
-		table_QuanLyPhieuMuon.getColumnModel().getColumn(1).setPreferredWidth(86);
-		table_QuanLyPhieuMuon.getColumnModel().getColumn(2).setPreferredWidth(64);
-		table_QuanLyPhieuMuon.getColumnModel().getColumn(3).setPreferredWidth(78);
-		table_QuanLyPhieuMuon.getColumnModel().getColumn(4).setPreferredWidth(67);
+		table_QuanLyPhieuMuon.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table_QuanLyPhieuMuon.getColumnModel().getColumn(1).setPreferredWidth(50);
+		table_QuanLyPhieuMuon.getColumnModel().getColumn(2).setPreferredWidth(90);
+		table_QuanLyPhieuMuon.getColumnModel().getColumn(3).setPreferredWidth(90);
+		table_QuanLyPhieuMuon.getColumnModel().getColumn(4).setPreferredWidth(90);
 		scrollPane_qlpm.setViewportView(table_QuanLyPhieuMuon);
 
 		table_QuanLyPhieuMuon.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -865,8 +865,11 @@ public class MainView extends JFrame {
 
 		});
 
-		table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(40);
-		table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(40);
+		table_QuanLySach.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table_QuanLySach.getColumnModel().getColumn(1).setPreferredWidth(90);
+		table_QuanLySach.getColumnModel().getColumn(2).setPreferredWidth(90);
+		table_QuanLySach.getColumnModel().getColumn(4).setPreferredWidth(40);
+		table_QuanLySach.getColumnModel().getColumn(5).setPreferredWidth(80);
 		table_QuanLySach.getColumnModel().getColumn(8).setPreferredWidth(51);
 		panel_2.setLayout(null);
 		// table_QuanLySach = QuanLySach.getInstance().selectAll(table_QuanLySach);
@@ -967,27 +970,27 @@ public class MainView extends JFrame {
 //		panel_qldg.add(scrollPane_qldg);
 
 		//// G. HUY //////
-		panelThemThanhVien = new JPanel();
-		cardPanel.add(panelThemThanhVien, "panelThemThanhVien");
-		panelThemThanhVien.setLayout(null);
+		panelThemDocGia = new JPanel();
+		cardPanel.add(panelThemDocGia, "panelThemDocGia");
+		panelThemDocGia.setLayout(null);
 
 		JPanel panel_TTV = new JPanel();
 		panel_TTV.setBackground(new Color(255, 255, 255));
 		panel_TTV.setBounds(10, 10, 829, 528);
-		panelThemThanhVien.add(panel_TTV);
+		panelThemDocGia.add(panel_TTV);
 		panel_TTV.setLayout(null);
 
-		JLabel labelTitle_TTV = new JLabel("THẺ THÀNH VIÊN");
+		JLabel labelTitle_TTV = new JLabel("THẺ ĐỘC GIẢ");
 		labelTitle_TTV.setForeground(new Color(0, 0, 0));
 		labelTitle_TTV.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitle_TTV.setFont(new Font("Tahoma", Font.BOLD, 30));
 		labelTitle_TTV.setBounds(10, 10, 809, 66);
 		panel_TTV.add(labelTitle_TTV);
 
-		JLabel label_TenThanhVien_TTV = new JLabel("Tên thành viên");
-		label_TenThanhVien_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label_TenThanhVien_TTV.setBounds(55, 123, 115, 35);
-		panel_TTV.add(label_TenThanhVien_TTV);
+		JLabel lblTncGi = new JLabel("Tên độc giả");
+		lblTncGi.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblTncGi.setBounds(55, 123, 115, 35);
+		panel_TTV.add(lblTncGi);
 
 		JLabel label_NgaySinh_TTV = new JLabel("Ngày sinh");
 		label_NgaySinh_TTV.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -1092,7 +1095,7 @@ public class MainView extends JFrame {
 		JLabel label_TTV = new JLabel("New label");
 		label_TTV.setIcon(new ImageIcon(MainView.class.getResource("/images/background.png")));
 		label_TTV.setBounds(0, 0, 849, 548);
-		panelThemThanhVien.add(label_TTV);
+		panelThemDocGia.add(label_TTV);
 
 		 panelQlyDocGia = new JPanel();
 		panelQlyDocGia.setBackground(new Color(255, 255, 255));
@@ -1150,7 +1153,7 @@ public class MainView extends JFrame {
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		table_QLTV.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		table_QLTV.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "M\u00E3 TV", "H\u1ECD v\u00E0 t\u00EAn", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i",
+				new String[] { "Mã ĐG", "H\u1ECD v\u00E0 t\u00EAn", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i",
 						"Ng\u00E0y sinh", "\u0110\u1ECBa ch\u1EC9", "TG \u0111\u0103ng k\u00FD", "H\u1EA1n th\u1EBB",
 						"Ph\u00ED \u0111\u0103ng k\u00FD", "T\u00ECnh Tr\u1EA1ng" }) {
 			// ngăn chặn chỉnh sửa giá trị
@@ -1546,12 +1549,12 @@ public class MainView extends JFrame {
 					}
 				});
 		
-		table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(37);
-		table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(63);
-		table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(74);
-		table_QuanLyNhapLo.getColumnModel().getColumn(3).setPreferredWidth(89);
-		table_QuanLyNhapLo.getColumnModel().getColumn(4).setPreferredWidth(101);
-
+		table_QuanLyNhapLo.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table_QuanLyNhapLo.getColumnModel().getColumn(1).setPreferredWidth(120);
+		table_QuanLyNhapLo.getColumnModel().getColumn(2).setPreferredWidth(70);
+		table_QuanLyNhapLo.getColumnModel().getColumn(3).setPreferredWidth(115);
+		table_QuanLyNhapLo.getColumnModel().getColumn(4).setPreferredWidth(45);
+		table_QuanLyNhapLo.getColumnModel().getColumn(5).setPreferredWidth(45);
 		table_QuanLyNhapLo.getSelectionModel().addListSelectionListener(new ListSelectionListener() { // su kien chon 1
 			// o tren table
 			public void valueChanged(ListSelectionEvent event) {
@@ -1577,12 +1580,12 @@ public class MainView extends JFrame {
 
 		panel_table_qlnl = new JPanel();
 		// panel_table_qlnl.setBounds(10, 123, 829, 415);ttt
-		panel_table_qlnl.setBounds(10, 120, 829, 400);
+		panel_table_qlnl.setBounds(22, 120, 817, 400);
 		panelQuanLyNhapLo.add(panel_table_qlnl);
 		panel_table_qlnl.setLayout(null);
 
 		scrollPane_qlnl = new JScrollPane(table_QuanLyNhapLo);
-		scrollPane_qlnl.setBounds(0, 0, 829, 415);
+		scrollPane_qlnl.setBounds(0, 0, 817, 415);
 		panel_table_qlnl.add(scrollPane_qlnl);
 
 		JButton btn_TimKiem_qlnl = new JButton("");
@@ -1895,7 +1898,7 @@ public class MainView extends JFrame {
 
 			theThanhVien.setPhiDangKy(Integer.valueOf(jLabel_PhiDangKy_TTV.getText()));
 
-			new Dialog_ThemThanhVien(this, docGia, theThanhVien); // hien thi dialog
+			new Dialog_ThemDocGia(this, docGia, theThanhVien); // hien thi dialog
 
 			// Xoá dữ liệu nhập trên màn hình
 			huyThemThanhVien();
@@ -1956,19 +1959,19 @@ public class MainView extends JFrame {
 					popupMenu.setBackground(Color.BLUE);
 
 					// tạo jmenuItem chuột phải
-					JMenuItem menuItemSuaThongTin_QLTV = new JMenuItem("Sửa thông tin thành viên");
+					JMenuItem menuItemSuaThongTin_QLTV = new JMenuItem("Sửa thông tin độc giả");
 					menuItemSuaThongTin_QLTV.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							new Dialog_SuaThongTinThanhVien(jFrame, MaDocGia_QLTV);
+							new Dialog_SuaThongTinDocGia(jFrame, MaDocGia_QLTV);
 						}
 					});
 
-					JMenuItem menuItemGiaHanThe_QLTV = new JMenuItem("Gia hạn thẻ thành viên");
+					JMenuItem menuItemGiaHanThe_QLTV = new JMenuItem("Gia hạn thẻ độc giả");
 					menuItemGiaHanThe_QLTV.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							new Dialog_GiaHanTheThanhVien(jFrame, MaDocGia_QLTV);
+							new Dialog_GiaHanTheDocGia(jFrame, MaDocGia_QLTV);
 						}
 					});
 

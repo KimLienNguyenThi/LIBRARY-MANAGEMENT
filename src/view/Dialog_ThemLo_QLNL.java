@@ -218,7 +218,7 @@ public int maNV;
 			}
 		});
 		btn_Luu_ThemLo.setBounds(453, 379, 69, 28);
-		btn_Luu_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btn_Luu_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		contentPane.add(btn_Luu_ThemLo);
 
 		JPanel panel_ThemLo_QLNL = new JPanel();
@@ -278,7 +278,7 @@ public int maNV;
 //				}
 			}
 		});
-		btn_ThemSach_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btn_ThemSach_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btn_ThemSach_ThemLo.setBounds(112, 132, 124, 33);
 		contentPane.add(btn_ThemSach_ThemLo);
 
@@ -294,12 +294,12 @@ public int maNV;
 				setVisible(false);
 			}
 		});
-		btn_Huy_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btn_Huy_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btn_Huy_ThemLo.setBounds(174, 379, 69, 28);
 		contentPane.add(btn_Huy_ThemLo);
 
 		JButton btnNewButton = new JButton("Import File");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jf = new JFileChooser();
@@ -331,8 +331,8 @@ public int maNV;
 				New_Dialog_ncc();
 			}
 		});
-		btn_Themncc_ThemLo.setBounds(97, 379, 83, 33);
-		btn_Themncc_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btn_Themncc_ThemLo.setBounds(97, 379, 97, 33);
+		btn_Themncc_ThemLo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel_ncc.add(btn_Themncc_ThemLo);
 
 		JLabel lbl_Thongtin_TenNCC_ThemLo = new JLabel("Thông tin Nhà Cung Cấp");

@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-public class Dialog_SuaThongTinThanhVien extends JDialog {
+public class Dialog_SuaThongTinDocGia extends JDialog {
 	JFrame frame = new JFrame();
 	private JPanel contentPane_DialogSTTTV;
 	private DocGia docGia = new DocGia();
@@ -33,15 +33,16 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 	private JTextField textField_HoTen_DialogSTTTV;
 	private JTextField textField_SDT_DialogSTTTV;
 	private JTextField textField_DiaChi_DialogSTTTV;
-	private JLabel label_MaDocGia_DialogSTTTV;
+	private JLabel lblMcGi;
 	private JLabel label_MaThe__DialogSTTTV;
 	private JLabel label_NgayDK_DialogSTTTV;
 	private JLabel label_HanThe_DialogSTTTV;
 	private JLabel label_PhiDK_DialogSTTTV;
 	private JDateChooser chooser_NgaySinh_DialogSTTTV;
 
-	public Dialog_SuaThongTinThanhVien(JFrame parent, int MaDG) {
+	public Dialog_SuaThongTinDocGia(JFrame parent, int MaDG) {
 		super(parent, "Sửa thông tin thành viên", true);
+		setTitle("Sửa thông tin độc giả");
 		maDG = MaDG;
 		docGia = ThanhVien.getInstance().selectDocGiaBySDT(maDG);
 		theThanhVien = ThanhVien.getInstance().selectTheThanhVienBySDT(maDG);
@@ -73,31 +74,31 @@ public class Dialog_SuaThongTinThanhVien extends JDialog {
 
 		JLabel label_Ten_DialogSTTTV = new JLabel("New label");
 		label_Ten_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_Ten_DialogSTTTV.setBounds(53, 75, 72, 18);
+		label_Ten_DialogSTTTV.setBounds(26, 75, 99, 18);
 		label_Ten_DialogSTTTV.setText("Họ và tên: ");
 		contentPane_DialogSTTTV.add(label_Ten_DialogSTTTV);
 
-		label_MaDocGia_DialogSTTTV = new JLabel("New label");
-		label_MaDocGia_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 19));
-		label_MaDocGia_DialogSTTTV.setBounds(53, 32, 200, 21);
-		label_MaDocGia_DialogSTTTV.setText("Mã thành viên: " + docGia.getMaDocGia());
-		contentPane_DialogSTTTV.add(label_MaDocGia_DialogSTTTV);
+		lblMcGi = new JLabel("New label");
+		lblMcGi.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblMcGi.setBounds(25, 32, 200, 21);
+		lblMcGi.setText("Mã độc giả: " + docGia.getMaDocGia());
+		contentPane_DialogSTTTV.add(lblMcGi);
 
 		JLabel label_SDT_DialogSTTTV = new JLabel("New label");
 		label_SDT_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_SDT_DialogSTTTV.setBounds(53, 115, 89, 18);
+		label_SDT_DialogSTTTV.setBounds(26, 115, 116, 18);
 		label_SDT_DialogSTTTV.setText("Số điện thoại: ");
 		contentPane_DialogSTTTV.add(label_SDT_DialogSTTTV);
 
 		JLabel label_DiaChi_DialogSTTTV = new JLabel("New label");
 		label_DiaChi_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_DiaChi_DialogSTTTV.setBounds(53, 155, 52, 18);
+		label_DiaChi_DialogSTTTV.setBounds(26, 155, 79, 18);
 		label_DiaChi_DialogSTTTV.setText("Địa chỉ: ");
 		contentPane_DialogSTTTV.add(label_DiaChi_DialogSTTTV);
 
 		JLabel label_NgaySinh_DialogSTTTV = new JLabel("New label");
 		label_NgaySinh_DialogSTTTV.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_NgaySinh_DialogSTTTV.setBounds(53, 195, 78, 18);
+		label_NgaySinh_DialogSTTTV.setBounds(26, 195, 105, 18);
 		label_NgaySinh_DialogSTTTV.setText("Ngày sinh: ");
 		contentPane_DialogSTTTV.add(label_NgaySinh_DialogSTTTV);
 

@@ -332,7 +332,7 @@ public class Dialog_XemChiTiet_QLNL extends JDialog {
 				
 			}
 		});
-		btn_Sua_XemChiTiet.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btn_Sua_XemChiTiet.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btn_Sua_XemChiTiet.setBounds(472, 8, 104, 28);
 		contentPane.add(btn_Sua_XemChiTiet);
 
