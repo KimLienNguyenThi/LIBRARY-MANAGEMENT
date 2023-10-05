@@ -93,7 +93,7 @@ public class Dialog_GiaHanTheDocGia extends JDialog {
 		label_MaDocGia_DialogGHT = new JLabel("New label");
 		label_MaDocGia_DialogGHT.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_MaDocGia_DialogGHT.setBounds(53, 32, 200, 21);
-		label_MaDocGia_DialogGHT.setText("Mã thành viên: " + docGia.getMaDocGia());
+		label_MaDocGia_DialogGHT.setText("Mã Thẻ Độc giả: " + docGia.getMaDocGia());
 		contentPane_DialogGHT.add(label_MaDocGia_DialogGHT);
 
 		JLabel label_SDT_DialogGHT = new JLabel("New label");

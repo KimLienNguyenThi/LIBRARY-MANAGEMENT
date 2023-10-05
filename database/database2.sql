@@ -81,7 +81,7 @@ CREATE TABLE SACH(
     TinhTrang varchar(100),
     GiaSach INT NOT NULL,
      MaDS INT ,
-    FOREIGN KEY (MaDS) REFERENCES ChiTietLo(MaDS)
+    FOREIGN KEY (MaDS) REFERENCES ChiTietLo(MaDS)	
 );
 
 
